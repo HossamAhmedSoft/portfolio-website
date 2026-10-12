@@ -1,0 +1,218 @@
+"use client";
+
+import React, { useEffect } from "react";
+import { Project } from "@/data/projects";
+import { 
+  X, 
+  ExternalLink, 
+  CheckCircle2, 
+  ShieldCheck, 
+  Layers, 
+  Cpu, 
+  AlertCircle,
+  HelpCircle,
+  Wrench
+} from "lucide-react";
+import { GithubIcon } from "./icons/GithubIcon";
+
+interface ProjectModalProps {
+  project: Project | null;
+  onClose: () => void;
+}
+
+export function ProjectModal({ project, onClose }: ProjectModalProps) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (project) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [project, onClose]);
+
+  if (!project) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
+      <div 
+        className="relative w-full max-w-4xl max-h-[90vh] flex flex-col bg-white dark:bg-[#0F172A] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden text-left"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal Header */}
+        <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between gap-4 bg-slate-50/50 dark:bg-[#131C31]">
+          <div>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <span className="px-2.5 py-0.5 rounded text-xs font-mono font-semibold bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800">
+                {project.category}
+              </span>
+              <span className="px-2.5 py-0.5 rounded text-xs font-mono font-semibold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                {project.status}
+              </span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+              {project.title}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-mono">
+              {project.headline}
+            </p>
+          </div>
+
+          <button
+            onClick={onClose}
+            aria-label="Close modal"
+            className="p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Modal Body (Scrollable) */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-8 text-sm text-slate-700 dark:text-slate-300">
+          
+          {/* Tech Stack Pills */}
+          <div>
+            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+              Verified Technology Stack
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Problem and Objective */}
+          <div>
+            <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
+              <HelpCircle className="w-4 h-4 text-sky-500" />
+              <span>Problem & Objective</span>
+            </h4>
+            <p className="leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800">
+              {project.caseStudy.problem}
+            </p>
+          </div>
+
+          {/* System Architecture */}
+          <div>
+            <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
+              <Layers className="w-4 h-4 text-purple-500" />
+              <span>System Architecture & Data Flow</span>
+            </h4>
+            <p className="leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800">
+              {project.caseStudy.architecture}
+            </p>
+          </div>
+
+          {/* Individual Contribution */}
+          <div>
+            <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
+              <Wrench className="w-4 h-4 text-emerald-500" />
+              <span>My Individual Contribution</span>
+            </h4>
+            <p className="leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800">
+              {project.caseStudy.individualContribution}
+            </p>
+          </div>
+
+          {/* Key Implemented Features */}
+          <div>
+            <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
+              <CheckCircle2 className="w-4 h-4 text-sky-500" />
+              <span>Implemented Features</span>
+            </h4>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {project.caseStudy.keyFeatures.map((feat, idx) => (
+                <li key={idx} className="flex items-start gap-2 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/30 border border-slate-200/60 dark:border-slate-800">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span className="text-xs leading-normal">{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Engineering Challenges & Solutions */}
+          <div>
+            <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
+              <Cpu className="w-4 h-4 text-amber-500" />
+              <span>Engineering Challenges & Solutions</span>
+            </h4>
+            <div className="space-y-3">
+              {project.caseStudy.challengesAndSolutions.map((item, idx) => (
+                <div key={idx} className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-1.5">
+                  <div className="text-xs font-semibold text-rose-600 dark:text-rose-400">
+                    Challenge: {item.challenge}
+                  </div>
+                  <div className="text-xs text-slate-700 dark:text-slate-300">
+                    <strong className="text-emerald-600 dark:text-emerald-400 font-semibold">Solution: </strong>
+                    {item.solution}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Security & Testing + Limitations */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-900/60 space-y-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-800 dark:text-emerald-300">
+                <ShieldCheck className="w-4 h-4" />
+                <span>Security & Testing Approach</span>
+              </div>
+              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                {project.caseStudy.securityAndTesting}
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/60 space-y-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-amber-800 dark:text-amber-300">
+                <AlertCircle className="w-4 h-4" />
+                <span>Status & Limitations</span>
+              </div>
+              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                {project.caseStudy.statusAndLimitations}
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Modal Footer with Actions */}
+        <div className="p-4 sm:p-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-[#131C31]">
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono hidden sm:inline">
+            Repository: {project.githubUrl.split("/").slice(-2).join("/")}
+          </span>
+
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors"
+            >
+              <GithubIcon className="w-4 h-4" />
+              <span>View Repository on GitHub</span>
+            </a>
+
+            <button
+              onClick={onClose}
+              className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
