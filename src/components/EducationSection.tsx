@@ -31,18 +31,18 @@ export function EducationSection() {
         <div className="max-w-3xl mb-12 text-left">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-purple-100 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-800 mb-3">
             <GraduationCap className="w-3.5 h-3.5 text-purple-500" />
-            <span>ACADEMIC FOUNDATION & LEADERSHIP</span>
+            <span>ACADEMIC FOUNDATION</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Education & Community Contribution
+            Academic Background & Education
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2">
-            Verified educational institutions and student leadership records. No manufactured corporate employment history.
+            Verified university degree programs and foundational computer science education.
           </p>
         </div>
 
         {/* Education Timeline Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
           {educationHistory.map((item, idx) => (
             <div
               key={idx}

@@ -23,9 +23,10 @@ export function Navbar({ onOpenCV }: NavbarProps) {
 
   const navLinks = [
     { label: "Overview", href: "#hero" },
-    { label: "Signature Project", href: "#firebot-case-study" },
+    { label: "FireBot", href: "#firebot-case-study" },
     { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
+    { label: "Experience", href: "#experience" },
     { label: "Credentials", href: "#certifications" },
     { label: "Education", href: "#education" },
     { label: "Contact", href: "#contact" },

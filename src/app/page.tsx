@@ -6,6 +6,7 @@ import { Hero } from "@/components/Hero";
 import { FireBotCaseStudy } from "@/components/FireBotCaseStudy";
 import { ProjectsShowcase } from "@/components/ProjectsShowcase";
 import { SkillsMatrix } from "@/components/SkillsMatrix";
+import { ExperienceSection } from "@/components/ExperienceSection";
 import { CertificationsGallery } from "@/components/CertificationsGallery";
 import { EducationSection } from "@/components/EducationSection";
 import { AboutSection } from "@/components/AboutSection";
@@ -34,6 +35,9 @@ export default function Home() {
 
         {/* Evidence-Backed Technical Skills Matrix */}
         <SkillsMatrix />
+
+        {/* Experience & Community Involvement: GDG NCTU */}
+        <ExperienceSection />
 
         {/* Verified Certifications & Credentials */}
         <CertificationsGallery />

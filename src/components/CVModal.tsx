@@ -144,6 +144,34 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
             </div>
           </div>
 
+          {/* Experience & Community Involvement */}
+          <div className="space-y-3">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+              Experience & Community Involvement
+            </h2>
+            <div className="space-y-2">
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                  <span>HR Team Member — GDG NCTU</span>
+                  <span className="text-xs font-mono text-slate-400 font-normal">NCTU Campus · Session 2026</span>
+                </div>
+                <div className="text-xs text-sky-600 dark:text-sky-400 font-semibold">
+                  Student Community Leadership & Human Resources
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Contributing to the people-management and member-engagement activities of GDG NCTU, supporting member onboarding, communication, follow-up, and a structured community experience across university technical tracks.
+                </p>
+                <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                  <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Member Onboarding</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Engagement & Follow-up</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Participation Tracking</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Cross-Team Coordination</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">HR Process Improvement</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Technical Skills */}
           <div className="space-y-2">
             <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
