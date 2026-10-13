@@ -3,14 +3,23 @@ export interface ResponsibilityItem {
   description: string;
 }
 
+export interface SessionRecord {
+  name: string;
+  period: string;
+  status: "Most Recent" | "Prior Session";
+  focus: string;
+}
+
 export interface ExperienceItem {
   id: string;
   role: string;
   community: string;
   location: string;
-  session: string;
+  duration: string;
+  mostRecentSession: string;
   category: string;
   summary: string;
+  sessions: SessionRecord[];
   responsibilities: ResponsibilityItem[];
   transferableSkills: string[];
   connectedProject?: {
@@ -27,63 +36,73 @@ export const communityExperiences: ExperienceItem[] = [
     role: "HR Team Member",
     community: "GDG NCTU",
     location: "NCTU Campus",
-    session: "Session 2026",
+    duration: "Two Sessions",
+    mostRecentSession: "2026",
     category: "Student Community Leadership & Human Resources",
     summary:
-      "Contributing to the people-management and member-engagement activities of GDG NCTU, supporting member onboarding, communication, follow-up, and a structured community experience across university technical tracks.",
+      "Contributed to HR and community operations across two sessions at GDG NCTU, supporting member engagement, team coordination, communication, and structured follow-up processes.",
+    sessions: [
+      {
+        name: "Session 2026",
+        period: "2025 — 2026",
+        status: "Most Recent",
+        focus: "Advanced member follow-up, structured feedback loops, rules and points system contribution, and translating operational workflows into the automated HR Platform."
+      },
+      {
+        name: "Session 2025",
+        period: "2024 — 2025",
+        status: "Prior Session",
+        focus: "Foundational member onboarding, participation monitoring, committee communication, and initial member tracking workflows."
+      }
+    ],
     responsibilities: [
       {
-        title: "Member Onboarding",
+        title: "Member Onboarding & Engagement",
         description:
-          "Welcoming new student recruits and introducing them to the GDG NCTU community structure, committee expectations, communication channels, and collaborative workflows."
+          "Welcoming new student recruits to GDG NCTU, introducing them to community workflows, and helping them integrate into their assigned technical tracks and committee teams."
       },
       {
-        title: "Member Engagement & Integration",
+        title: "Team Communication & Coordination",
         description:
-          "Following up on member participation across assigned tracks, facilitating cross-team integration, and encouraging continuous active involvement in team activities."
+          "Supporting clear, structured communication regarding tasks, deadlines, upcoming milestones, and community announcements across technical and non-technical teams."
       },
       {
-        title: "Communication & Structured Follow-up",
+        title: "Attendance & Task Follow-up",
         description:
-          "Supporting clear, consistent communication regarding tasks, deadlines, upcoming milestones, and community announcements to maintain organizational clarity."
-      },
-      {
-        title: "Participation Monitoring",
-        description:
-          "Helping monitor attendance, task submissions, and workshop participation to maintain objective records of team activity and engagement."
+          "Monitoring session attendance and tracking task submissions to maintain accurate, objective participation records across both community sessions."
       },
       {
         title: "Feedback & Member Development",
         description:
-          "Facilitating constructive feedback and follow-up loops on submitted assignments and committee deliverables to support member skill growth."
+          "Supporting constructive feedback and follow-up loops on submitted assignments and committee deliverables to encourage ongoing technical development."
       },
       {
-        title: "Member Support & Empathetic Retention",
+        title: "HR Rules, Documentation & Points Systems",
         description:
-          "Proactively understanding the personal and academic circumstances of less-active members before drawing conclusions, providing supportive re-engagement pathways."
+          "Contributing to structured team rules, documented evaluation guidelines, and transparent points systems to promote fair, evidence-based member recognition."
       },
       {
-        title: "HR Process & Operational Improvement",
+        title: "Improving Tracking & Follow-up Workflows",
         description:
-          "Contributing to structured community rules, points systems, automated reminder workflows, and member follow-up processes to improve operational consistency."
+          "Identifying operational communication gaps across consecutive sessions and contributing to structured reminder workflows and member follow-up processes."
       }
     ],
     transferableSkills: [
-      "Communication & Interpersonal Skills",
+      "Interpersonal Communication & Active Listening",
       "Cross-Functional Team Coordination",
-      "Process Documentation & Workflows",
+      "Process Documentation & Workflow Design",
       "Conflict-Sensitive Communication & Empathy",
-      "Structured Follow-up & Task Discipline",
+      "Structured Task Follow-up & Accountability",
       "Problem-Solving in Team Dynamics",
-      "Collaboration Across Technical & Non-Technical Tracks"
+      "Collaboration Across Technical & Non-Technical Teams"
     ],
     connectedProject: {
       title: "GDG NCTU Operations & HR Platform",
       description:
-        "Directly translated operational HR workflows into an enterprise-grade full-stack web platform governing 17 operational modules.",
+        "Directly translated operational HR workflows from both sessions into an enterprise-grade full-stack web platform governing 17 operational modules.",
       repoUrl: "https://github.com/HossamAhmedSoft/hr-management-platform",
       implementedFeatures: [
-        "Member and multi-track profile governance",
+        "Member and multi-track profile governance across sessions",
         "Attendance and task submission lifecycle tracking",
         "Individual points ledger and evaluation systems",
         "Automated smart reminders and Egyptian calendar support",

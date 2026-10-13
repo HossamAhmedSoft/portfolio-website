@@ -7,15 +7,13 @@ import {
   Calendar, 
   MapPin, 
   CheckCircle2, 
-  Layers, 
-  MessageSquare, 
-  HeartHandshake, 
   ClipboardCheck, 
   Sparkles,
   ExternalLink,
   Code2,
   Workflow,
-  ArrowRight
+  Clock,
+  History
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 
@@ -36,7 +34,7 @@ export function ExperienceSection() {
             Experience & Community Involvement
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2">
-            Demonstrated interpersonal communication, team coordination, and structured people-management experience at GDG NCTU — complementing technical engineering with organizational discipline.
+            Demonstrated interpersonal communication, team coordination, and structured people-management experience across two sessions at GDG NCTU.
           </p>
         </div>
 
@@ -50,23 +48,26 @@ export function ExperienceSection() {
                 <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800">
                   {exp.community}
                 </span>
+                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800">
+                  {exp.duration}
+                </span>
                 <span className="px-2.5 py-0.5 rounded text-[11px] font-mono text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
                   {exp.category}
                 </span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
-                {exp.role}
+                {exp.role} — {exp.community}
               </h3>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300">
-                <Calendar className="w-3.5 h-3.5 text-sky-500" />
-                <span>{exp.session}</span>
-              </span>
+            <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-500 dark:text-slate-400">
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300">
                 <MapPin className="w-3.5 h-3.5 text-sky-500" />
                 <span>{exp.location}</span>
+              </span>
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                <Clock className="w-3.5 h-3.5 text-sky-500" />
+                <span>Two Sessions · Most Recent: {exp.mostRecentSession}</span>
               </span>
             </div>
           </div>
@@ -76,14 +77,52 @@ export function ExperienceSection() {
             {exp.summary}
           </p>
 
+          {/* Two Sessions Breakdown Cards */}
+          <div className="space-y-3 pt-1">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400">
+              <History className="w-3.5 h-3.5 text-sky-500" />
+              <span>Session History & Participation Breakdown (Two Sessions)</span>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {exp.sessions.map((sess, sIdx) => (
+                <div 
+                  key={sIdx}
+                  className={`p-4 rounded-xl border transition-all ${
+                    sess.status === "Most Recent" 
+                      ? "bg-sky-50/40 dark:bg-sky-950/20 border-sky-300/80 dark:border-sky-800" 
+                      : "bg-slate-50/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                      <span>{sess.name}</span>
+                      <span className="text-xs font-mono font-normal text-slate-400">({sess.period})</span>
+                    </span>
+                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold ${
+                      sess.status === "Most Recent"
+                        ? "bg-sky-500 text-slate-950"
+                        : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                    }`}>
+                      {sess.status}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {sess.focus}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Grid: Responsibilities & Transferable Skills */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-2">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
             
             {/* Responsibilities Column (7 cols) */}
             <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white font-bold text-sm">
                 <ClipboardCheck className="w-4 h-4 text-sky-500" />
-                <span>Core HR & Community Responsibilities</span>
+                <span>Verified HR & Community Responsibilities</span>
               </div>
 
               <div className="space-y-3.5">
@@ -114,7 +153,7 @@ export function ExperienceSection() {
                   <span>Transferable Professional Competencies</span>
                 </div>
                 <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Soft skills and operational abilities cultivated through direct people engagement and student community coordination:
+                  Professional competencies and soft skills refined across two sessions of active student community operations:
                 </p>
                 <div className="flex flex-wrap gap-2 pt-1">
                   {exp.transferableSkills.map((skill, sIdx) => (
@@ -135,7 +174,7 @@ export function ExperienceSection() {
                   <span>Engineering Positioning Alignment</span>
                 </div>
                 <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Hossam&apos;s primary career direction remains <strong>Java Backend Engineering & Full-Stack Development</strong>. This HR experience enriches his technical profile with empathy, communication, and real-world understanding of how people and organizations interact with software systems.
+                  Hossam&apos;s primary career direction remains <strong>Java Backend Engineering & Full-Stack Development</strong>. This HR experience across two consecutive sessions demonstrates sustained interpersonal reliability, team coordination, and an understanding of organizational workflows that directly strengthens his software engineering impact.
                 </p>
               </div>
 
@@ -174,7 +213,7 @@ export function ExperienceSection() {
               </div>
 
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {exp.connectedProject.description} Rather than treating HR operations purely as manual tasks, Hossam recognized the organizational bottlenecks and engineered software solutions to automate and streamline committee governance:
+                {exp.connectedProject.description} Rather than treating HR operations purely as manual tasks, Hossam recognized the organizational bottlenecks across sessions and engineered software solutions to automate committee governance:
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-1">
