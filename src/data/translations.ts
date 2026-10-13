@@ -630,7 +630,7 @@ export const translations: Record<Language, Translations> = {
         layer3Badge: "واجهات سهلة وتفاعلية",
         layer3Desc: "Next.js 14، TypeScript الصارم، Java Swing (FlatLaf)، وتطبيقات PWA: شاشات متابعة ومؤشرات تحكم فورية.",
         reposCount: "22 مستودعاً عاماً موثقاً ومتزامناً على GitHub",
-        viewSignature: "استكشف المشروع المميز →",
+        viewSignature: "استكشف المشروع المميز ←",
       },
     },
     firebot: {

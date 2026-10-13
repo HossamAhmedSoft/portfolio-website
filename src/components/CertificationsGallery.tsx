@@ -81,7 +81,7 @@ export function CertificationsGallery() {
               <div className="relative aspect-4/3 w-full bg-slate-950 overflow-hidden border-b border-slate-200 dark:border-slate-800">
                 <img
                   src={cert.imagePath}
-                  alt={cert.title}
+                  alt={isAr ? cert.titleAr : cert.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
@@ -99,24 +99,24 @@ export function CertificationsGallery() {
                     <span className="font-semibold text-sky-600 dark:text-sky-400">
                       {cert.issuer}
                     </span>
-                    <span>{cert.date}</span>
+                    <span>{isAr ? cert.dateAr : cert.date}</span>
                   </div>
 
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors line-clamp-2">
-                    {cert.title}
+                    {isAr ? cert.titleAr : cert.title}
                   </h3>
 
-                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">
-                    {cert.summary}
+                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                    {isAr ? cert.summaryAr : cert.summary}
                   </p>
                 </div>
 
                 {/* Footer Meta */}
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-                  <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-                    {cert.credentialType}
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 truncate">
+                    {isAr ? cert.credentialTypeAr : cert.credentialType}
                   </span>
-                  <span className="text-xs font-semibold text-sky-500 group-hover:translate-x-0.5 transition-transform">
+                  <span className={`text-xs font-semibold text-sky-500 shrink-0 transition-transform ${isAr ? "group-hover:-translate-x-0.5" : "group-hover:translate-x-0.5"}`}>
                     {isAr ? "عرض الوثيقة ←" : "View Doc →"}
                   </span>
                 </div>

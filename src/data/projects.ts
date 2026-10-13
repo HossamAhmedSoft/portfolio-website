@@ -9,6 +9,13 @@ export interface ProjectCaseStudy {
   statusAndLimitations: string;
 }
 
+export interface ProjectLocalized {
+  title: string;
+  headline: string;
+  description: string;
+  caseStudy: ProjectCaseStudy;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -22,6 +29,7 @@ export interface Project {
   thumbnailUrl?: string;
   isPrivateRepo?: boolean;
   caseStudy: ProjectCaseStudy;
+  ar: ProjectLocalized;
 }
 
 export const featuredProjects: Project[] = [
@@ -60,6 +68,37 @@ export const featuredProjects: Project[] = [
       ],
       securityAndTesting: "Hardware tested on physical obstacle courses during RoboCup MICA 2023. Telemetry endpoints authenticated via session tokens in private network deployments.",
       statusAndLimitations: "Autonomous line tracking and obstacle avoidance are physically verified on hardware. The AI computer vision object-detection module is an experimental prototype operating in controlled test simulations."
+    },
+    ar: {
+      title: "روبوت الإطفاء الذكي المتصل بالسحاب (Troy FireBot)",
+      headline: "روبوت مدمج ذاتي الحركة لتتبع المسار وكشف اللهب، مزود ببث فيديو ESP32-CAM وغرفة تحكم لحظية عبر WebSockets.",
+      description: "منصة روبوتية متكاملة تجمع بين متحكمات Arduino الدقيقة، وحساسات اللهب بالأشعة تحت الحمراء، وتفادي العوائق بالموجات فوق الصوتية، وبث الفيديو عبر ESP32-CAM، ولوحة تحكم لحظية مبنية على Node.js و WebSockets.",
+      caseStudy: {
+        problem: "إطفاء الحرائق في المخازن الكيميائية والمنشآت الصناعية المؤتمتة يعرض فرق الإنقاذ لمخاطر الدخان السام والانهيارات الإنشائية. يتطلب الحل الروبوتي قياساً حرارياً لحظياً، وبثاً مرئياً منخفض التأخير، وتنقلًا ذاتياً في البيئات الخطرة.",
+        architecture: "بنية معمارية من 3 طبقات: (1) طبقة التنفيذ الفيزيائي على Arduino Mega لمعالجة الحساسات بالزمن الحقيقي والتحكم بالمحركات؛ (2) جسر البث البصري عبر ESP32-CAM لنقل إطارات MJPEG عبر HTTP؛ (3) غرفة قيادة مركزية تعمل بـ Node.js و Express و WebSockets للمعايرة الحية والتحكم اليدوي.",
+        individualContribution: "برمجة فيرموير المتحكم الدقيق (قراءة الحساسات، تحديد زاوية اللهب، معايرة حساسات المسار، وتشغيل مضخة المياه عبر الريلاي) وبناء خط الاتصال عبر WebSockets لربط بيانات المنفذ التسلسلي بواجهة المتصفح.",
+        technologyChoices: "اختيار لغة C++ على Arduino لضمان استجابة لحظية حتمية للحساسات، مع Node.js و WebSockets لتبادل القياسات ثنائية الاتجاه بأقل زمن تأخير.",
+        keyFeatures: [
+          "تنقل ذاتي على المسار باستخدام حساسات انعكاس الأشعة تحت الحمراء المعايرة",
+          "مسح المسافات بالموجات فوق الصوتية لتفادي العوائق ديناميكياً",
+          "مصفوفة حساسات لهب متعددة الزوايا لتحديد اتجاه البؤرة بدقة",
+          "بث فيديو مباشر عبر كاميرا ESP32-CAM للتأكيد البصري عن بُعد",
+          "غرفة تحكم عبر المتصفح تعرض مؤشرات القياس الحية، وحالة البطارية، والتحكم اليدوي",
+          "آلية إخماد حريق بمضخة مياه غاطسة محكومة عبر الريلاي"
+        ],
+        challengesAndSolutions: [
+          {
+            challenge: "تشويش قراءات الحساسات الضوئية بسبب تغير الإضاءة المحيطة أثناء تتبع المسار.",
+            solution: "تطبيق فلترة برمجية بالمتوسط المتحرك (Moving Average) ومعايرة ديناميكية للعتبات داخل ذاكرة المتحكم."
+          },
+          {
+            challenge: "ارتفاع زمن التأخير وسقوط الإطارات عند دمج بث الفيديو مع بيانات الحساسات اللحظية.",
+            solution: "فصل مسار بث الفيديو المباشر (MJPEG Socket) عن قناة بيانات القياس الخفيفة (WebSocket JSON)."
+          }
+        ],
+        securityAndTesting: "تم اختبار العتاد فعلياً في حلبات مسابقة RoboCup MICA 2023، وتأمين جلسات التحكم عبر الشبكة المحلية.",
+        statusAndLimitations: "تتبع المسار الذاتي وتفادي العوائق موثقان عملياً على العتاد الفيزيائي. وحدة الرؤية الحاسوبية بالذكاء الاصطناعي هي نموذج أولي تجريبي للتقييم."
+      }
     }
   },
   {
@@ -97,6 +136,37 @@ export const featuredProjects: Project[] = [
       ],
       securityAndTesting: "Spring Security 6 with CSRF disabled for stateless JWT, password hashing via BCrypt (12 rounds). Verified with Apache Maven clean build (`mvnw test-compile`) on Java 21 LTS.",
       statusAndLimitations: "Core REST API complete and verified. Ready for containerized deployment with Docker."
+    },
+    ar: {
+      title: "الواجهة البرمجية المؤسسية لإدارة الموظفين والأقسام (REST API)",
+      headline: "نظام خلفي إنتاجي مبني بـ Spring Boot 3 و Java 21 LTS مع تأمين Spring Security 6، ومصادقة JWT، وقاعدة بيانات Oracle SQL.",
+      description: "نظام خلفي مؤسسي متكامل لإدارة الهياكل التنظيمية متعددة الأقسام، وسجلات الموظفين، والتحكم في الصلاحيات حسب الدور (RBAC)، ومسارات اعتماد الإجازات.",
+      caseStudy: {
+        problem: "تحتاج المؤسسات المتوسطة والكبيرة إلى واجهات برمجية آمنة وقابلة للتدقيق لإدارة شؤون الموظفين مع فصل صارم للصلاحيات بين مسؤولي الموارد البشرية ومديري الأقسام.",
+        architecture: "معمارية طبقية نظيفة بـ Spring Boot: طبقة Controller لنقاط النهاية القياسية، وطبقة Service لقواعد العمل وإدارة المعاملات، وطبقة Repository عبر Spring Data JPA و HikariCP، مع سلسلة فلاتر أمان JWT عديمة الحالة.",
+        individualContribution: "تصميم نماذج البيانات والمخطط العلائقي لقاعدة بيانات Oracle SQL، وبناء سلسلة فلاتر مصادقة JWT المخصصة، وكتابة اختبارات الوحدة والتكامل الشاملة.",
+        technologyChoices: "اختيار Java 21 LTS و Spring Boot 3 للاعتمادية المؤسسية، وقاعدة بيانات Oracle SQL لضمان معاملات ACID، ومجمع اتصالات HikariCP للأداء العالي.",
+        keyFeatures: [
+          "تحكم صارم في الصلاحيات المبنية على الأدوار (RBAC) لـ ROLE_ADMIN و ROLE_USER",
+          "إدارة دورة حياة التوكن عديم الحالة (JWT): التوقيع التشفيري، استخراج الصلاحيات، والتحقق من الصلاحية الزمنية",
+          "فهرسة الموظفين حسب الأقسام والهياكل الإدارية الهرمية",
+          "تحقق تلقائي من المدخلات مع معالجة مركزية للاستثناءات واستجابات أخطاء موحدة",
+          "مسارات معاملات آمنة لاعتماد طلبات الإجازات مع سجل الحالات",
+          "فهرسة وتقسيم صفحات (Pagination) محسن للاستعلامات الضخمة"
+        ],
+        challengesAndSolutions: [
+          {
+            challenge: "تأمين نقاط النهاية الدقيقة دون إبطاء الأداء باستعلامات متكررة لقاعدة البيانات مع كل طلب HTTP.",
+            solution: "تضمين صلاحيات المستخدم داخل مطالبات التوكن (JWT Claims) والتحقق منها مباشرة عبر فلتر عديم الحالة."
+          },
+          {
+            challenge: "منع الحذف المتسلسل غير المقصود للأقسام التي تضم موظفين نشطين.",
+            solution: "فرض قيود مفاتيح أجنبية صارمة في Oracle SQL مدعومة بتحقق مسبق في طبقة الخدمات (Service Layer)."
+          }
+        ],
+        securityAndTesting: "تأمين بواسطة Spring Security 6 وتشفير كلمات المرور بـ BCrypt (12 جولة). تم التحقق من البناء بنجاح عبر Apache Maven (`mvnw test-compile`) على بيئة Java 21 LTS.",
+        statusAndLimitations: "الواجهة البرمجية الأساسية مكتملة وموثقة بالكامل وجاهزة للنشر عبر حاويات Docker."
+      }
     }
   },
   {
@@ -134,6 +204,37 @@ export const featuredProjects: Project[] = [
       ],
       securityAndTesting: "Validated with `tsc --noEmit` passing with 0 errors across 38 commits. Supabase RLS enforces data boundaries at the database engine level.",
       statusAndLimitations: "Deployed and operating as the central operations platform for Google Developer Groups on Campus NCTU."
+    },
+    ar: {
+      title: "منصة إدارة العمليات وتقييم الأداء لمجتمع GDG NCTU",
+      headline: "منصة ويب متكاملة مبنية بـ Next.js 14 و Supabase تدير 17 وحدة تشغيلية لمجتمع مطوري جوجل بالجامعة التكنولوجية.",
+      description: "تطبيق ويب إنتاجي يخدم عمليات مجتمع المطورين الجامعي، ويوفر صلاحيات متعددة الأدوار، وسجلات نقاط فردية معزولة، وتقارير PDF تنفيذية، وتذكيرات ذكية.",
+      caseStudy: {
+        problem: "تعاني المجتمعات الطلابية ذات المسارات التقنية المتعددة من تشتت البيانات في جداول تقليدية عند متابعة الحضور ونقاط التفاعل وتسليم المهام.",
+        architecture: "تطبيق ويب متكامل يعتمد على Next.js App Router ومكونات الخادم (RSC)، مع قاعدة بيانات Supabase PostgreSQL محمية بسياسات أمان مستوى الصفوف (RLS) ونمط TypeScript الصارم.",
+        individualContribution: "تصميم وبناء 17 وحدة تشغيلية، وتطوير محرك عزل نقاط الأعضاء لمنع تداخل بيانات اللجان، وبناء مولد تقارير PDF التنفيذية، وتصميم واجهات ثنائية اللغة متجاوبة.",
+        technologyChoices: "اختيار Next.js 14 لسرعة الأداء، و Supabase PostgreSQL للتكامل العلائقي وأمان الصفوف (RLS)، و Tailwind CSS مع Radix UI للواجهات القياسية.",
+        keyFeatures: [
+          "17 وحدة تشغيلية شاملة تغطي تأهيل الأعضاء، وتتبع المهام، والتقييمات، والحضور",
+          "عزل صارم لسجل نقاط كل عضو لمنع تسرب أو تداخل النقاط بين اللجان المختلفة",
+          "تصدير تقارير PDF تنفيذية لاجتماعات القيادة بضغطة زر",
+          "محرك تذكيرات ذكي لرصد الأعضاء غير النشطين والتنبيه بالمواعيد النهائية",
+          "دعم كامل للغتين العربية والإنجليزية متوافق مع التقويم الأكاديمي المصري",
+          "كتابة كود TypeScript صارم بنسبة 100% مجتاز لفحص `tsc --noEmit` بصفر أخطاء"
+        ],
+        challengesAndSolutions: [
+          {
+            challenge: "منع تداخل حسابات النقاط عندما ينتمي العضو لأكثر من لجنة أو مسار تقني.",
+            solution: "إعادة هيكلة محرك النقاط باستخدام مفاتيح مركبة معزولة بـ UUID وإعادة حساب دفعية آمنة."
+          },
+          {
+            challenge: "بطء عرض الجداول الكبيرة عند توليد تقارير الأداء المتداخلة.",
+            solution: "استخدام جداول تفاعلية مع تقسيم الصفحات من جهة الخادم وتحسين الاستعلامات."
+          }
+        ],
+        securityAndTesting: "تم التحقق عبر `tsc --noEmit` بصفر أخطاء عبر 38 تعديلاً موثقاً (Commits)، مع فرض حدود البيانات عبر سياسات Supabase RLS.",
+        statusAndLimitations: "منصة منشورة وتعمل فعلياً كنظام إدارة مركزي لمجتمع مطوري جوجل (GDG NCTU)."
+      }
     }
   },
   {
@@ -170,6 +271,36 @@ export const featuredProjects: Project[] = [
       ],
       securityAndTesting: "Rigorous compilation with MSVC (Visual Studio 2022) with zero warnings under `/W4`. Input validation blocks buffer overflows and invalid numeric entries.",
       statusAndLimitations: "Complete terminal CLI ERP. Codebase is structured modularly for easy binding to a graphical front-end."
+    },
+    ar: {
+      title: "نظام معلومات الطلاب الجامعي (University SIS)",
+      headline: "نظام ERP جامعي عالي الأداء عبر الطرفية مبني بلغة C++17 الحديثة والبرمجة كائنية التوجه مع حفظ مستمر للبيانات.",
+      description: "منصة إدارة تعليمية مبنية بلغة C++ الحديثة تضم ثلاث بوابات مستقلة (للطلاب، والأساتذة، والإدارة)، مع حساب آلي للمعدل التراكمي GPA، والتحقق من المتطلبات السابقة للمقررات، ورصد الحضور.",
+      caseStudy: {
+        problem: "تحتاج المؤسسات الأكاديمية إلى أنظمة إدارة بيانات سريعة وموثوقة لنمذجة العلاقات المعقدة بين الطلاب وأعضاء هيئة التدريس والمقررات وحسابات الدرجات دون عبء أطر العمل الثقيلة.",
+        architecture: "معمارية كائنية التوجه متعددة الأشكال (Polymorphic OOP) في C++: فئة أساسية مجردة `User` ترثها فئات `Student` و `Professor` و `Admin`، مع مدير قاعدة بيانات مركزي يدير العلاقات في الذاكرة ويحفظها على القرص.",
+        individualContribution: "تصميم الهيكل الكامل للفئات، وتنفيذ خوارزميات حساب المعدل التراكمي الموزون بالساعات المعتمدة، وبناء منطق فحص المتطلبات السابقة وحفظ الملفات.",
+        technologyChoices: "اختيار C++17 لسرعة التنفيذ الفائقة، والتحكم الدقيق بالذاكرة، والتجريد البرمجي بدون تكلفة أداء إضافية.",
+        keyFeatures: [
+          "ثلاث بوابات معزولة الصلاحيات: الطالب (التسجيل والسجل الأكاديمي)، الأستاذ (رصد الدرجات والحضور)، المسؤول (إدارة المقررات والحسابات)",
+          "محرك حساب المعدل التراكمي (GPA) بمقياس 4.0 موزون بالساعات المعتمدة",
+          "دليل مقررات ديناميكي مع فحص صارم للمتطلبات السابقة وعداد للمقاعد المتاحة",
+          "كشف تعارضات جداول المحاضرات والقاعات الدراسية",
+          "حفظ واسترجاع متين للبيانات عبر الملفات يضمن استمرارية الجلسات"
+        ],
+        challengesAndSolutions: [
+          {
+            challenge: "منع تسرب الذاكرة والمراجع الدائرية للمؤشرات بين كائنات الطلاب والمقررات المسجلة.",
+            solution: "تطبيق مبادئ RAII في C++ الحديثة والمؤشرات الذكية (`std::shared_ptr`, `std::weak_ptr`) لإدارة دورة حياة الكائنات."
+          },
+          {
+            challenge: "التعامل الآمن مع ملفات البيانات التالفة أو المفقودة عند بدء التشغيل.",
+            solution: "إضافة تحقق من صحة هيكل البيانات عند القراءة مع استعادة تلقائية للحالة الآمنة."
+          }
+        ],
+        securityAndTesting: "ترجمة برمجية صارمة عبر مترجم MSVC (Visual Studio 2022) بصفر تحذيرات تحت مستوى `/W4`، مع تنقية المدخلات لمنع أخطاء التدفق.",
+        statusAndLimitations: "نظام ERP مكتمل عبر الطرفية (CLI) ومصمم بهيكلية معيارية تسهل ربطه بواجهة رسومية."
+      }
     }
   },
   {
@@ -206,6 +337,36 @@ export const featuredProjects: Project[] = [
       ],
       securityAndTesting: "69 out of 69 automated unit and regression tests passing with 100% success rate in 0.023 seconds under Pytest.",
       statusAndLimitations: "Production-ready educational and algorithmic workbench. Algorithms are classical and designed for academic reference, not modern transport security."
+    },
+    ar: {
+      title: "حزمة أدوات التشفير الكلاسيكي وكسر الشفرات (Cryptography Suite)",
+      headline: "بيئة عمل برمجية بلغة Python 3 لتنفيذ خوارزميات Caesar و Vigenère و Rail Fence مع اجتياز 69/69 اختباراً آلياً.",
+      description: "مجموعة أدوات تشفير شاملة تضم واجهة رسومية تفاعلية (Tkinter) وأدوات سطر أوامر، مع جداول Tabula Recta المرئية، وكسر الشفرات بالقوة الغاشمة، ودعم كامل للأبجديتين العربية والإنجليزية.",
+      caseStudy: {
+        problem: "يتطلب إتقان المبادئ الرياضية للتشفير استكشافاً عملياً لخوارزميات الإبدال المتعدد والتبديل الموضعي، وتمثيلاً بصرياً لتدفق المفاتيح، وتحققاً رياضياً عبر اختبارات مؤتمتة.",
+        architecture: "فصل معماري نظيف بين نواة الخوارزميات الرياضية (`crypto_core`) وطبقة العرض الرسومية والطرفية (`gui`, `cli`) بالاعتماد الكامل على التحويلات الرياضية المعيارية ومكتبة Python القياسية.",
+        individualContribution: "برمجة كافة خوارزميات التشفير وفك التشفير، وتصميم عارض جداول Tabula Recta، وبناء محلل كسر الشفرات، وكتابة حزمة اختبارات Pytest الشاملة.",
+        technologyChoices: "اختيار Python 3 لوضوح التمثيل الخوارزمي، مع بناء حزمة اختبارات Pytest لضمان الانعكاسية الرياضية التامة (تشفير ثم فك تشفير يعيد النص الأصلي).",
+        keyFeatures: [
+          "شفرة قيصر (Caesar Cipher) مع إزاحات مخصصة واسترجاع آلي للمفتاح بالقوة الغاشمة",
+          "شفرة فيجينير (Vigenère Cipher) مع تمديد المفاتيح وعرض جدول Tabula Recta التفاعلي",
+          "شفرة سياج السكة الحديدية (Rail Fence) بعدد مسارات قابل للتخصيص ومسح متعرج",
+          "دعم ثنائي اللغة للأبجدية الإنجليزية (26 حرفاً) والأبجدية العربية (28 حرفاً)",
+          "حزمة اختبارات آلية تضم 69 اختبار وحدة وتكامل تعمل في 0.023 ثانية"
+        ],
+        challengesAndSolutions: [
+          {
+            challenge: "معالجة ترتيب حروف اليونيكود العربية وتوحيد أشكال الحروف أثناء عمليات الإزاحة الحسابية المعيارية.",
+            solution: "بناء جداول فهرسة مخصصة للحروف العربية تربط نقاط Unicode بنطاقات أعداد صحيحة معيارية."
+          },
+          {
+            challenge: "معالجة الحالات الحدية في خوارزمية Rail Fence عندما يكون طول النص أقصر من عدد المسارات.",
+            solution: "تطبيق قيود حدودية للمصفوفات والتحقق منها عبر اختبارات الحالات الحدية."
+          }
+        ],
+        securityAndTesting: "اجتياز 69 من أصل 69 اختباراً آلياً بنسبة نجاح 100% في زمن 0.023 ثانية عبر إطار Pytest.",
+        statusAndLimitations: "بيئة خوارزمية وتعليمية مكتملة وموثقة؛ الخوارزميات كلاسيكية مخصصة للمرجعية الأكاديمية."
+      }
     }
   },
   {
@@ -238,6 +399,32 @@ export const featuredProjects: Project[] = [
       ],
       securityAndTesting: "Uses standard secure random (`SecureRandom`) generators for IV and key creation. Verified compilation with standard `javac` on Java SE.",
       statusAndLimitations: "Complete functional desktop application."
+    },
+    ar: {
+      title: "حزمة تطبيقات التشفير وأمن المعلومات المكتبية بلغة Java",
+      headline: "تطبيق سطح مكتب حديث بـ Java Swing وواجهة FlatLaf يدعم تشفير AES-CBC وتوليد مفاتيح RSA (512–2048 bit) وخوارزميات التجزئة SHA.",
+      description: "تطبيق مكتبي بصري يعتمد على معمارية التشفير في جافا (JCA) للتشفير التماثلي AES، وتوليد المفاتيح غير التماثلية RSA، وحساب البصمات التشفيرية SHA.",
+      caseStudy: {
+        problem: "يحتاج المطورون وطلاب أمن المعلومات إلى أداة بصرية تفاعلية لفحص التحويلات التشفيرية، ومعاينة النصوص المشفرة بصيغ Hex/Base64، وفهم سلوك متجهات التهيئة (IV).",
+        architecture: "تطبيق مكتبي مبني بـ Java Swing ومحرك الواجهات الحديث FlatLaf، ينفذ العمليات التشفيرية عبر مكتبات `javax.crypto` و `java.security` القياسية على خيوط معالجة خلفية.",
+        individualContribution: "تصميم الواجهة الليلية الحديثة، وتنفيذ مسارات تشفير AES-128/192/256-bit بنمط CBC وحشو PKCS5، وبناء واجهات توليد مفاتيح RSA.",
+        technologyChoices: "اختيار معمارية التشفير القياسية في جافا (JCA) للتوافق مع المعايير الأمنية ودعم تسريع العتاد لخوارزمية AES.",
+        keyFeatures: [
+          "منصة تشفير تماثلي تدعم AES بنمطي CBC و ECB مع تخصيص المفاتيح ومتجه التهيئة IV",
+          "مولد أزواج مفاتيح RSA غير التماثلية بأطوال بت قابلة للاختيار (512، 1024، 2048 بت)",
+          "حاسبة بصمات التجزئة التشفيرية (SHA) للتحقق الفوري من سلامة البيانات",
+          "واجهة مستخدم حديثة بالوضع الليلي عبر FlatLaf مع أيقونات متجهة وتنسيق واضح",
+          "أدوات تحويل فوري بين الصيغ الست عشرية (Hexadecimal) و Base64"
+        ],
+        challengesAndSolutions: [
+          {
+            challenge: "منع تجمد واجهة المستخدم الرسومية أثناء العمليات الحسابية الثقيلة لتوليد مفاتيح RSA بطول 2048 بت.",
+            solution: "فصل عمليات توليد الأعداد الأولية والحسابات التشفيرية في خيوط خلفية مستقلة (`SwingWorker`)."
+          }
+        ],
+        securityAndTesting: "اعتماد مولدات الأرقام العشوائية الآمنة (`SecureRandom`) لتوليد المفاتيح ومتجهات التهيئة، مع التحقق من سلامة الترجمة عبر `javac`.",
+        statusAndLimitations: "تطبيق سطح مكتب مكتمل الوظائف وجاهز للاستخدام."
+      }
     }
   },
   {
@@ -272,6 +459,33 @@ export const featuredProjects: Project[] = [
       ],
       securityAndTesting: "Enforced parameterized SQL prepared statements to eliminate SQL injection vulnerabilities. Preserved as private repository due to production schema templates.",
       statusAndLimitations: "Complete desktop system prototype with fully verified UI screenshots and database schemas."
+    },
+    ar: {
+      title: "النظام المؤسسي المكتبي لإدارة المكتبات (Library Management System)",
+      headline: "تطبيق سطح مكتب مؤسسي بـ Java Swing مرتبط بقاعدة بيانات Oracle عبر JDBC، مع حساب آلي لغرامات التأخير وتنبيهات البريد الإلكتروني.",
+      description: "حل برمجي مكتبي متكامل بلغة Java لإدارة المكتبات الأكاديمية، وتتبع استعارة وإرجاع الكتب، وإدارة حسابات الطلاب، وحساب غرامات التأخير، وإرسال إيصالات البريد الإلكتروني تلقائياً.",
+      caseStudy: {
+        problem: "تحتاج المكتبات الأكاديمية إلى أنظمة استعارة دقيقة لمنع فقدان الكتب، وأتمتة حساب غرامات التأخير، وتتبع سجل استعارات الطلاب، وإرسال تنبيهات بمواعيد الإرجاع.",
+        architecture: "معمارية MVC ثنائية الطبقات لسطح المكتب: طبقة العرض تضم نوافذ Swing لبوابتي المسؤول والطالب، وطبقة البيانات تستخدم مشغل Oracle JDBC Thin مع المعاملات المعزولة والاستعلامات المجهزة.",
+        individualContribution: "تطوير مسارات إدارة الفهرس (CRUD)، ونظام الاستعارة والإرجاع، واستعلامات رصد المتأخرين تلقائياً، ودمج خدمة إشعارات البريد عبر JavaMail API.",
+        technologyChoices: "اختيار Java Swing لسرعة الاستجابة الفورية، وقاعدة بيانات Oracle للموثوقية العلائقية، و JavaMail لإرسال الإيصالات والتنبيهات.",
+        keyFeatures: [
+          "بوابتان مستقلتان حسب الصلاحية: بوابة المدير (المخزون، المستخدمين، السجلات) وبوابة الطالب (البحث وسجل الاستعارة)",
+          "مسار استعارة متكامل مع ختم تلقائي لتاريخ الإصدار وتاريخ الاستحقاق",
+          "متتبع آلي للمتأخرين يعرض المستعيرين المتجاوزين للمدة مع حساب الغرامة المستحقة",
+          "لوحة إحصائيات حية تعرض الإعارات النشطة وإجمالي الكتب والطلاب المسجلين",
+          "بحث وتصفية فورية في فهرس الكتب وسجلات الطلاب",
+          "موثق بـ 14 لقطة شاشة حقيقية لواجهات النظام ومخططات قاعدة البيانات"
+        ],
+        challengesAndSolutions: [
+          {
+            challenge: "منع تضارب العمليات (Race Conditions) عند محاولة إعارة النسخة الأخيرة المتاحة من الكتاب في نفس اللحظة.",
+            solution: "تطبيق تحديثات SQL علائقية على مستوى الصف تتحقق من `quantity > 0` داخل المعاملة قبل خصم الرصيد."
+          }
+        ],
+        securityAndTesting: "استخدام الاستعلامات المجهزة (Prepared Statements) لمنع ثغرات حقن SQL بالكامل. محفوظ كمستودع خاص لحماية قوالب قاعدة البيانات.",
+        statusAndLimitations: "نظام مكتبي متكامل وموثق بالكامل بلقطات الواجهات ومخططات جداول Oracle."
+      }
     }
   },
   {
@@ -304,6 +518,32 @@ export const featuredProjects: Project[] = [
       ],
       securityAndTesting: "All user inputs sanitized before DOM insertion to prevent cross-site scripting (XSS). Tested across mobile and desktop viewport sizes.",
       statusAndLimitations: "Complete front-end PWA ready for production integration with payment gateways."
+    },
+    ar: {
+      title: "منصة التجارة الإلكترونية وتطبيق الويب التقدمي (MDBoutique PWA)",
+      headline: "متجر إلكتروني متجاوب وتطبيق ويب تقدمي (PWA) مع تخزين مؤقت عبر Service Worker، وتصفية فورية للمنتجات، وسلة تسوق مستمرة.",
+      description: "تطبيق تجارة إلكترونية حديث ومتجاوب مبني بـ JavaScript ES6+ القياسي، وتقنيات تطبيقات الويب التقدمية (PWA Service Workers)، وإدارة حالة العميل عبر 260 تعديلاً برمجياً موثقاً (Commits).",
+      caseStudy: {
+        problem: "تتطلب منصات التجزئة الحديثة سرعة تحميل فائقة في اللحظة الأولى، وقدرة على العمل دون اتصال (Offline)، وتصفحاً سلساً للفهرس دون عبء الحزم البرمجية الضخمة.",
+        architecture: "تطبيق ويب تقدمي (PWA) مبني بمعايير الويب القياسية: يعترض `Service Worker` طلبات الشبكة لتقديم الأصول من الذاكرة المؤقتة أولاً، ويدير مخزن الحالة سلة التسوق والفلاتر عبر `localStorage`.",
+        individualContribution: "بناء محرك عرض فهرس المنتجات، وتصميم التخطيطات المتجاوبة، وبرمجة استمرارية سلة التسوق، وهندسة استراتيجية التخزين المؤقت عبر Service Worker.",
+        technologyChoices: "اختيار تقنيات الويب القياسية الخالصة لتحقيق زمن تحميل أقل من ثانية واحدة وبدون أي عبء إضافي للمكتبات الخارجية.",
+        keyFeatures: [
+          "تطبيق ويب تقدمي كامل (PWA) قابل للتثبيت ويدعم التصفح دون اتصال بالإنترنت",
+          "بحث فوري وتصفية لحظية للمنتجات حسب الفئات من جهة العميل",
+          "سلة تسوق مستمرة مع تعديل حي للكميات وحساب تلقائي للأسعار",
+          "مسار إتمام شراء متعدد الخطوات مع ملخص الطلب وتأكيد الفاتورة",
+          "260 تعديلاً برمجياً (Commits) في Git توثق مراحل بناء وتطوير المنصة"
+        ],
+        challengesAndSolutions: [
+          {
+            challenge: "الحفاظ على تزامن سلة التسوق عبر عدة علامات تبويب مفتوحة في المتصفح دون استعلامات خادم متكررة.",
+            solution: "استخدام واجهة أحداث التخزين (`storage` event API) في المتصفح لبث تحديثات السلة تفاعلياً بين جميع التبويبات."
+          }
+        ],
+        securityAndTesting: "تنقية كافة مدخلات المستخدم قبل إدراجها في DOM لمنع ثغرات XSS، مع اختبار التجاوب عبر مختلف أحجام الشاشات.",
+        statusAndLimitations: "واجهة متجر PWA مكتملة وجاهزة للربط المباشر مع بوابات الدفع."
+      }
     }
   }
 ];

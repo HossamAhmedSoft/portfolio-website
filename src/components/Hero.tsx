@@ -12,9 +12,11 @@ import {
   CheckCircle2, 
   FileText,
   Layers,
-  ShieldCheck
+  ShieldCheck,
+  Phone
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
+import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import { useLanguage } from "./LanguageProvider";
 
 interface HeroProps {
@@ -98,6 +100,28 @@ export function Hero({ onOpenCV }: HeroProps) {
                 <FileText className="w-4 h-4 text-sky-500" />
                 <span>{t.hero.viewCV}</span>
               </button>
+
+              <a
+                href="https://wa.me/201286677999"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl text-sm font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 border border-emerald-200 dark:border-emerald-800/80 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 shadow-sm"
+                aria-label="Chat on WhatsApp (+201286677999)"
+                title="Chat on WhatsApp (+201286677999)"
+              >
+                <WhatsAppIcon className="w-4 h-4 text-emerald-500" />
+                <span className="font-mono text-xs">WhatsApp</span>
+              </a>
+
+              <a
+                href="tel:+201286677999"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800/60 hover:bg-slate-200 dark:hover:bg-slate-700/60 border border-slate-200 dark:border-slate-700 transition-all"
+                aria-label="Call 01286677999"
+                title="Call 01286677999"
+              >
+                <Phone className="w-4 h-4 text-sky-500" />
+                <span className="font-mono text-xs">01286677999</span>
+              </a>
 
               <a
                 href="https://github.com/HossamAhmedSoft"

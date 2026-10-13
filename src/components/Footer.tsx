@@ -6,9 +6,11 @@ import {
   ArrowUp, 
   Terminal, 
   ShieldCheck, 
-  CheckCircle2 
+  CheckCircle2,
+  Phone
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
+import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import { useLanguage } from "./LanguageProvider";
 
 export function Footer() {
@@ -70,11 +72,29 @@ export function Footer() {
           </div>
 
           {/* Connect & Top Action (3 cols) */}
-          <div className={`md:col-span-3 space-y-3 ${isAr ? "md:text-start" : "md:text-end"}`}>
+          <div className="md:col-span-3 space-y-3 md:text-end">
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
               {t.footer.socialTitle}
             </h4>
-            <div className={`flex items-center ${isAr ? "md:justify-start" : "md:justify-end"} gap-2.5`}>
+            <div className="flex items-center md:justify-end gap-2">
+              <a
+                href="https://wa.me/201286677999"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors border border-emerald-200 dark:border-emerald-800/80"
+                aria-label="Chat on WhatsApp (+201286677999)"
+                title="WhatsApp (+201286677999)"
+              >
+                <WhatsAppIcon className="w-4 h-4 text-emerald-500" />
+              </a>
+              <a
+                href="tel:+201286677999"
+                className="p-2 rounded-lg bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 hover:bg-sky-100 dark:hover:bg-sky-900/60 transition-colors border border-sky-200 dark:border-sky-800/80"
+                aria-label="Call 01286677999"
+                title="Call (01286677999)"
+              >
+                <Phone className="w-4 h-4 text-sky-500" />
+              </a>
               <a
                 href="https://github.com/HossamAhmedSoft"
                 target="_blank"
@@ -100,7 +120,7 @@ export function Footer() {
               </button>
             </div>
             <div className="text-[11px] font-mono text-slate-400 dark:text-slate-500">
-              {isAr ? "القاهرة، مصر · جامعة ICT NCTU" : "Cairo, Egypt · ICT NCTU"}
+              {isAr ? "القاهرة، مصر · جامعة ICT NCTU · 01286677999" : "Cairo, Egypt · ICT NCTU · 01286677999"}
             </div>
           </div>
 

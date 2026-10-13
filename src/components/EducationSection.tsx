@@ -86,7 +86,7 @@ export function EducationSection() {
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-2">
-                  {item.highlights.map((h, hIdx) => (
+                  {(isAr ? item.highlightsAr : item.highlights).map((h, hIdx) => (
                     <div key={hIdx} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
                       <span>{h}</span>

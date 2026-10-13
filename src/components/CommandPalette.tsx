@@ -18,11 +18,12 @@ import {
   Mail, 
   Zap,
   Bot,
-  Languages
+  Phone
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useLanguage } from "./LanguageProvider";
 import { GithubIcon } from "./icons/GithubIcon";
+import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -44,13 +45,13 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copiedToast, setCopiedToast] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const { lang, isAr, toggleLanguage, t } = useLanguage();
+  const { t } = useLanguage();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const actions: CommandAction[] = [
     {
       id: "nav-projects",
-      title: isAr ? "استعراض المشاريع البرمجية" : "View Featured Projects",
+      title: "View Featured Projects",
       category: t.commandPalette.navGroup,
       icon: Code,
       run: () => {
@@ -60,7 +61,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-ai-engineering",
-      title: isAr ? "هندسة الذكاء الاصطناعي وسير العمل المنظم" : "Explore AI-Assisted Engineering & Workflows",
+      title: "Explore AI-Assisted Engineering & Workflows",
       category: t.commandPalette.navGroup,
       icon: Bot,
       run: () => {
@@ -70,7 +71,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-firebot",
-      title: isAr ? "استكشاف دراسة حالة روبوت الإطفاء Troy FireBot" : "Explore Troy FireBot Case Study",
+      title: "Explore Troy FireBot Case Study",
       category: t.commandPalette.navGroup,
       icon: Zap,
       run: () => {
@@ -80,7 +81,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-skills",
-      title: isAr ? "فحص مصفوفة المهارات التقنية" : "Inspect Technical Skills Matrix",
+      title: "Inspect Technical Skills Matrix",
       category: t.commandPalette.navGroup,
       icon: Terminal,
       run: () => {
@@ -90,7 +91,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-experience",
-      title: isAr ? "خبرات الموارد البشرية والمجتمع في GDG NCTU" : "View GDG NCTU HR Community Experience",
+      title: "View GDG NCTU HR Community Experience",
       category: t.commandPalette.navGroup,
       icon: Briefcase,
       run: () => {
@@ -100,7 +101,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-certs",
-      title: isAr ? "الشهادات والاعتمادات الموثقة" : "Inspect Verified Certifications & Credentials",
+      title: "Inspect Verified Certifications & Credentials",
       category: t.commandPalette.navGroup,
       icon: Award,
       run: () => {
@@ -110,7 +111,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-education",
-      title: isAr ? "المسار الأكاديمي والتعليم" : "Academic Background & Education",
+      title: "Academic Background & Education",
       category: t.commandPalette.navGroup,
       icon: GraduationCap,
       run: () => {
@@ -120,7 +121,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-contact",
-      title: isAr ? "تواصل معي مباشرة" : "Contact Hossam Ahmed",
+      title: "Contact Hossam Ahmed",
       category: t.commandPalette.navGroup,
       icon: Mail,
       run: () => {
@@ -140,14 +141,36 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
       }
     },
     {
-      id: "act-lang",
-      title: isAr ? "Switch Language to English (EN)" : "تبديل اللغة إلى العربية (AR)",
+      id: "act-whatsapp",
+      title: "Chat on WhatsApp (+20 128 667 7999)",
       category: t.commandPalette.actionsGroup,
-      icon: Languages,
-      shortcut: isAr ? "EN" : "عربي",
+      icon: WhatsAppIcon,
+      shortcut: "WA",
       run: () => {
-        toggleLanguage();
+        window.open("https://wa.me/201286677999", "_blank");
         onClose();
+      }
+    },
+    {
+      id: "act-call",
+      title: "Call Hossam Directly (01286677999 / +20 128 667 7999)",
+      category: t.commandPalette.actionsGroup,
+      icon: Phone,
+      shortcut: "Call",
+      run: () => {
+        window.location.href = "tel:+201286677999";
+        onClose();
+      }
+    },
+    {
+      id: "act-copy-phone",
+      title: "Copy Phone Number (01286677999)",
+      category: t.commandPalette.actionsGroup,
+      icon: Copy,
+      run: () => {
+        navigator.clipboard.writeText("01286677999");
+        setCopiedToast(true);
+        setTimeout(() => setCopiedToast(false), 2000);
       }
     },
     {
@@ -324,7 +347,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
 
           <div className="flex items-center gap-1.5 text-sky-500">
             <Terminal className="w-3.5 h-3.5" />
-            <span>{isAr ? "لوحة الأوامر السريعة" : "Developer Quick Launcher"}</span>
+            <span>Developer Quick Launcher</span>
           </div>
         </div>
 

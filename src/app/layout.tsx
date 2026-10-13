@@ -77,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ar" dir="rtl" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="en" dir="ltr" className="dark scroll-smooth" suppressHydrationWarning>
       <body className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#080B11] dark:text-slate-100 antialiased selection:bg-sky-500 selection:text-white transition-colors duration-200">
         <ThemeProvider>
           <LanguageProvider>

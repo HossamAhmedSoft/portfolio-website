@@ -111,7 +111,7 @@ export function ExperienceSection() {
                   <div className="relative aspect-4/3 overflow-hidden bg-slate-950">
                     <img 
                       src={item.src} 
-                      alt={item.title}
+                      alt={isAr ? item.titleAr : item.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -121,21 +121,21 @@ export function ExperienceSection() {
                       </span>
                     </div>
                     <span className={`absolute top-2.5 ${isAr ? "right-2.5" : "left-2.5"} px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-black/75 text-sky-300 border border-sky-400/30`}>
-                      {item.tag}
+                      {isAr ? item.tagAr : item.tag}
                     </span>
                   </div>
 
                   <div className="p-4 flex-1 flex flex-col justify-between space-y-2">
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-sky-500 transition-colors">
-                        {item.title}
+                        {isAr ? item.titleAr : item.title}
                       </h4>
                       <p className="text-[11px] font-mono text-sky-600 dark:text-sky-400 mt-0.5">
-                        {item.subtitle}
+                        {isAr ? item.subtitleAr : item.subtitle}
                       </p>
                     </div>
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">
-                      {item.description}
+                      {isAr ? item.descriptionAr : item.description}
                     </p>
                   </div>
                 </div>
@@ -155,7 +155,7 @@ export function ExperienceSection() {
                 </span>
               </div>
               <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400">
-                {isAr ? "صادرة وموقعة من قائد الفرع الجامعي" : `Issued by Chapter Leader ${exp.certificate.chapterLeader}`}
+                {isAr ? `صادرة وموقعة من قائد الفرع الجامعي (${exp.certificate.chapterLeader})` : `Issued by Chapter Leader ${exp.certificate.chapterLeader}`}
               </span>
             </div>
           </div>
@@ -177,11 +177,11 @@ export function ExperienceSection() {
                     className="p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-800/70 hover:border-sky-500/40 transition-colors"
                   >
                     <div className="text-xs font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
-                      <span>{item.title}</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0"></span>
+                      <span>{isAr ? item.titleAr : item.title}</span>
                     </div>
                     <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                      {item.description}
+                      {isAr ? item.descriptionAr : item.description}
                     </p>
                   </div>
                 ))}
@@ -203,7 +203,7 @@ export function ExperienceSection() {
                     : "Professional competencies and soft skills refined across two sessions of active student community operations:"}
                 </p>
                 <div className="flex flex-wrap gap-2 pt-1">
-                  {exp.transferableSkills.map((skill, sIdx) => (
+                  {(isAr ? exp.transferableSkillsAr : exp.transferableSkills).map((skill, sIdx) => (
                     <span 
                       key={sIdx}
                       className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shadow-2xs"
@@ -244,7 +244,7 @@ export function ExperienceSection() {
                       {isAr ? "تطبيق هندسي برمجي مرتبط بالعمليات" : "Connected Engineering Implementation"}
                     </span>
                     <h4 className="text-base sm:text-lg font-bold text-white">
-                      {exp.connectedProject.title}
+                      {isAr ? exp.connectedProject.titleAr : exp.connectedProject.title}
                     </h4>
                   </div>
                 </div>
@@ -262,11 +262,14 @@ export function ExperienceSection() {
               </div>
 
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {exp.connectedProject.description} {isAr ? "بدلاً من الاكتفاء بالمهام اليدوية، بادر حسام ببناء منصة برمجية متكاملة بـ 17 موديول لأتمتة الحضور وتقييم النقاط وإصدار تقارير الـ PDF:" : "Rather than treating HR operations purely as manual tasks, Hossam recognized the organizational bottlenecks across sessions and engineered software solutions to automate committee governance:"}
+                {isAr ? exp.connectedProject.descriptionAr : exp.connectedProject.description}{" "}
+                {isAr 
+                  ? "بدلاً من الاكتفاء بالمهام اليدوية، بادر حسام ببناء منصة برمجية متكاملة بـ 17 موديول لأتمتة الحضور وتقييم النقاط وإصدار تقارير الـ PDF:" 
+                  : "Rather than treating HR operations purely as manual tasks, Hossam recognized the organizational bottlenecks across sessions and engineered software solutions to automate committee governance:"}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-1">
-                {exp.connectedProject.implementedFeatures.map((feat, fIdx) => (
+                {(isAr ? exp.connectedProject.implementedFeaturesAr : exp.connectedProject.implementedFeatures).map((feat, fIdx) => (
                   <div key={fIdx} className="flex items-start gap-2 text-xs text-slate-300 bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/60">
                     <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0 mt-0.5" />
                     <span>{feat}</span>
@@ -287,16 +290,16 @@ export function ExperienceSection() {
           onClick={() => setActiveModalGraphic(null)}
         >
           <div 
-            className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-slate-900 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden"
+            className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-slate-900 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden text-start"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
               <div>
                 <h3 className="text-sm font-bold text-white">
-                  {activeModalGraphic.title}
+                  {isAr ? activeModalGraphic.titleAr : activeModalGraphic.title}
                 </h3>
                 <span className="text-xs font-mono text-sky-400">
-                  {activeModalGraphic.subtitle}
+                  {isAr ? activeModalGraphic.subtitleAr : activeModalGraphic.subtitle}
                 </span>
               </div>
               <button 
@@ -310,13 +313,13 @@ export function ExperienceSection() {
             <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-black/60">
               <img 
                 src={activeModalGraphic.src} 
-                alt={activeModalGraphic.title}
+                alt={isAr ? activeModalGraphic.titleAr : activeModalGraphic.title}
                 className="max-h-[70vh] w-auto object-contain rounded-lg shadow-lg"
               />
             </div>
 
             <div className="p-4 border-t border-slate-800 bg-slate-950 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
-              <p>{activeModalGraphic.description}</p>
+              <p>{isAr ? activeModalGraphic.descriptionAr : activeModalGraphic.description}</p>
               <a
                 href={activeModalGraphic.src}
                 target="_blank"

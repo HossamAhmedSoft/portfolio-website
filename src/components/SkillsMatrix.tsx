@@ -70,10 +70,10 @@ export function SkillsMatrix() {
                   </div>
                   <div>
                     <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">
-                      {cat.category}
+                      {isAr ? cat.categoryAr : cat.category}
                     </h3>
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">
-                      {cat.description}
+                      {isAr ? cat.descriptionAr : cat.description}
                     </p>
                   </div>
                 </div>
@@ -86,7 +86,7 @@ export function SkillsMatrix() {
                       className="p-2.5 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800/80 space-y-1"
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-xs font-semibold text-slate-900 dark:text-white">
+                        <span className="text-xs font-semibold text-slate-900 dark:text-white" dir="ltr">
                           {skill.name}
                         </span>
                         <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-medium shrink-0 ${
@@ -98,7 +98,7 @@ export function SkillsMatrix() {
                         </span>
                       </div>
                       <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                        ↳ {skill.projectEvidence}
+                        {isAr ? `• ${skill.projectEvidenceAr}` : `↳ ${skill.projectEvidence}`}
                       </div>
                     </div>
                   ))}

@@ -230,7 +230,7 @@ export function AIEngineeringSection() {
                 className="relative p-4 rounded-xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 space-y-1.5 hover:border-sky-500/50 transition-colors"
               >
                 <div className="text-[10px] font-mono font-bold text-sky-600 dark:text-sky-400 tracking-wider">
-                  STAGE {String(idx + 1).padStart(2, '0')}
+                  {isAr ? `المرحلة ${String(idx + 1).padStart(2, '0')}` : `STAGE ${String(idx + 1).padStart(2, '0')}`}
                 </div>
                 <h4 className="text-xs font-bold text-slate-900 dark:text-white">
                   {stage.title}
