@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { 
   ArrowRight, 
   ArrowLeft,
@@ -48,9 +49,13 @@ export function Hero({ onOpenCV }: HeroProps) {
             {/* Developer Portrait & Status Badge */}
             <div className="flex items-center gap-4 p-3 rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200/90 dark:border-slate-800 shadow-md max-w-fit">
               <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-sky-400 shadow-md shadow-sky-500/25 bg-slate-900 shrink-0 group">
-                <img 
+                <Image 
                   src="/assets/profile/hossam-ahmed.jpg" 
                   alt="Hossam Ahmed" 
+                  width={80}
+                  height={80}
+                  priority
+                  fetchPriority="high"
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" 
                 />
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-2xl pointer-events-none" />
@@ -147,7 +152,7 @@ export function Hero({ onOpenCV }: HeroProps) {
                     <div className="font-semibold text-xs text-slate-900 dark:text-white leading-tight">
                       {p.label}
                     </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight mt-0.5">
+                    <div className="text-[11px] text-slate-600 dark:text-slate-400 leading-tight mt-0.5">
                       {p.desc}
                     </div>
                   </div>
@@ -165,9 +170,9 @@ export function Hero({ onOpenCV }: HeroProps) {
                   <div className="w-3 h-3 rounded-full bg-rose-500/80" />
                   <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="font-mono text-xs text-slate-500 dark:text-slate-400 mx-2">{t.hero.diagram.title}</span>
+                  <span className="font-mono text-xs text-slate-600 dark:text-slate-400 mx-2">{t.hero.diagram.title}</span>
                 </div>
-                <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-300 border border-sky-200 dark:border-sky-900">
+                <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-900">
                   {t.hero.diagram.verifiedPipeline}
                 </span>
               </div>
@@ -176,57 +181,57 @@ export function Hero({ onOpenCV }: HeroProps) {
               <div className="py-5 space-y-3.5">
                 {/* Layer 1: Embedded Hardware / Edge */}
                 <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 shrink-0">
+                  <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 shrink-0">
                     <Cpu className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">{t.hero.diagram.layer1Title}</span>
-                      <span className="text-[10px] font-mono text-emerald-500 shrink-0">{t.hero.diagram.layer1Badge}</span>
+                      <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 shrink-0 font-semibold">{t.hero.diagram.layer1Badge}</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
                       {t.hero.diagram.layer1Desc}
                     </p>
                   </div>
                 </div>
 
                 {/* Connector Arrow */}
-                <div className="flex justify-center -my-1 text-sky-500 dark:text-sky-400 font-mono text-xs">
-                  ↓ <span className="text-[10px] text-slate-400 dark:text-slate-500 mx-1">{t.hero.diagram.connector1}</span>
+                <div className="flex justify-center -my-1 text-sky-600 dark:text-sky-400 font-mono text-xs">
+                  ↓ <span className="text-[10px] text-slate-600 dark:text-slate-400 mx-1">{t.hero.diagram.connector1}</span>
                 </div>
 
                 {/* Layer 2: Transactional Core & Persistence */}
                 <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-sky-500/10 text-sky-500 shrink-0">
+                  <div className="p-2 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-500 shrink-0">
                     <Database className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">{t.hero.diagram.layer2Title}</span>
-                      <span className="text-[10px] font-mono text-sky-500 shrink-0">{t.hero.diagram.layer2Badge}</span>
+                      <span className="text-[10px] font-mono text-sky-600 dark:text-sky-400 shrink-0 font-semibold">{t.hero.diagram.layer2Badge}</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
                       {t.hero.diagram.layer2Desc}
                     </p>
                   </div>
                 </div>
 
                 {/* Connector Arrow */}
-                <div className="flex justify-center -my-1 text-sky-500 dark:text-sky-400 font-mono text-xs">
-                  ↓ <span className="text-[10px] text-slate-400 dark:text-slate-500 mx-1">{t.hero.diagram.connector2}</span>
+                <div className="flex justify-center -my-1 text-sky-600 dark:text-sky-400 font-mono text-xs">
+                  ↓ <span className="text-[10px] text-slate-600 dark:text-slate-400 mx-1">{t.hero.diagram.connector2}</span>
                 </div>
 
                 {/* Layer 3: Presentation & User Control */}
                 <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500 shrink-0">
+                  <div className="p-2 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 shrink-0">
                     <Layers className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">{t.hero.diagram.layer3Title}</span>
-                      <span className="text-[10px] font-mono text-purple-500 shrink-0">{t.hero.diagram.layer3Badge}</span>
+                      <span className="text-[10px] font-mono text-purple-600 dark:text-purple-400 shrink-0 font-semibold">{t.hero.diagram.layer3Badge}</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
                       {t.hero.diagram.layer3Desc}
                     </p>
                   </div>
@@ -234,7 +239,7 @@ export function Hero({ onOpenCV }: HeroProps) {
               </div>
 
               {/* Bottom Verification Note */}
-              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
                 <span className="flex items-center gap-1.5 font-mono text-[11px]">
                   <ShieldCheck className="w-4 h-4 text-emerald-500" />
                   <span>{t.hero.diagram.reposCount}</span>

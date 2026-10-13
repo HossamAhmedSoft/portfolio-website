@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 import { useLanguage } from "./LanguageProvider";
 import { 
@@ -10,7 +12,8 @@ import {
   X, 
   Terminal, 
   FileText, 
-  Phone
+  Phone,
+  Send
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
@@ -26,15 +29,14 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: t.nav.overview, href: "#hero" },
-    { label: t.nav.firebot, href: "#firebot-case-study" },
-    { label: t.nav.projects, href: "#projects" },
-    { label: t.nav.aiEngineering, href: "#ai-engineering" },
-    { label: t.nav.skills, href: "#skills" },
-    { label: t.nav.experience, href: "#experience" },
-    { label: t.nav.credentials, href: "#certifications" },
-    { label: t.nav.education, href: "#education" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.overview, href: "/#hero" },
+    { label: t.nav.services, href: "/services" },
+    { label: t.nav.projects, href: "/projects" },
+    { label: t.nav.aiEngineering, href: "/#ai-engineering" },
+    { label: t.nav.skills, href: "/#skills" },
+    { label: t.nav.experience, href: "/#experience" },
+    { label: t.nav.about, href: "/about" },
+    { label: t.nav.contact, href: "/contact" },
   ];
 
   // Close mobile menu if viewport resizes to desktop
@@ -49,13 +51,16 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
-    e.preventDefault();
     setMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 10);
+    if (href.startsWith("/#") && typeof window !== "undefined" && window.location.pathname === "/") {
+      e.preventDefault();
+      const hash = href.replace("/", "");
+      const element = document.querySelector(hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 10);
+      }
     }
   };
 
@@ -64,15 +69,18 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
       <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/95 dark:bg-[#080B11]/95 border-b border-slate-200 dark:border-slate-800/80 transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
           {/* Brand Logo Emblem */}
-          <a 
-            href="#hero"
-            onClick={(e) => handleNavClick(e, "#hero")}
+          <Link 
+            href="/"
+            onClick={() => setMobileMenuOpen(false)}
             className="flex items-center gap-2 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg p-1 min-w-0"
           >
             <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden border border-sky-400/50 shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform bg-slate-900 shrink-0">
-              <img 
+              <Image 
                 src="/assets/branding/portfolio-icon.jpg" 
                 alt="Hossam Ahmed Logo" 
+                width={40}
+                height={40}
+                priority
                 className="w-full h-full object-cover" 
               />
             </div>
@@ -80,11 +88,11 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
               <span className="font-bold text-slate-900 dark:text-white tracking-tight text-sm sm:text-base block group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors leading-tight truncate">
                 Hossam Ahmed
               </span>
-              <span className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 block font-mono leading-tight truncate">
+              <span className="text-[10px] sm:text-[11px] text-slate-600 dark:text-slate-400 block font-mono leading-tight truncate">
                 Software Developer
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-1 2xl:gap-1.5">
@@ -164,11 +172,20 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
               <GithubIcon className="w-4 h-4 shrink-0" />
             </a>
 
+            {/* Request Service CTA Button */}
+            <Link
+              href="/services/request"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold whitespace-nowrap text-white bg-sky-500 hover:bg-sky-600 rounded-lg shadow-sm shadow-sky-500/30 transition-all hover:shadow-md hover:shadow-sky-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-400"
+            >
+              <Send className="w-3.5 h-3.5 shrink-0" />
+              <span>{t.nav.requestService || "Request Service"}</span>
+            </Link>
+
             {/* CV / Resume Button */}
             <button
               type="button"
               onClick={onOpenCV}
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold whitespace-nowrap text-white bg-sky-500 hover:bg-sky-600 rounded-lg shadow-sm shadow-sky-500/30 transition-all hover:shadow-md hover:shadow-sky-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-400 cursor-pointer"
+              className="hidden md:flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold whitespace-nowrap text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 cursor-pointer"
             >
               <FileText className="w-3.5 h-3.5 shrink-0" />
               <span>{t.nav.cv}</span>
@@ -203,6 +220,14 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
               ))}
             </div>
             <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
+              <Link
+                href="/services/request"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-white bg-sky-500 hover:bg-sky-600 rounded-lg shadow-sm"
+              >
+                <Send className="w-4 h-4" />
+                <span>{t.nav.requestService || "Request a Service"}</span>
+              </Link>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
@@ -210,7 +235,7 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
                     setMobileMenuOpen(false);
                     onOpenCV();
                   }}
-                  className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-white bg-sky-500 hover:bg-sky-600 rounded-lg shadow-sm cursor-pointer"
+                  className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 cursor-pointer"
                 >
                   <FileText className="w-4 h-4" />
                   <span>{t.nav.cv}</span>

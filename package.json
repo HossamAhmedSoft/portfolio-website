@@ -6,7 +6,8 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "npx -y tsx scripts/test-service-system.ts"
   },
   "dependencies": {
     "next": "16.4.0",

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { certificates, Certificate } from "@/data/certificates";
 import { CertificateModal } from "./CertificateModal";
 import { 
@@ -50,18 +51,19 @@ export function CertificationsGallery() {
 
         {/* Filter Pills */}
         <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-slate-200 dark:border-slate-800">
-          <div className="flex items-center gap-1 text-xs font-mono text-slate-400 mx-1">
+          <div className="flex items-center gap-1 text-xs font-mono text-slate-600 dark:text-slate-400 mx-1">
             <Filter className="w-3.5 h-3.5" />
             <span>{isAr ? "الجهة المصدرة:" : "Issuer:"}</span>
           </div>
           {issuers.map((iss) => (
             <button
               key={iss.key}
+              type="button"
               onClick={() => setSelectedIssuer(iss.key)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 selectedIssuer === iss.key
                   ? "bg-sky-500 text-white shadow-sm shadow-sky-500/25"
-                  : "bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/60"
+                  : "bg-white dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/60"
               }`}
             >
               {iss.label}
@@ -74,18 +76,30 @@ export function CertificationsGallery() {
           {filteredCerts.map((cert) => (
             <div
               key={cert.id}
+              role="button"
+              tabIndex={0}
+              aria-label={`View certificate for ${isAr ? cert.titleAr : cert.title}`}
               onClick={() => setActiveModalCert(cert)}
-              className="group cursor-pointer flex flex-col justify-between rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200/90 dark:border-slate-800 hover:border-sky-500/70 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setActiveModalCert(cert);
+                }
+              }}
+              className="group cursor-pointer flex flex-col justify-between rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200/90 dark:border-slate-800 hover:border-sky-500/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden"
             >
               {/* Certificate Image Thumbnail Preview */}
               <div className="relative aspect-4/3 w-full bg-slate-950 overflow-hidden border-b border-slate-200 dark:border-slate-800">
-                <img
+                <Image
                   src={cert.imagePath}
                   alt={isAr ? cert.titleAr : cert.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90 group-hover:opacity-100"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  loading="lazy"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90 group-hover:opacity-100"
                 />
-                <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
-                <div className={`absolute top-2.5 ${isAr ? "left-2.5" : "right-2.5"}`}>
+                <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10" />
+                <div className={`absolute top-2.5 ${isAr ? "left-2.5" : "right-2.5"} z-20`}>
                   <span className="p-1.5 rounded-md bg-slate-900/80 text-white backdrop-blur-sm flex items-center justify-center">
                     <Eye className="w-3.5 h-3.5" />
                   </span>
@@ -95,7 +109,7 @@ export function CertificationsGallery() {
               {/* Card Body */}
               <div className="p-5 space-y-2.5 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 mb-1">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-600 dark:text-slate-400 mb-1">
                     <span className="font-semibold text-sky-600 dark:text-sky-400">
                       {cert.issuer}
                     </span>
@@ -106,7 +120,7 @@ export function CertificationsGallery() {
                     {isAr ? cert.titleAr : cert.title}
                   </h3>
 
-                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
                     {isAr ? cert.summaryAr : cert.summary}
                   </p>
                 </div>

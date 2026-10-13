@@ -127,12 +127,15 @@ export function FireBotCaseStudy() {
           {/* Visual Showcase (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg">
-              <img
+              <Image
                 src={selectedImage}
                 alt="Troy FireBot System Visualization"
-                className="w-full h-full object-contain bg-slate-950"
+                fill
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                loading="lazy"
+                className="object-contain bg-slate-950"
               />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent p-4 text-white">
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent p-4 text-white z-10">
                 <span className="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/80 text-white mx-2">
                   {isAr ? "معاينة حية" : "Live Capture"}
                 </span>
@@ -147,14 +150,23 @@ export function FireBotCaseStudy() {
               {galleryImages.map((img, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => setSelectedImage(img.src)}
+                  aria-label={`Select ${img.title} view`}
                   className={`relative aspect-video rounded-lg overflow-hidden border-2 transition-all ${
                     selectedImage === img.src
                       ? "border-sky-500 scale-95 shadow-md shadow-sky-500/20"
                       : "border-slate-200 dark:border-slate-800 opacity-70 hover:opacity-100"
                   }`}
                 >
-                  <img src={img.src} alt={img.title} className="w-full h-full object-cover" />
+                  <Image
+                    src={img.src}
+                    alt={img.title}
+                    fill
+                    sizes="(max-width: 768px) 25vw, 15vw"
+                    loading="lazy"
+                    className="object-cover"
+                  />
                 </button>
               ))}
             </div>

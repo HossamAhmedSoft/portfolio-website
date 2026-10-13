@@ -5,6 +5,8 @@ export interface Translations {
     overview: string;
     firebot: string;
     projects: string;
+    services: string;
+    requestService: string;
     skills: string;
     experience: string;
     credentials: string;
@@ -282,6 +284,8 @@ export const translations: Record<Language, Translations> = {
       overview: "Overview",
       firebot: "FireBot",
       projects: "Projects",
+      services: "Services",
+      requestService: "Request Service",
       skills: "Skills",
       experience: "Experience",
       credentials: "Credentials",
@@ -591,6 +595,8 @@ export const translations: Record<Language, Translations> = {
       overview: "نظرة عامة",
       firebot: "مشروع فايربوت",
       projects: "المشاريع",
+      services: "الخدمات",
+      requestService: "طلب خدمة",
       skills: "المهارات",
       experience: "الخبرات",
       credentials: "الشهادات",

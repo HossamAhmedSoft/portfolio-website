@@ -18,7 +18,10 @@ import {
   Mail, 
   Zap,
   Bot,
-  Phone
+  Phone,
+  Send,
+  Clock,
+  Layers
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useLanguage } from "./LanguageProvider";
@@ -50,13 +53,48 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
 
   const actions: CommandAction[] = [
     {
+      id: "nav-services",
+      title: "Explore Professional Engineering Services",
+      category: t.commandPalette.navGroup,
+      icon: Layers,
+      run: () => {
+        onClose();
+        window.location.href = "/services";
+      }
+    },
+    {
+      id: "act-request-service",
+      title: "Submit a Project / Service Request",
+      category: t.commandPalette.actionsGroup,
+      icon: Send,
+      shortcut: "REQ",
+      run: () => {
+        onClose();
+        window.location.href = "/services/request";
+      }
+    },
+    {
+      id: "act-track-request",
+      title: "Track Service Request Status",
+      category: t.commandPalette.actionsGroup,
+      icon: Clock,
+      run: () => {
+        onClose();
+        window.location.href = "/services/request/status";
+      }
+    },
+    {
       id: "nav-projects",
       title: "View Featured Projects",
       category: t.commandPalette.navGroup,
       icon: Code,
       run: () => {
         onClose();
-        document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
+        if (window.location.pathname === "/") {
+          document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
+        } else {
+          window.location.href = "/projects";
+        }
       }
     },
     {

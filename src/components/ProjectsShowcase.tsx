@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { featuredProjects, Project } from "@/data/projects";
 import { ProjectModal } from "./ProjectModal";
 import { 
@@ -88,8 +89,8 @@ export function ProjectsShowcase() {
           </div>
 
           {/* Results Badge */}
-          <div className="font-mono text-xs text-slate-400 shrink-0">
-            {t.projects.showing} <strong className="text-sky-500 font-bold">{filteredProjects.length}</strong> {t.projects.of} {featuredProjects.length} {t.projects.projectsText}
+          <div className="font-mono text-xs text-slate-600 dark:text-slate-400 shrink-0">
+            {t.projects.showing} <strong className="text-sky-600 dark:text-sky-400 font-bold">{filteredProjects.length}</strong> {t.projects.of} {featuredProjects.length} {t.projects.projectsText}
           </div>
         </div>
 
@@ -98,18 +99,21 @@ export function ProjectsShowcase() {
           
           {/* Top Row: Search Input */}
           <div className="relative">
-            <Search className={`absolute ${isAr ? "right-3.5" : "left-3.5"} top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400`} />
+            <Search className={`absolute ${isAr ? "right-3.5" : "left-3.5"} top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 dark:text-slate-400`} />
             <input 
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t.projects.searchPlaceholder}
-              className={`w-full ${isAr ? "pr-10 pl-10" : "pl-10 pr-10"} py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500`}
+              aria-label={t.projects.searchPlaceholder || "Search projects by title, stack, or keywords"}
+              className={`w-full ${isAr ? "pr-10 pl-10" : "pl-10 pr-10"} py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500`}
             />
             {searchQuery && (
               <button 
+                type="button"
                 onClick={() => setSearchQuery("")}
-                className={`absolute ${isAr ? "left-3.5" : "right-3.5"} top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-700 dark:hover:text-white rounded`}
+                aria-label="Clear search input"
+                className={`absolute ${isAr ? "left-3.5" : "right-3.5"} top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-slate-700 dark:hover:text-white rounded cursor-pointer`}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -118,18 +122,19 @@ export function ProjectsShowcase() {
 
           {/* Bottom Row: Category Filter Tabs */}
           <div className="flex flex-wrap items-center gap-2 pt-1">
-            <div className="flex items-center gap-1 text-xs font-mono text-slate-400 mx-1">
+            <div className="flex items-center gap-1 text-xs font-mono text-slate-600 dark:text-slate-400 mx-1">
               <Filter className="w-3.5 h-3.5" />
               <span>{t.projects.categoryLabel}</span>
             </div>
             {categories.map((cat) => (
               <button
                 key={cat.key}
+                type="button"
                 onClick={() => setSelectedCategory(cat.key)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   selectedCategory === cat.key
                     ? "bg-sky-500 text-white shadow-sm shadow-sky-500/25"
-                    : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/60"
+                    : "bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/60"
                 }`}
               >
                 {cat.label}
@@ -171,12 +176,15 @@ export function ProjectsShowcase() {
                   {/* Optional Screenshot Banner */}
                   {project.thumbnailUrl && (
                     <div className="relative aspect-16/9 overflow-hidden bg-slate-900 border-b border-slate-200/80 dark:border-slate-800">
-                      <img 
+                      <Image 
                         src={project.thumbnailUrl} 
                         alt={pData.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        loading="lazy"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                      <div className={`absolute top-3 ${isAr ? "right-3" : "left-3"} px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-black/70 text-sky-300 border border-sky-400/30 backdrop-blur-xs`}>
+                      <div className={`absolute top-3 ${isAr ? "right-3" : "left-3"} px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-black/70 text-sky-300 border border-sky-400/30 backdrop-blur-xs z-10`}>
                         {getLocalizedStatus(project.status)}
                       </div>
                     </div>

@@ -1,13 +1,25 @@
 import React from "react";
 
-export function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
+interface IconProps {
+  className?: string;
+  "aria-label"?: string;
+  "aria-hidden"?: boolean | "true" | "false";
+}
+
+export function WhatsAppIcon({ 
+  className = "w-4 h-4",
+  "aria-label": ariaLabel,
+  "aria-hidden": ariaHidden = true
+}: IconProps) {
   return (
     <svg
-      role="img"
       viewBox="0 0 24 24"
       fill="currentColor"
       width="1em"
       height="1em"
+      aria-hidden={ariaLabel ? undefined : ariaHidden}
+      aria-label={ariaLabel}
+      role={ariaLabel ? "img" : undefined}
       className={`inline-block shrink-0 ${className}`}
       xmlns="http://www.w3.org/2000/svg"
     >

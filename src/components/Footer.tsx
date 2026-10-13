@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { 
   Mail, 
   ArrowUp, 
@@ -30,9 +32,12 @@ export function Footer() {
           <div className="md:col-span-5 space-y-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl overflow-hidden border border-sky-400/40 bg-slate-900 shadow-sm shrink-0">
-                <img 
+                <Image 
                   src="/assets/branding/portfolio-icon.jpg" 
                   alt="Hossam Ahmed Logo" 
+                  width={40}
+                  height={40}
+                  loading="lazy"
                   className="w-full h-full object-cover" 
                 />
               </div>
@@ -40,12 +45,12 @@ export function Footer() {
                 <span className="font-bold text-slate-900 dark:text-white text-base tracking-tight block">
                   {isAr ? "حسام أحمد" : "Hossam Ahmed"}
                 </span>
-                <span className="text-[11px] font-mono text-sky-500">
+                <span className="text-[11px] font-mono text-sky-600 dark:text-sky-400">
                   {isAr ? "هندسة البرمجيات والأنظمة" : "Software Engineering"}
                 </span>
               </div>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
               {t.footer.summary}
             </p>
             <div className="flex items-center gap-2 text-[11px] font-mono text-emerald-600 dark:text-emerald-400">
@@ -60,14 +65,14 @@ export function Footer() {
               {t.footer.navTitle}
             </h4>
             <div className="grid grid-cols-2 gap-2 text-xs">
-              <a href="#hero" className="hover:text-sky-500 transition-colors">{t.nav.overview}</a>
-              <a href="#firebot-case-study" className="hover:text-sky-500 transition-colors">{t.nav.firebot}</a>
-              <a href="#projects" className="hover:text-sky-500 transition-colors">{t.nav.projects}</a>
-              <a href="#skills" className="hover:text-sky-500 transition-colors">{t.nav.skills}</a>
-              <a href="#experience" className="hover:text-sky-500 transition-colors">{t.nav.experience}</a>
-              <a href="#certifications" className="hover:text-sky-500 transition-colors">{t.nav.credentials}</a>
-              <a href="#education" className="hover:text-sky-500 transition-colors">{t.nav.education}</a>
-              <a href="#contact" className="hover:text-sky-500 transition-colors">{t.nav.contact}</a>
+              <Link href="/" className="hover:text-sky-500 transition-colors">{t.nav.overview}</Link>
+              <Link href="/services" className="hover:text-sky-500 transition-colors">{t.nav.services || "Services"}</Link>
+              <Link href="/services/request" className="hover:text-sky-500 transition-colors text-sky-600 dark:text-sky-400 font-semibold">{t.nav.requestService || "Request Service"}</Link>
+              <Link href="/projects" className="hover:text-sky-500 transition-colors">{t.nav.projects}</Link>
+              <Link href="/about" className="hover:text-sky-500 transition-colors">{t.nav.about}</Link>
+              <Link href="/contact" className="hover:text-sky-500 transition-colors">{t.nav.contact}</Link>
+              <Link href="/services/request/status" className="hover:text-sky-500 transition-colors">{isAr ? "متابعة الطلب" : "Track Request"}</Link>
+              <Link href="/privacy" className="hover:text-sky-500 transition-colors">{isAr ? "سياسة الخصوصية" : "Privacy Notice"}</Link>
             </div>
           </div>
 
@@ -112,14 +117,15 @@ export function Footer() {
                 <Mail className="w-4 h-4" />
               </a>
               <button
+                type="button"
                 onClick={scrollToTop}
-                className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-400 transition-colors"
+                className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-400 transition-colors cursor-pointer"
                 aria-label="Scroll to top"
               >
                 <ArrowUp className="w-4 h-4" />
               </button>
             </div>
-            <div className="text-[11px] font-mono text-slate-400 dark:text-slate-500">
+            <div className="text-[11px] font-mono text-slate-600 dark:text-slate-400">
               {isAr ? "القاهرة، مصر · جامعة ICT NCTU · 01286677999" : "Cairo, Egypt · ICT NCTU · 01286677999"}
             </div>
           </div>
@@ -127,7 +133,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Attribution */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 dark:text-slate-500 text-[11px]">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-600 dark:text-slate-400 text-[11px]">
           <div>
             {isAr 
               ? "© 2026 حسام أحمد. مبني بأحدث تقنيات Next.js 16، TypeScript، و Tailwind CSS."
