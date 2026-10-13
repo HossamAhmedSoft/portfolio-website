@@ -70,19 +70,23 @@ export function AboutSection() {
           {/* Right Column: Portrait & Principles (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             {/* Authentic Portrait Card */}
-            <div className="flex flex-col sm:flex-row items-center gap-5 p-5 rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800">
-              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-sky-400/40 shadow-md shrink-0 bg-slate-900">
+            <div className="flex flex-col sm:flex-row items-center gap-5 p-6 rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-md">
+              <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-sky-400/80 shadow-lg shadow-sky-500/25 shrink-0 bg-slate-900 group">
                 <img 
                   src="/assets/profile/hossam-ahmed.jpg" 
                   alt="Hossam Ahmed — Software Developer" 
-                  className="w-full h-full object-cover object-top" 
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" 
                 />
+                <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-2xl pointer-events-none" />
               </div>
-              <div className="space-y-1">
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  {isAr ? "حسام أحمد" : "Hossam Ahmed"}
-                </h3>
-                <p className="text-xs font-mono text-sky-600 dark:text-sky-400">
+              <div className="space-y-1.5 text-center sm:text-start">
+                <div className="flex items-center justify-center sm:justify-start gap-2">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                    {isAr ? "حسام أحمد" : "Hossam Ahmed"}
+                  </h3>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                </div>
+                <p className="text-xs font-mono font-semibold text-sky-600 dark:text-sky-400">
                   {isAr ? "مهندس ومطور برمجيات · جامعة NCTU" : "Software Developer · ICT NCTU"}
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pt-1">
@@ -90,6 +94,17 @@ export function AboutSection() {
                     ? "متخصص في هندسة الأنظمة الخلفية بلغة Java، وهندسة قواعد البيانات العلائقية، وتطبيقات إنترنت الأشياء والروبوتات."
                     : "Focused on Java backend engineering, relational database architecture, and integrated IoT robotics."}
                 </p>
+                <div className="pt-1 flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                    Java 21 LTS
+                  </span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                    Spring Boot 3
+                  </span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                    Oracle SQL
+                  </span>
+                </div>
               </div>
             </div>
 

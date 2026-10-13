@@ -43,10 +43,28 @@ export function Hero({ onOpenCV }: HeroProps) {
           
           {/* Main Hero Column (7 cols) */}
           <div className="lg:col-span-7 space-y-6 text-start">
-            {/* Status / Availability Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-medium bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800/80 text-sky-700 dark:text-sky-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>{t.hero.statusBadge}</span>
+            {/* Developer Portrait & Status Badge */}
+            <div className="flex items-center gap-4 p-3 rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200/90 dark:border-slate-800 shadow-md max-w-fit">
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-sky-400 shadow-md shadow-sky-500/25 bg-slate-900 shrink-0 group">
+                <img 
+                  src="/assets/profile/hossam-ahmed.jpg" 
+                  alt="Hossam Ahmed" 
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" 
+                />
+                <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-2xl pointer-events-none" />
+              </div>
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/80 text-emerald-700 dark:text-emerald-300">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>{t.hero.statusBadge}</span>
+                </div>
+                <div className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-tight">
+                  {isAr ? "حسام أحمد" : "Hossam Ahmed"}
+                </div>
+                <div className="text-xs font-mono text-sky-600 dark:text-sky-400">
+                  {isAr ? "مهندس ومطور برمجيات" : "Software Developer & Systems Engineer"}
+                </div>
+              </div>
             </div>
 
             {/* Main Headline */}
