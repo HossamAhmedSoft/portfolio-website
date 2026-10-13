@@ -23,13 +23,22 @@ export function Footer() {
           
           {/* Brand & Positioning (5 cols) */}
           <div className="md:col-span-5 space-y-3 text-left">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-sky-500 flex items-center justify-center text-white font-bold font-mono text-sm shadow-sm shadow-sky-500/20">
-                HA
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl overflow-hidden border border-sky-400/40 bg-slate-900 shadow-sm shrink-0">
+                <img 
+                  src="/assets/branding/portfolio-icon.jpg" 
+                  alt="Hossam Ahmed Logo" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
-              <span className="font-bold text-slate-900 dark:text-white text-base tracking-tight">
-                Hossam Ahmed
-              </span>
+              <div>
+                <span className="font-bold text-slate-900 dark:text-white text-base tracking-tight block">
+                  Hossam Ahmed
+                </span>
+                <span className="text-[11px] font-mono text-sky-500">
+                  Software Engineering
+                </span>
+              </div>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
               Software developer specializing in Java backend engineering, transactional databases, modern full-stack web platforms, and embedded IoT systems.

@@ -15,9 +15,10 @@ import { GithubIcon } from "./icons/GithubIcon";
 
 interface NavbarProps {
   onOpenCV: () => void;
+  onOpenPalette: () => void;
 }
 
-export function Navbar({ onOpenCV }: NavbarProps) {
+export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -43,13 +44,17 @@ export function Navbar({ onOpenCV }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-[#080B11]/85 border-b border-slate-200 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand Monogram */}
+        {/* Brand Logo Emblem */}
         <a 
           href="#hero" 
           className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg p-1"
         >
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white font-bold shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
-            <span className="font-mono text-lg">HA</span>
+          <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-sky-400/50 shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform bg-slate-900 shrink-0">
+            <img 
+              src="/assets/branding/portfolio-icon.jpg" 
+              alt="Hossam Ahmed Logo" 
+              className="w-full h-full object-cover" 
+            />
           </div>
           <div>
             <span className="font-bold text-slate-900 dark:text-white tracking-tight text-base sm:text-lg block group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors">
@@ -87,6 +92,16 @@ export function Navbar({ onOpenCV }: NavbarProps) {
             ) : (
               <Moon className="w-4 h-4 text-slate-700 hover:-rotate-12 transition-transform" />
             )}
+          </button>
+
+          {/* Quick Launcher / Command Palette Trigger */}
+          <button
+            onClick={onOpenPalette}
+            aria-label="Open command palette"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-mono text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          >
+            <Terminal className="w-3.5 h-3.5 text-sky-500" />
+            <span className="text-[10px] text-slate-400 font-normal">Ctrl+K</span>
           </button>
 
           {/* GitHub Link */}

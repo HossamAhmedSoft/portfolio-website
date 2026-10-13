@@ -9,12 +9,16 @@ import {
   ArrowUpRight, 
   CheckCircle2, 
   Code,
-  Filter
+  Filter,
+  Search,
+  X,
+  RotateCcw
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 
 export function ProjectsShowcase() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
 
   const categories = [
@@ -26,140 +30,226 @@ export function ProjectsShowcase() {
     "Cryptography"
   ];
 
-  const filteredProjects = selectedCategory === "All"
-    ? featuredProjects
-    : featuredProjects.filter(p => p.category === selectedCategory);
+  const filteredProjects = featuredProjects.filter((p) => {
+    const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return matchesCategory;
+    const matchesSearch = 
+      p.title.toLowerCase().includes(q) ||
+      p.headline.toLowerCase().includes(q) ||
+      p.technologies.some(t => t.toLowerCase().includes(q)) ||
+      p.caseStudy.problem.toLowerCase().includes(q) ||
+      p.caseStudy.individualContribution.toLowerCase().includes(q);
+    return matchesCategory && matchesSearch;
+  });
+
+  const handleResetFilters = () => {
+    setSelectedCategory("All");
+    setSearchQuery("");
+  };
 
   return (
     <section id="projects" className="py-20 bg-white dark:bg-[#080B11]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-10 text-left">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800 mb-3">
-            <Code className="w-3.5 h-3.5 text-sky-500" />
-            <span>PORTFOLIO CODEBASES & CASE STUDIES</span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 text-left">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800 mb-3">
+              <Code className="w-3.5 h-3.5 text-sky-500" />
+              <span>PORTFOLIO CODEBASES & CASE STUDIES</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Verified Engineering Projects
+            </h2>
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2">
+              Selected projects demonstrating actual backend architecture, systems programming, and hardware-software integration. Each project represents verifiable code published on GitHub.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Verified Engineering Projects
-          </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2">
-            Selected projects demonstrating actual backend architecture, systems programming, and hardware-software integration. Each project represents verifiable code published on GitHub.
-          </p>
+
+          {/* Results Badge */}
+          <div className="font-mono text-xs text-slate-400 shrink-0">
+            Showing <strong className="text-sky-500 font-bold">{filteredProjects.length}</strong> of {featuredProjects.length} projects
+          </div>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-slate-200 dark:border-slate-800">
-          <div className="flex items-center gap-1 text-xs font-mono text-slate-400 mr-2">
-            <Filter className="w-3.5 h-3.5" />
-            <span>Filter:</span>
+        {/* Search & Filter Control Bar */}
+        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 mb-10 space-y-4">
+          
+          {/* Top Row: Search Input */}
+          <div className="relative">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input 
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by technology, keyword, or concept (e.g. 'Java', 'Spring', 'JWT', 'Arduino', 'C++', 'SQL')..."
+              className="w-full pl-10 pr-10 py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            />
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-700 dark:hover:text-white rounded"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                selectedCategory === cat
-                  ? "bg-sky-500 text-white shadow-sm shadow-sky-500/25"
-                  : "bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/60"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+
+          {/* Bottom Row: Category Filter Tabs */}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <div className="flex items-center gap-1 text-xs font-mono text-slate-400 mr-2">
+              <Filter className="w-3.5 h-3.5" />
+              <span>Category:</span>
+            </div>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  selectedCategory === cat
+                    ? "bg-sky-500 text-white shadow-sm shadow-sky-500/25"
+                    : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/60"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
         </div>
 
         {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="group flex flex-col justify-between rounded-2xl bg-slate-50/70 dark:bg-[#0F172A] border border-slate-200/90 dark:border-slate-800/90 hover:border-sky-500/60 dark:hover:border-sky-500/60 shadow-sm hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300 text-left overflow-hidden"
+        {filteredProjects.length === 0 ? (
+          <div className="p-12 text-center rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 space-y-4">
+            <div className="w-12 h-12 rounded-full bg-sky-500/10 text-sky-500 flex items-center justify-center mx-auto">
+              <Search className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+              No matching projects found
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+              No projects matched your search &ldquo;{searchQuery}&rdquo; in category &ldquo;{selectedCategory}&rdquo;.
+            </p>
+            <button
+              onClick={handleResetFilters}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-sky-500 text-white hover:bg-sky-600 transition-colors"
             >
-              {/* Optional Screenshot Banner */}
-              {project.thumbnailUrl && (
-                <div className="relative aspect-video w-full overflow-hidden bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-                  <img
-                    src={project.thumbnailUrl}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-950/80 text-white backdrop-blur-sm border border-white/10">
-                      Screenshots Available
-                    </span>
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Reset Search & Filters</span>
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project) => (
+              <div
+                key={project.id}
+                className="group flex flex-col justify-between rounded-2xl bg-slate-50/70 dark:bg-[#0F172A] border border-slate-200/90 dark:border-slate-800/90 hover:border-sky-500/60 dark:hover:border-sky-500/60 shadow-sm hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300 text-left overflow-hidden"
+              >
+                {/* Optional Screenshot Banner */}
+                {project.thumbnailUrl && (
+                  <div className="relative aspect-16/9 overflow-hidden bg-slate-900 border-b border-slate-200/80 dark:border-slate-800">
+                    <img 
+                      src={project.thumbnailUrl} 
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-black/70 text-sky-300 border border-sky-400/30 backdrop-blur-xs">
+                      {project.status}
+                    </div>
+                  </div>
+                )}
+
+                {/* Card Content Body */}
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded bg-sky-100 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800/80">
+                        {project.category}
+                      </span>
+                      {!project.thumbnailUrl && (
+                        <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
+                          {project.status}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors">
+                      {project.title}
+                    </h3>
+
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2">
+                      {project.headline}
+                    </p>
+
+                    {/* What I Implemented (Factual summary) */}
+                    <div className="p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800/60 space-y-1">
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+                        What I Implemented
+                      </div>
+                      <p className="text-xs text-slate-700 dark:text-slate-200 line-clamp-3 leading-relaxed">
+                        {project.caseStudy.individualContribution}
+                      </p>
+                    </div>
+
+                    {/* Tech Tags */}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {project.technologies.map((tag, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Card Bottom Actions */}
+                  <div className="pt-4 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between gap-2">
+                    <button
+                      onClick={() => setActiveModalProject(project)}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
+                    >
+                      <span>Deep Case Study</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    <div className="flex items-center gap-2">
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`View ${project.title} on GitHub`}
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+                        >
+                          <GithubIcon className="w-4 h-4" />
+                        </a>
+                      )}
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Open demo for ${project.title}`}
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              )}
 
-              {/* Card Body */}
-              <div className="p-6 space-y-4 flex-1">
-                {/* Meta Pills */}
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
-                    {project.category}
-                  </span>
-                  <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3" />
-                    <span>{project.status}</span>
-                  </span>
-                </div>
-
-                {/* Project Title */}
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors leading-snug">
-                  {project.title}
-                </h3>
-
-                {/* Headline / Problem */}
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {project.headline}
-                </p>
-
-                {/* Verified Tech Pills */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {project.technologies.slice(0, 4).map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2 py-0.5 rounded text-[11px] font-medium bg-white dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/60"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <span className="px-1.5 py-0.5 text-[10px] font-mono text-slate-400">
-                      +{project.technologies.length - 4}
-                    </span>
-                  )}
-                </div>
               </div>
-
-              {/* Card Footer Actions */}
-              <div className="px-6 py-4 bg-white/70 dark:bg-[#131C31]/60 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between">
-                <button
-                  onClick={() => setActiveModalProject(project)}
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
-                >
-                  <span>Case Study</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
-
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
-                  aria-label="View on GitHub"
-                >
-                  <GithubIcon className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
       </div>
 
-      {/* Case Study Modal */}
+      {/* Case Study Deep-Dive Modal */}
       <ProjectModal
         project={activeModalProject}
         onClose={() => setActiveModalProject(null)}
