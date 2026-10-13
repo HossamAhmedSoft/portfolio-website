@@ -20,6 +20,7 @@ export interface Project {
   githubUrl: string;
   liveUrl?: string;
   thumbnailUrl?: string;
+  isPrivateRepo?: boolean;
   caseStudy: ProjectCaseStudy;
 }
 
@@ -32,7 +33,7 @@ export const featuredProjects: Project[] = [
     description: "An integrated robotics and IoT platform that combines Arduino microcontroller motor drivers, infrared flame sensors, ultrasonic obstacle avoidance, ESP32-CAM optical streaming, and a Node.js WebSocket dashboard.",
     technologies: ["Arduino Uno/Mega", "ESP32-CAM", "Node.js", "WebSockets", "C/C++", "PWM", "Sensors"],
     status: "Active Case Study",
-    githubUrl: "https://github.com/HossamAhmedSoft/firebot-iot-server",
+    githubUrl: "https://github.com/HossamAhmedSoft/arduino-robotics-and-embedded-systems",
     thumbnailUrl: "/projects/firebot/04-control-room.png",
     caseStudy: {
       problem: "Traditional industrial firefighting in high-risk chemical storage and automated facilities exposes human responders to toxic smoke and structural collapse hazards. A robotic solution requires real-time telemetry, low-latency video feed, and autonomous pathing under extreme conditions.",
@@ -142,7 +143,7 @@ export const featuredProjects: Project[] = [
     headline: "High-performance C++17 object-oriented enterprise terminal ERP with multi-portal access and file persistence.",
     description: "An educational ERP platform architected in modern C++ featuring dedicated portals for Students, Professors, and Administrators, with automated GPA calculations, course prerequisites, and attendance tracking.",
     technologies: ["C++17", "Object-Oriented Architecture", "STL Containers", "File I/O Streams", "MSVC"],
-    status: "Production Ready",
+    status: "Verified Prototype",
     githubUrl: "https://github.com/HossamAhmedSoft/student-information-system-cli",
     thumbnailUrl: "/projects/student-information-system-cli/terminal.jpg",
     caseStudy: {
@@ -178,7 +179,7 @@ export const featuredProjects: Project[] = [
     headline: "Python 3 cryptographic workbench implementing Caesar, Vigenère, and Rail Fence algorithms with 69/69 automated tests.",
     description: "A comprehensive cryptography toolkit featuring visual graphical interfaces (Tkinter) and command-line solvers, complete with Tabula Recta lookup tables, brute-force frequency analysis, and bilingual support (Arabic & English).",
     technologies: ["Python 3", "Tkinter", "Pytest (100% Pass Rate)", "Modular Arithmetic", "Algorithms"],
-    status: "Production Ready",
+    status: "Verified Prototype",
     githubUrl: "https://github.com/HossamAhmedSoft/classical-cryptography-toolkit",
     thumbnailUrl: "/projects/classical-cryptography-toolkit/gui.jpg",
     caseStudy: {
@@ -214,7 +215,7 @@ export const featuredProjects: Project[] = [
     headline: "Modern Java Swing desktop workbench implementing AES-CBC, RSA key generation (512–2048 bit), and SHA hashing with FlatLaf UI.",
     description: "A visual cryptographic desktop application utilizing the Java Cryptography Architecture (JCA) for symmetric AES encryption, asymmetric RSA key generation, and SHA cryptographic hashing.",
     technologies: ["Java SE", "Java Swing", "FlatLaf Theme", "JCA (JCE)", "AES-CBC", "RSA", "SHA-1/256"],
-    status: "Production Ready",
+    status: "Verified Prototype",
     githubUrl: "https://github.com/HossamAhmedSoft/crypto-desktop-suite",
     thumbnailUrl: "/projects/crypto-desktop-suite/desktop.jpg",
     caseStudy: {
@@ -246,9 +247,10 @@ export const featuredProjects: Project[] = [
     headline: "Enterprise Java Swing desktop application with Oracle Database JDBC backend, automated defaulter penalties, and email alerts.",
     description: "A full-featured Java desktop solution designed for institutional library administration, book circulation tracking, student accounts, overdue fine calculations, and automated email receipts.",
     technologies: ["Java 19", "Java Swing & AWT", "Oracle Database (JDBC Thin)", "Apache Maven", "JavaMail API"],
-    status: "Production Ready",
+    status: "Verified Prototype",
     githubUrl: "https://github.com/HossamAhmedSoft/library-management-system-desktop",
     thumbnailUrl: "/projects/library/HomePage.png",
+    isPrivateRepo: true,
     caseStudy: {
       problem: "Academic libraries require streamlined circulation counters to prevent book loss, automate overdue fine assessments, track student lending histories, and notify borrowers of impending due dates.",
       architecture: "Dual-tier MVC desktop architecture: Presentation layer contains Swing frames for Admin/Owner and User/Student portals; persistence layer uses Oracle JDBC thin driver with prepared statements and transaction isolation.",

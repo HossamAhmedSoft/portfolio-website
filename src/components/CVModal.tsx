@@ -81,7 +81,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
         </div>
 
         {/* Printable Resume Body */}
-        <div className="flex-1 overflow-y-auto p-6 sm:p-10 space-y-8 bg-white dark:bg-[#0B0F19] text-slate-800 dark:text-slate-200 print:p-0 print:bg-white print:text-black">
+        <div id="cv-printable-area" className="flex-1 overflow-y-auto p-6 sm:p-10 space-y-8 bg-white dark:bg-[#0B0F19] text-slate-800 dark:text-slate-200 print:p-0 print:bg-white print:text-black">
           
           {/* Resume Header */}
           <div className="border-b border-slate-200 dark:border-slate-800 pb-6 space-y-2">
@@ -89,7 +89,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
               Hossam Ahmed
             </h1>
             <p className="text-sm font-semibold text-sky-600 dark:text-sky-400 font-mono">
-              Software Developer | Backend & Full-Stack Engineering | Embedded Systems & AI Enthusiast
+              Software Developer | Java Backend & Full-Stack Engineering | AI-Assisted Development | Embedded Systems
             </p>
             <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400 font-mono pt-1">
               <span className="flex items-center gap-1">
@@ -197,6 +197,10 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
               <div>
                 <strong className="text-slate-900 dark:text-white">Frontend & IoT: </strong>
                 Next.js (App Router), React, Tailwind CSS, Arduino Mega/Uno, ESP32-CAM, Sensor Telemetry, PWM Control
+              </div>
+              <div className="sm:col-span-2">
+                <strong className="text-slate-900 dark:text-white">AI-Assisted Engineering: </strong>
+                Cursor, Trae, Google Antigravity, Structured Prompt Decomposition, Agent-Assisted Debugging, Human Verification
               </div>
             </div>
           </div>

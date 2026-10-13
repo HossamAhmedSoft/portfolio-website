@@ -4,10 +4,10 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hossamahmedsoft.github.io"),
+  metadataBase: new URL("https://hossamahmedwebsite.vercel.app"),
   title: "Hossam Ahmed | Software Developer & Systems Engineer",
   description:
-    "Personal engineering portfolio of Hossam Ahmed. Backend engineering, Spring Boot, Oracle SQL, Next.js full-stack development, and embedded IoT systems.",
+    "Personal engineering portfolio of Hossam Ahmed. Java backend engineering, Spring Boot, Oracle SQL, Next.js full-stack development, and embedded IoT systems.",
   keywords: [
     "Hossam Ahmed",
     "حسام أحمد",
@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     "Embedded Systems",
     "IoT",
     "Robotics",
+    "AI-Assisted Development",
     "Portfolio"
   ],
   authors: [{ name: "Hossam Ahmed", url: "https://github.com/HossamAhmedSoft" }],
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://github.com/HossamAhmedSoft",
+    url: "https://hossamahmedwebsite.vercel.app",
     title: "Hossam Ahmed | Software Developer & Systems Engineer",
     description:
       "Software developer focused on backend engineering, full-stack applications, and integrated systems — combining software, databases, and embedded technology.",

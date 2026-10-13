@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://github.com/HossamAhmedSoft/sitemap.xml",
+    sitemap: "https://hossamahmedwebsite.vercel.app/sitemap.xml",
   };
 }

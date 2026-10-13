@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://github.com/HossamAhmedSoft";
+  const baseUrl = "https://hossamahmedwebsite.vercel.app";
   return [
     {
       url: baseUrl,
@@ -11,6 +11,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}#projects`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}#ai-engineering`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,

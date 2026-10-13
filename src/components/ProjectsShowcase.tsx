@@ -12,7 +12,8 @@ import {
   Filter,
   Search,
   X,
-  RotateCcw
+  RotateCcw,
+  Lock
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 import { useLanguage } from "./LanguageProvider";
@@ -219,15 +220,25 @@ export function ProjectsShowcase() {
 
                     <div className="flex items-center gap-2">
                       {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`View ${project.title} on GitHub`}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
-                        >
-                          <GithubIcon className="w-4 h-4" />
-                        </a>
+                        project.isPrivateRepo ? (
+                          <span
+                            title={isAr ? "مستودع مؤسسي خاص (متاح عند الطلب)" : "Private Enterprise Repository (Available on request)"}
+                            className="inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-mono text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 cursor-help"
+                          >
+                            <Lock className="w-3 h-3 text-amber-500" />
+                            <span>{isAr ? "خاص" : "Private"}</span>
+                          </span>
+                        ) : (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View ${project.title} on GitHub`}
+                            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+                          >
+                            <GithubIcon className="w-4 h-4" />
+                          </a>
+                        )
                       )}
                       {project.liveUrl && (
                         <a

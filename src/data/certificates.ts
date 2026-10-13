@@ -90,7 +90,7 @@ export const certificates: Certificate[] = [
     verificationCode: "PEaA-uSHc",
     verificationUrl: "https://verify.certiport.com",
     skills: ["Java SE Syntax", "Data Types", "Object-Oriented Architecture", "Debugging", "Exception Handling"],
-    summary: "Industry-standard certification issued by Microsoft Corporation (CEO Satya Nadella) and Certiport, demonstrating validated proficiency in Java programming, object lifecycle, and algorithm implementation."
+    summary: "Microsoft Technology Associate (MTA) certification in Introduction to Programming Using Java, issued via Certiport (Verification Code: PEaA-uSHc), validating foundational competency in Java data types, control flow, object-oriented concepts, and debugging."
   },
   {
     id: "robocup-mica-egypt-2023",

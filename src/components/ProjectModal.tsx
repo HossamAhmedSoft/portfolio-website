@@ -11,7 +11,8 @@ import {
   Cpu, 
   AlertCircle,
   HelpCircle,
-  Wrench
+  Wrench,
+  Lock
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 
@@ -204,15 +205,22 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           </span>
 
           <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors"
-            >
-              <GithubIcon className="w-4 h-4" />
-              <span>View Repository on GitHub</span>
-            </a>
+            {project.isPrivateRepo ? (
+              <span className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-mono font-medium text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800">
+                <Lock className="w-3.5 h-3.5" />
+                <span>Private Enterprise Repository (Available on request)</span>
+              </span>
+            ) : (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors"
+              >
+                <GithubIcon className="w-4 h-4" />
+                <span>View Repository on GitHub</span>
+              </a>
+            )}
 
             <button
               onClick={onClose}

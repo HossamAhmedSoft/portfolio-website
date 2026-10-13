@@ -97,7 +97,7 @@ export function FireBotCaseStudy() {
           </div>
 
           <a
-            href="https://github.com/HossamAhmedSoft/firebot-iot-server"
+            href="https://github.com/HossamAhmedSoft/arduino-robotics-and-embedded-systems"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-800 dark:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-sky-500 shadow-sm transition-all shrink-0"

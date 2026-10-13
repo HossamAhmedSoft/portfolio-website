@@ -100,7 +100,7 @@ export function ContactSection() {
                 @HossamAhmedSoft
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                {isAr ? "26 مستودع برمجي مستقل، سجلات كود موثقة، وأكواد مصدرية كاملة." : "26 independent repositories, verified commits, and full source code."}
+                {isAr ? "22 مستودعاً برمجياً عاماً، سجلات كود موثقة، وأكواد مصدرية كاملة." : "22 public repositories, verified commits, and full source code."}
               </p>
             </a>
 

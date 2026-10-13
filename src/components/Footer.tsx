@@ -48,7 +48,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-2 text-[11px] font-mono text-emerald-600 dark:text-emerald-400">
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>{isAr ? "جميع الـ 26 مستودع برمجي موثقة ومتزامنة على GitHub" : "All 26 GitHub Repositories Verified & Synchronized"}</span>
+              <span>{isAr ? "جميع الـ 22 مستودعاً عاماً موثقة ومتزامنة على GitHub" : "All 22 Public GitHub Repositories Verified & Synchronized"}</span>
             </div>
           </div>
 

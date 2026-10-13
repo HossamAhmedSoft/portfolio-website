@@ -68,7 +68,7 @@ export const skillCategories: SkillCategory[] = [
     category: "DevOps, Testing & Quality",
     description: "Version control hygiene, automated testing, and development workflow.",
     skills: [
-      { name: "Git & GitHub Administration", level: "Advanced", projectEvidence: "Clean commit history, branch management, 26 verified repositories" },
+      { name: "Git & GitHub Administration", level: "Advanced", projectEvidence: "Clean commit history, branch management, 22 verified public repositories" },
       { name: "Automated Testing (Pytest, JUnit)", level: "Proficient", projectEvidence: "69/69 Pytest suite (100% pass rate in 0.023s), Maven test suites" },
       { name: "TypeScript Strict Mode", level: "Proficient", projectEvidence: "Zero-error type safety across complete full-stack web platforms" },
       { name: "Apache Maven", level: "Proficient", projectEvidence: "Dependency lifecycle, plugin configuration, multi-module packaging" }
