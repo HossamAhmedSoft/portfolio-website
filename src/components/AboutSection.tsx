@@ -65,8 +65,30 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Right Column: Principles Card (5 cols) */}
-          <div className="lg:col-span-5">
+          {/* Right Column: Portrait & Principles (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Authentic Portrait Card */}
+            <div className="flex flex-col sm:flex-row items-center gap-5 p-5 rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-left">
+              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-sky-400/40 shadow-md shrink-0 bg-slate-900">
+                <img 
+                  src="/assets/profile/hossam-ahmed.jpg" 
+                  alt="Hossam Ahmed — Software Developer" 
+                  className="w-full h-full object-cover object-top" 
+                />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                  Hossam Ahmed
+                </h3>
+                <p className="text-xs font-mono text-sky-600 dark:text-sky-400">
+                  Software Developer · ICT NCTU
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pt-1">
+                  Focused on Java backend engineering, relational database architecture, and integrated IoT robotics.
+                </p>
+              </div>
+            </div>
+
             <div className="p-6 rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 space-y-5 text-left">
               <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-sky-500" />

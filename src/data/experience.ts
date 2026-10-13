@@ -3,23 +3,34 @@ export interface ResponsibilityItem {
   description: string;
 }
 
-export interface SessionRecord {
-  name: string;
-  period: string;
-  status: "Most Recent" | "Prior Session";
-  focus: string;
+export interface CommunityGraphic {
+  src: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  tag: string;
 }
 
 export interface ExperienceItem {
   id: string;
   role: string;
   community: string;
+  team: string;
   location: string;
+  academicYear: string;
   duration: string;
-  mostRecentSession: string;
-  category: string;
   summary: string;
-  sessions: SessionRecord[];
+  certificate: {
+    title: string;
+    issuer: string;
+    recipient: string;
+    roleOnCert: string;
+    academicYear: string;
+    verificationCode: string;
+    imageSrc: string;
+    chapterLeader: string;
+  };
+  communityGraphics: CommunityGraphic[];
   responsibilities: ResponsibilityItem[];
   transferableSkills: string[];
   connectedProject?: {
@@ -33,26 +44,45 @@ export interface ExperienceItem {
 export const communityExperiences: ExperienceItem[] = [
   {
     id: "gdg-nctu-hr",
-    role: "HR Team Member",
-    community: "GDG NCTU",
-    location: "NCTU Campus",
-    duration: "Two Sessions",
-    mostRecentSession: "2026",
-    category: "Student Community Leadership & Human Resources",
+    role: "Core Team HR Specialist",
+    community: "Google Developer Group on Campus, New Cairo Technological University (GDG NCTU)",
+    team: "Community & Membership Committee",
+    location: "New Cairo Technological University, Egypt",
+    academicYear: "2025–2026",
+    duration: "Across two sessions",
     summary:
-      "Contributed to HR and community operations across two sessions at GDG NCTU, supporting member engagement, team coordination, communication, and structured follow-up processes.",
-    sessions: [
+      "Contributed to HR and community operations at GDG NCTU, supporting member engagement, communication, and community activities across two sessions.",
+    certificate: {
+      title: "Certificate of Appreciation",
+      issuer: "Google Developer Group on Campus — New Cairo Technological University",
+      recipient: "Hossam Ahmed Abdelfattah",
+      roleOnCert: "Core Team HR Specialist",
+      academicYear: "2025–2026",
+      verificationCode: "NCTU-GDG26-KHASHAB-FKJCFD",
+      imageSrc: "/assets/gdg-nctu/hr-specialist-certificate.png",
+      chapterLeader: "Omar El. Khashab"
+    },
+    communityGraphics: [
       {
-        name: "Session 2026",
-        period: "2025 — 2026",
-        status: "Most Recent",
-        focus: "Advanced member follow-up, structured feedback loops, rules and points system contribution, and translating operational workflows into the automated HR Platform."
+        src: "/assets/gdg-nctu/hr-specialist-certificate.png",
+        title: "Certificate of Appreciation",
+        subtitle: "Official GDG NCTU Recognition",
+        description: "Awarded for successfully serving as Core Team HR Specialist at New Cairo Technological University for the 2025–2026 academic year.",
+        tag: "Official Award"
       },
       {
-        name: "Session 2025",
-        period: "2024 — 2025",
-        status: "Prior Session",
-        focus: "Foundational member onboarding, participation monitoring, committee communication, and initial member tracking workflows."
+        src: "/assets/gdg-nctu/team-introduction.jpg",
+        title: "Meet Our Team Announcement",
+        subtitle: "Community & Membership Committee",
+        description: "Official GDG NCTU community announcement welcoming Hossam as Human Resource Specialist in the Community & Membership Committee.",
+        tag: "Team Announcement"
+      },
+      {
+        src: "/assets/gdg-nctu/season-1-finale.jpg",
+        title: "Season 1 Finale Celebration",
+        subtitle: "Community Milestones & Recognition",
+        description: "Celebrating a season of learning, building, and growing with the GDG NCTU student developer community.",
+        tag: "Season 1 Celebration"
       }
     ],
     responsibilities: [
@@ -99,7 +129,7 @@ export const communityExperiences: ExperienceItem[] = [
     connectedProject: {
       title: "GDG NCTU Operations & HR Platform",
       description:
-        "Directly translated operational HR workflows from both sessions into an enterprise-grade full-stack web platform governing 17 operational modules.",
+        "Directly translated operational HR workflows into an enterprise-grade full-stack web platform governing 17 operational modules.",
       repoUrl: "https://github.com/HossamAhmedSoft/hr-management-platform",
       implementedFeatures: [
         "Member and multi-track profile governance across sessions",

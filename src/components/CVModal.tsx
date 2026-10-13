@@ -152,14 +152,14 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
             <div className="space-y-2">
               <div className="space-y-1">
                 <div className="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-                  <span>HR Team Member — GDG NCTU</span>
-                  <span className="text-xs font-mono text-slate-400 font-normal">NCTU Campus · Two Sessions (2025 & 2026)</span>
+                  <span>Core Team HR Specialist — GDG NCTU</span>
+                  <span className="text-xs font-mono text-slate-400 font-normal">NCTU Campus · Across two sessions</span>
                 </div>
                 <div className="text-xs text-sky-600 dark:text-sky-400 font-semibold">
-                  Student Community Leadership & Human Resources (Session 2025 & Session 2026)
+                  Community & Membership Committee · Academic Year 2025–2026
                 </div>
                 <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Contributed to HR and community operations across two sessions at GDG NCTU, supporting member engagement, team coordination, communication, and structured follow-up processes.
+                  Contributed to HR and community operations at GDG NCTU, supporting member engagement, communication, and community activities across two sessions.
                 </p>
                 <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-500 dark:text-slate-400">
                   <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Member Onboarding & Engagement</span>

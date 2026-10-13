@@ -41,9 +41,18 @@ export function FireBotCaseStudy() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800 mb-3">
-              <Zap className="w-3.5 h-3.5 text-amber-500" />
-              <span>SIGNATURE HARDWARE & SOFTWARE PROJECT</span>
+            <div className="flex items-center gap-3 mb-3">
+              <img 
+                src="/assets/branding/troy-developers-logo.png" 
+                alt="Troy Developers Emblem" 
+                className="w-12 h-12 rounded-full border-2 border-sky-400/50 shadow-md shadow-sky-500/20 bg-slate-900 shrink-0" 
+              />
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800">
+                  <Zap className="w-3 h-3 text-amber-500" />
+                  <span>TROY DEVELOPERS · SIGNATURE HARDWARE PROJECT</span>
+                </div>
+              </div>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Troy FireBot: Autonomous IoT Firefighting Robot
