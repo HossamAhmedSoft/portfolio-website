@@ -74,6 +74,17 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         {/* Modal Body (Scrollable) */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8 text-sm text-slate-700 dark:text-slate-300">
           
+          {/* Project Visual Preview / Banner */}
+          {project.thumbnailUrl && (
+            <div className="relative w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-sm aspect-16/9 max-h-80">
+              <img 
+                src={project.thumbnailUrl} 
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+
           {/* Tech Stack Pills */}
           <div>
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">

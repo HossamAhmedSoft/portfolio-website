@@ -70,6 +70,7 @@ export const featuredProjects: Project[] = [
     technologies: ["Java 21 LTS", "Spring Boot 3", "Spring Security 6", "JWT", "Hibernate / JPA", "Oracle SQL", "HikariCP", "Maven"],
     status: "Production Ready",
     githubUrl: "https://github.com/HossamAhmedSoft/employee-management-api",
+    thumbnailUrl: "/projects/employee-management-api/dashboard.jpg",
     caseStudy: {
       problem: "Mid-to-large organizations require secure, auditable, and resilient APIs for personnel lifecycle management with strict segregation of duties between HR personnel, departmental managers, and administrative executives.",
       architecture: "Layered Spring Boot clean architecture: Controller layer exposes standardized REST endpoints; Service layer enforces business validation and transaction boundaries; Repository layer utilizes Spring Data JPA with HikariCP connection pooling; Security filter chain handles stateless JWT verification.",
@@ -106,6 +107,7 @@ export const featuredProjects: Project[] = [
     technologies: ["Next.js 14", "TypeScript (Strict)", "Tailwind CSS", "Supabase", "PostgreSQL", "Radix UI", "PDF Generation"],
     status: "Production Ready",
     githubUrl: "https://github.com/HossamAhmedSoft/hr-management-platform",
+    thumbnailUrl: "/projects/hr-management-platform/dashboard.jpg",
     caseStudy: {
       problem: "Community organizations with multiple technical tracks (AI, Mobile, Web, DevOps) often struggle with fragmented spreadsheets for tracking attendance, member engagement points, and project milestones.",
       architecture: "Full-stack serverless Next.js App Router with React Server Components, client-side interactive tables, Supabase PostgreSQL backend with Row Level Security (RLS) policies, and TypeScript strict mode.",
@@ -142,6 +144,7 @@ export const featuredProjects: Project[] = [
     technologies: ["C++17", "Object-Oriented Architecture", "STL Containers", "File I/O Streams", "MSVC"],
     status: "Production Ready",
     githubUrl: "https://github.com/HossamAhmedSoft/student-information-system-cli",
+    thumbnailUrl: "/projects/student-information-system-cli/terminal.jpg",
     caseStudy: {
       problem: "Academic institutions require robust data management systems that model complex relationships between students, faculty, course catalogs, grade calculations, and prerequisite validations without web framework overhead.",
       architecture: "Polymorphic object-oriented architecture in C++: Abstract base `User` class inherited by `Student`, `Professor`, and `Admin`; centralized `UniversityDatabase` manager orchestrating relational mappings in memory with persistent disk serialization.",
@@ -177,6 +180,7 @@ export const featuredProjects: Project[] = [
     technologies: ["Python 3", "Tkinter", "Pytest (100% Pass Rate)", "Modular Arithmetic", "Algorithms"],
     status: "Production Ready",
     githubUrl: "https://github.com/HossamAhmedSoft/classical-cryptography-toolkit",
+    thumbnailUrl: "/projects/classical-cryptography-toolkit/gui.jpg",
     caseStudy: {
       problem: "Understanding foundational cryptographic principles requires hands-on exploration of polyalphabetic and transposition ciphers, visual representation of keystreams, and empirical validation through automated mathematical tests.",
       architecture: "Clean separation of algorithmic solvers (`crypto_core`) and presentation layer (`gui`, `cli`). Core algorithms rely purely on mathematical modular transformations and Python standard library without external dependencies.",
@@ -212,6 +216,7 @@ export const featuredProjects: Project[] = [
     technologies: ["Java SE", "Java Swing", "FlatLaf Theme", "JCA (JCE)", "AES-CBC", "RSA", "SHA-1/256"],
     status: "Production Ready",
     githubUrl: "https://github.com/HossamAhmedSoft/crypto-desktop-suite",
+    thumbnailUrl: "/projects/crypto-desktop-suite/desktop.jpg",
     caseStudy: {
       problem: "Developers and students need an intuitive visual tool to inspect cryptographic transformations, examine raw ciphertext hexadecimal/Base64 encodings, and understand initialization vector (IV) behavior.",
       architecture: "Event-driven Java desktop application utilizing FlatLaf modern UI engine. Cryptographic operations utilize standard `javax.crypto` and `java.security` providers on background worker threads.",
@@ -276,6 +281,7 @@ export const featuredProjects: Project[] = [
     technologies: ["HTML5", "CSS3", "JavaScript ES6+", "Service Workers (PWA)", "LocalStorage", "Responsive Design"],
     status: "Production Ready",
     githubUrl: "https://github.com/HossamAhmedSoft/mdboutique-ecommerce-pwa",
+    thumbnailUrl: "/projects/mdboutique/storefront.png",
     caseStudy: {
       problem: "Modern web retail demands fast initial render times, offline resilience, and intuitive client-side catalog navigation without heavy front-end framework overhead.",
       architecture: "Progressive Web App built with native web standards: Service Worker (`sw.js`) intercepts network requests for cache-first asset delivery; event-driven state store manages shopping cart and filter queries via browser `localStorage`.",
