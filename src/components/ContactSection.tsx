@@ -6,13 +6,15 @@ import {
   Copy, 
   Check, 
   Send, 
-  MessageSquare,
-  ShieldCheck,
-  Clock
+  MessageSquare, 
+  ShieldCheck, 
+  Clock 
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
+import { useLanguage } from "./LanguageProvider";
 
 export function ContactSection() {
+  const { t, isAr } = useLanguage();
   const [copied, setCopied] = useState(false);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
@@ -27,37 +29,37 @@ export function ContactSection() {
 
   const handleSendEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject || "Engineering Opportunity / Discussion")}&body=${encodeURIComponent(message)}`;
+    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject || (isAr ? "فرصة هندسة برمجيات / مناقشة عمل" : "Engineering Opportunity / Discussion"))}&body=${encodeURIComponent(message)}`;
     window.location.href = mailtoUrl;
   };
 
   return (
-    <section id="contact" className="py-20 bg-slate-50/50 dark:bg-[#0B0F19]/50 border-t border-slate-200 dark:border-slate-800">
+    <section id="contact" className="py-20 bg-slate-50/50 dark:bg-[#0B0F19]/50 border-t border-slate-200 dark:border-slate-800 text-start">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="max-w-4xl mx-auto text-center space-y-4 mb-12">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800">
             <Mail className="w-3.5 h-3.5 text-sky-500" />
-            <span>LET'S CONNECT</span>
+            <span>{t.contact.badge}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Start a Conversation
+            {t.contact.title}
           </h2>
 
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            I am actively exploring software engineering and backend developer opportunities. Feel free to reach out directly via email or review my live code repositories on GitHub.
+            {t.contact.subtitle}
           </p>
         </div>
 
         <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Direct Contacts (5 cols) */}
-          <div className="md:col-span-5 space-y-4 text-left">
+          <div className="md:col-span-5 space-y-4">
             {/* Primary Email Card */}
             <div className="p-5 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
               <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold block">
-                Direct Email
+                {isAr ? "البريد الإلكتروني المباشر" : "Direct Email"}
               </span>
               <div className="font-mono text-sm font-semibold text-slate-900 dark:text-white break-all">
                 {email}
@@ -68,7 +70,7 @@ export function ContactSection() {
                   className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-white bg-sky-500 hover:bg-sky-600 transition-colors"
                 >
                   <Mail className="w-3.5 h-3.5" />
-                  <span>Send Mail</span>
+                  <span>{isAr ? "إرسال إيميل" : "Send Mail"}</span>
                 </a>
                 <button
                   onClick={handleCopyEmail}
@@ -76,7 +78,7 @@ export function ContactSection() {
                   aria-label="Copy email address"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copied ? "Copied!" : "Copy"}</span>
+                  <span>{copied ? (isAr ? "تم النسخ!" : "Copied!") : (isAr ? "نسخ" : "Copy")}</span>
                 </button>
               </div>
             </div>
@@ -90,7 +92,7 @@ export function ContactSection() {
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
-                  GitHub Profile
+                  {isAr ? "ملف GitHub الرسمي" : "GitHub Profile"}
                 </span>
                 <GithubIcon className="w-4 h-4 text-slate-600 dark:text-slate-300 group-hover:text-sky-500 transition-colors" />
               </div>
@@ -98,14 +100,14 @@ export function ContactSection() {
                 @HossamAhmedSoft
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                26 independent repositories, verified commits, and full source code.
+                {isAr ? "26 مستودع برمجي مستقل، سجلات كود موثقة، وأكواد مصدرية كاملة." : "26 independent repositories, verified commits, and full source code."}
               </p>
             </a>
 
             {/* Response Time Notice */}
             <div className="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-400 font-mono">
               <Clock className="w-4 h-4 text-sky-500 shrink-0" />
-              <span>Standard response time: Within 24 hours</span>
+              <span>{isAr ? "وقت الاستجابة المعتاد: خلال 24 ساعة" : "Standard response time: Within 24 hours"}</span>
             </div>
           </div>
 
@@ -113,20 +115,20 @@ export function ContactSection() {
           <div className="md:col-span-7">
             <form
               onSubmit={handleSendEmail}
-              className="p-6 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 space-y-4 text-left shadow-sm"
+              className="p-6 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm"
             >
               <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <MessageSquare className="w-4 h-4 text-sky-500" />
-                <span>Quick Mail Composer</span>
+                <span>{isAr ? "محرر الرسائل السريع" : "Quick Mail Composer"}</span>
               </h3>
 
               <div className="space-y-1">
                 <label className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                  Subject / Topic
+                  {t.contact.subjectLabel}
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. Software Developer Role at [Company]"
+                  placeholder={isAr ? "مثال: فرصة عمل مطور برمجيات في [الشركة]" : "e.g. Software Developer Role at [Company]"}
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
@@ -135,11 +137,11 @@ export function ContactSection() {
 
               <div className="space-y-1">
                 <label className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                  Message Details
+                  {t.contact.messageLabel}
                 </label>
                 <textarea
                   rows={4}
-                  placeholder="Describe the opportunity, technical stack, or project discussion..."
+                  placeholder={isAr ? "صف الفرصة، التقنيات المستخدمة، أو مناقشة المشروع..." : "Describe the opportunity, technical stack, or project discussion..."}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 resize-none"
@@ -151,11 +153,11 @@ export function ContactSection() {
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-semibold text-white bg-sky-500 hover:bg-sky-600 shadow-md shadow-sky-500/20 hover:shadow-lg transition-all"
               >
                 <Send className="w-3.5 h-3.5" />
-                <span>Open Mail Client & Send to {email}</span>
+                <span>{isAr ? `فتح برنامج البريد والإرسال إلى ${email}` : `Open Mail Client & Send to ${email}`}</span>
               </button>
 
               <p className="text-[11px] text-slate-400 dark:text-slate-500 text-center">
-                Launches your default email application with pre-filled content. Zero third-party trackers.
+                {isAr ? "يفتح تطبيق البريد الافتراضي لديك مع النص المجهز. خصوصية تامة وبدون أي أدوات تتبع." : "Launches your default email application with pre-filled content. Zero third-party trackers."}
               </p>
             </form>
           </div>

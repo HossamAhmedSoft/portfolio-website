@@ -15,19 +15,21 @@ import {
   RotateCcw
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
+import { useLanguage } from "./LanguageProvider";
 
 export function ProjectsShowcase() {
+  const { t, isAr } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
 
   const categories = [
-    "All",
-    "Backend & APIs",
-    "Full-Stack Web",
-    "Embedded & IoT",
-    "Systems & C++",
-    "Cryptography"
+    { key: "All", label: t.projects.categories.all },
+    { key: "Backend & APIs", label: t.projects.categories.backend },
+    { key: "Full-Stack Web", label: t.projects.categories.fullstack },
+    { key: "Embedded & IoT", label: t.projects.categories.embedded },
+    { key: "Systems & C++", label: t.projects.categories.systems },
+    { key: "Cryptography", label: t.projects.categories.crypto },
   ];
 
   const filteredProjects = featuredProjects.filter((p) => {
@@ -37,7 +39,7 @@ export function ProjectsShowcase() {
     const matchesSearch = 
       p.title.toLowerCase().includes(q) ||
       p.headline.toLowerCase().includes(q) ||
-      p.technologies.some(t => t.toLowerCase().includes(q)) ||
+      p.technologies.some(tech => tech.toLowerCase().includes(q)) ||
       p.caseStudy.problem.toLowerCase().includes(q) ||
       p.caseStudy.individualContribution.toLowerCase().includes(q);
     return matchesCategory && matchesSearch;
@@ -49,27 +51,27 @@ export function ProjectsShowcase() {
   };
 
   return (
-    <section id="projects" className="py-20 bg-white dark:bg-[#080B11]">
+    <section id="projects" className="py-20 bg-white dark:bg-[#080B11] text-start">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 text-left">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800 mb-3">
               <Code className="w-3.5 h-3.5 text-sky-500" />
-              <span>PORTFOLIO CODEBASES & CASE STUDIES</span>
+              <span>{t.projects.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Verified Engineering Projects
+              {t.projects.title}
             </h2>
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2">
-              Selected projects demonstrating actual backend architecture, systems programming, and hardware-software integration. Each project represents verifiable code published on GitHub.
+              {t.projects.subtitle}
             </p>
           </div>
 
           {/* Results Badge */}
           <div className="font-mono text-xs text-slate-400 shrink-0">
-            Showing <strong className="text-sky-500 font-bold">{filteredProjects.length}</strong> of {featuredProjects.length} projects
+            {t.projects.showing} <strong className="text-sky-500 font-bold">{filteredProjects.length}</strong> {t.projects.of} {featuredProjects.length} {t.projects.projectsText}
           </div>
         </div>
 
@@ -78,18 +80,18 @@ export function ProjectsShowcase() {
           
           {/* Top Row: Search Input */}
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Search className={`absolute ${isAr ? "right-3.5" : "left-3.5"} top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400`} />
             <input 
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by technology, keyword, or concept (e.g. 'Java', 'Spring', 'JWT', 'Arduino', 'C++', 'SQL')..."
-              className="w-full pl-10 pr-10 py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
+              placeholder={t.projects.searchPlaceholder}
+              className={`w-full ${isAr ? "pr-10 pl-10" : "pl-10 pr-10"} py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500`}
             />
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-700 dark:hover:text-white rounded"
+                className={`absolute ${isAr ? "left-3.5" : "right-3.5"} top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-700 dark:hover:text-white rounded`}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -98,21 +100,21 @@ export function ProjectsShowcase() {
 
           {/* Bottom Row: Category Filter Tabs */}
           <div className="flex flex-wrap items-center gap-2 pt-1">
-            <div className="flex items-center gap-1 text-xs font-mono text-slate-400 mr-2">
+            <div className="flex items-center gap-1 text-xs font-mono text-slate-400 mx-1">
               <Filter className="w-3.5 h-3.5" />
-              <span>Category:</span>
+              <span>{t.projects.categoryLabel}</span>
             </div>
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
+                key={cat.key}
+                onClick={() => setSelectedCategory(cat.key)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  selectedCategory === cat
+                  selectedCategory === cat.key
                     ? "bg-sky-500 text-white shadow-sm shadow-sky-500/25"
                     : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/60"
                 }`}
               >
-                {cat}
+                {cat.label}
               </button>
             ))}
           </div>
@@ -126,17 +128,17 @@ export function ProjectsShowcase() {
               <Search className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-              No matching projects found
+              {t.projects.noResultsTitle}
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-              No projects matched your search &ldquo;{searchQuery}&rdquo; in category &ldquo;{selectedCategory}&rdquo;.
+              {t.projects.noResultsText}
             </p>
             <button
               onClick={handleResetFilters}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-sky-500 text-white hover:bg-sky-600 transition-colors"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>Reset Search & Filters</span>
+              <span>{t.projects.resetButton}</span>
             </button>
           </div>
         ) : (
@@ -144,7 +146,7 @@ export function ProjectsShowcase() {
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
-                className="group flex flex-col justify-between rounded-2xl bg-slate-50/70 dark:bg-[#0F172A] border border-slate-200/90 dark:border-slate-800/90 hover:border-sky-500/60 dark:hover:border-sky-500/60 shadow-sm hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300 text-left overflow-hidden"
+                className="group flex flex-col justify-between rounded-2xl bg-slate-50/70 dark:bg-[#0F172A] border border-slate-200/90 dark:border-slate-800/90 hover:border-sky-500/60 dark:hover:border-sky-500/60 shadow-sm hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300 overflow-hidden"
               >
                 {/* Optional Screenshot Banner */}
                 {project.thumbnailUrl && (
@@ -154,7 +156,7 @@ export function ProjectsShowcase() {
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-black/70 text-sky-300 border border-sky-400/30 backdrop-blur-xs">
+                    <div className={`absolute top-3 ${isAr ? "right-3" : "left-3"} px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-black/70 text-sky-300 border border-sky-400/30 backdrop-blur-xs`}>
                       {project.status}
                     </div>
                   </div>
@@ -185,7 +187,7 @@ export function ProjectsShowcase() {
                     {/* What I Implemented (Factual summary) */}
                     <div className="p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800/60 space-y-1">
                       <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
-                        What I Implemented
+                        {t.projects.whatIImplemented}
                       </div>
                       <p className="text-xs text-slate-700 dark:text-slate-200 line-clamp-3 leading-relaxed">
                         {project.caseStudy.individualContribution}
@@ -211,7 +213,7 @@ export function ProjectsShowcase() {
                       onClick={() => setActiveModalProject(project)}
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors"
                     >
-                      <span>Deep Case Study</span>
+                      <span>{t.projects.deepCaseStudy}</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </button>
 

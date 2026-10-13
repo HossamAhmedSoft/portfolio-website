@@ -18,32 +18,41 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("hossam_portfolio_theme") as Theme | null;
-    if (savedTheme === "light" || savedTheme === "dark") {
-      setThemeState(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else {
-      // Default to dark theme as requested for technology-focused visual identity
-      setThemeState("dark");
+    const initialTheme: Theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
+    setThemeState(initialTheme);
+    if (initialTheme === "dark") {
       document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
     }
-    setMounted(false);
     setMounted(true);
   }, []);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
-    localStorage.setItem("hossam_portfolio_theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    try {
+      localStorage.setItem("hossam_portfolio_theme", newTheme);
+    } catch (e) {
+      // Storage not available
+    }
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  // Prevent flash of incorrect theme
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
-      <div className={theme === "dark" ? "dark" : ""}>
+      <div className={theme === "dark" ? "dark" : "light"}>
         {children}
       </div>
     </ThemeContext.Provider>

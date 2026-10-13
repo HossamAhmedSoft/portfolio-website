@@ -17,9 +17,10 @@ import {
   GraduationCap, 
   Mail, 
   Zap,
-  ArrowRight
+  Languages
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import { useLanguage } from "./LanguageProvider";
 import { GithubIcon } from "./icons/GithubIcon";
 
 interface CommandPaletteProps {
@@ -31,7 +32,7 @@ interface CommandPaletteProps {
 interface CommandAction {
   id: string;
   title: string;
-  category: "Navigation" | "Actions" | "Links";
+  category: string;
   icon: React.ElementType;
   shortcut?: string;
   run: () => void;
@@ -42,13 +43,14 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copiedToast, setCopiedToast] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { lang, isAr, toggleLanguage, t } = useLanguage();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const actions: CommandAction[] = [
     {
       id: "nav-projects",
-      title: "View Featured Projects",
-      category: "Navigation",
+      title: isAr ? "استعراض المشاريع البرمجية" : "View Featured Projects",
+      category: t.commandPalette.navGroup,
       icon: Code,
       run: () => {
         onClose();
@@ -57,8 +59,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-firebot",
-      title: "Explore Troy FireBot Case Study",
-      category: "Navigation",
+      title: isAr ? "استكشاف دراسة حالة روبوت الإطفاء Troy FireBot" : "Explore Troy FireBot Case Study",
+      category: t.commandPalette.navGroup,
       icon: Zap,
       run: () => {
         onClose();
@@ -67,8 +69,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-skills",
-      title: "Inspect Technical Skills Matrix",
-      category: "Navigation",
+      title: isAr ? "فحص مصفوفة المهارات التقنية" : "Inspect Technical Skills Matrix",
+      category: t.commandPalette.navGroup,
       icon: Terminal,
       run: () => {
         onClose();
@@ -77,8 +79,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-experience",
-      title: "View GDG NCTU HR Community Experience",
-      category: "Navigation",
+      title: isAr ? "خبرات الموارد البشرية والمجتمع في GDG NCTU" : "View GDG NCTU HR Community Experience",
+      category: t.commandPalette.navGroup,
       icon: Briefcase,
       run: () => {
         onClose();
@@ -87,8 +89,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-certs",
-      title: "Inspect Verified Certifications & Credentials",
-      category: "Navigation",
+      title: isAr ? "الشهادات والاعتمادات الموثقة" : "Inspect Verified Certifications & Credentials",
+      category: t.commandPalette.navGroup,
       icon: Award,
       run: () => {
         onClose();
@@ -97,8 +99,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-education",
-      title: "Academic Background & Education",
-      category: "Navigation",
+      title: isAr ? "المسار الأكاديمي والتعليم" : "Academic Background & Education",
+      category: t.commandPalette.navGroup,
       icon: GraduationCap,
       run: () => {
         onClose();
@@ -107,8 +109,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "nav-contact",
-      title: "Contact Hossam Ahmed",
-      category: "Navigation",
+      title: isAr ? "تواصل معي مباشرة" : "Contact Hossam Ahmed",
+      category: t.commandPalette.navGroup,
       icon: Mail,
       run: () => {
         onClose();
@@ -117,8 +119,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "act-cv",
-      title: "Open & Print Verified CV",
-      category: "Actions",
+      title: t.commandPalette.openCV,
+      category: t.commandPalette.actionsGroup,
       icon: FileText,
       shortcut: "CV",
       run: () => {
@@ -127,10 +129,22 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
       }
     },
     {
+      id: "act-lang",
+      title: isAr ? "Switch Language to English (EN)" : "تبديل اللغة إلى العربية (AR)",
+      category: t.commandPalette.actionsGroup,
+      icon: Languages,
+      shortcut: isAr ? "EN" : "عربي",
+      run: () => {
+        toggleLanguage();
+        onClose();
+      }
+    },
+    {
       id: "act-theme",
-      title: `Toggle Theme (${theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"})`,
-      category: "Actions",
+      title: theme === "dark" ? t.commandPalette.toggleThemeLight : t.commandPalette.toggleThemeDark,
+      category: t.commandPalette.actionsGroup,
       icon: theme === "dark" ? Sun : Moon,
+      shortcut: "Theme",
       run: () => {
         toggleTheme();
         onClose();
@@ -138,8 +152,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "act-email",
-      title: "Copy Email (Kabtinhosa@yahoo.com)",
-      category: "Actions",
+      title: t.commandPalette.copyEmail,
+      category: t.commandPalette.actionsGroup,
       icon: Copy,
       run: () => {
         navigator.clipboard.writeText("Kabtinhosa@yahoo.com");
@@ -149,8 +163,8 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
     },
     {
       id: "link-github",
-      title: "Open GitHub Profile (@HossamAhmedSoft)",
-      category: "Links",
+      title: t.commandPalette.openGitHub,
+      category: t.commandPalette.linksGroup,
       icon: GithubIcon,
       shortcut: "GitHub",
       run: () => {
@@ -183,9 +197,6 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         if (isOpen) onClose();
-        else {
-          // Trigger handled in page.tsx
-        }
       } else if (e.key === "Escape" && isOpen) {
         onClose();
       } else if (isOpen) {
@@ -214,7 +225,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-xl bg-white dark:bg-[#0F172A] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col text-left"
+        className="w-full max-w-xl bg-white dark:bg-[#0F172A] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col text-start"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Bar Input */}
@@ -225,7 +236,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search commands, sections, or actions (e.g., 'Projects', 'CV', 'Theme')..."
+            placeholder={t.commandPalette.placeholder}
             className="flex-1 bg-transparent text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none"
           />
           <kbd className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono text-slate-400 bg-slate-200 dark:bg-slate-800 rounded">
@@ -243,7 +254,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
         <div className="max-h-80 overflow-y-auto p-2 space-y-1">
           {filteredActions.length === 0 ? (
             <div className="p-6 text-center text-xs text-slate-500 dark:text-slate-400">
-              No matching commands found for &ldquo;{query}&rdquo;
+              {t.commandPalette.noResults} &ldquo;{query}&rdquo;
             </div>
           ) : (
             filteredActions.map((action, idx) => {
@@ -254,7 +265,7 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
                   key={action.id}
                   onClick={action.run}
                   onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`w-full flex items-center justify-between p-3 rounded-xl text-left transition-colors ${
+                  className={`w-full flex items-center justify-between p-3 rounded-xl transition-colors ${
                     isSelected 
                       ? "bg-sky-500 text-slate-950 font-semibold" 
                       : "hover:bg-slate-100 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-200"
@@ -290,19 +301,19 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
         {/* Footer Bar */}
         <div className="p-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0B0F19] flex items-center justify-between text-[11px] text-slate-400 font-mono">
           <div className="flex items-center gap-3">
-            <span>↑↓ Navigate</span>
-            <span>↵ Select</span>
+            <span>{t.commandPalette.hintNavigate}</span>
+            <span>{t.commandPalette.hintSelect}</span>
           </div>
 
           {copiedToast && (
             <span className="inline-flex items-center gap-1 text-emerald-500 font-semibold">
-              <Check className="w-3.5 h-3.5" /> Email copied to clipboard!
+              <Check className="w-3.5 h-3.5" /> {t.commandPalette.emailCopied}
             </span>
           )}
 
           <div className="flex items-center gap-1.5 text-sky-500">
             <Terminal className="w-3.5 h-3.5" />
-            <span>Developer Quick Launcher</span>
+            <span>{isAr ? "لوحة الأوامر السريعة" : "Developer Quick Launcher"}</span>
           </div>
         </div>
 

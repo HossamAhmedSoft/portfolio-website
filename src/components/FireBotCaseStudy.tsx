@@ -16,26 +16,60 @@ import {
   Zap,
   Activity
 } from "lucide-react";
+import { useLanguage } from "./LanguageProvider";
 
 export function FireBotCaseStudy() {
+  const { t, isAr } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<string>("/projects/firebot/04-control-room.png");
 
   const telemetryMetrics = [
-    { label: "Microcontroller", value: "Arduino Mega / Uno", detail: "Real-time sensor loop" },
-    { label: "Vision Streamer", value: "ESP32-CAM (MJPEG)", detail: "HTTP/TCP video socket" },
-    { label: "Telemetry Layer", value: "WebSockets & Node.js", detail: "Bidirectional state bridge" },
-    { label: "Physical Sensors", value: "Flame Array + Ultrasonic", detail: "Multi-angle directional scan" }
+    { 
+      label: isAr ? "المتحكم الدقيق" : "Microcontroller", 
+      value: "Arduino Mega / Uno", 
+      detail: isAr ? "معالجة الحساسات بالزمن الفعلي" : "Real-time sensor loop" 
+    },
+    { 
+      label: isAr ? "بث الكاميرا البصرية" : "Vision Streamer", 
+      value: "ESP32-CAM (MJPEG)", 
+      detail: isAr ? "بث الفيديو عبر سوكت HTTP/TCP" : "HTTP/TCP video socket" 
+    },
+    { 
+      label: isAr ? "طبقة نقل البيانات" : "Telemetry Layer", 
+      value: "WebSockets & Node.js", 
+      detail: isAr ? "جسر ثنائي الاتجاه للحالة" : "Bidirectional state bridge" 
+    },
+    { 
+      label: isAr ? "الحساسات الفيزيائية" : "Physical Sensors", 
+      value: "Flame Array + Ultrasonic", 
+      detail: isAr ? "مسح اتجاهي متعدد الزوايا" : "Multi-angle directional scan" 
+    }
   ];
 
   const galleryImages = [
-    { src: "/projects/firebot/04-control-room.png", title: "Web Control Room & Telemetry", caption: "Live browser dashboard displaying motor controls, telemetry dials, and video feed" },
-    { src: "/projects/firebot/02-dashboard.png", title: "System Analytics Dashboard", caption: "Sensor thresholds, hardware status, and environmental parameters overview" },
-    { src: "/projects/firebot/deployment.png", title: "Physical Deployment Architecture", caption: "Hardware interconnection: Microcontrollers, motor drivers, ESP32, and server bridge" },
-    { src: "/projects/firebot/activity.png", title: "Firmware Decision Workflow", caption: "State machine logic for line tracking, flame detection, obstacle bypass, and extinguishing" }
+    { 
+      src: "/projects/firebot/04-control-room.png", 
+      title: isAr ? "غرفة التحكم عبر الويب" : "Web Control Room & Telemetry", 
+      caption: isAr ? "واجهة المتصفح الحية لعرض تحكم المحركات ومؤشرات الحساسات وبث الكاميرا" : "Live browser dashboard displaying motor controls, telemetry dials, and video feed" 
+    },
+    { 
+      src: "/projects/firebot/02-dashboard.png", 
+      title: isAr ? "لوحة تحليلات النظام" : "System Analytics Dashboard", 
+      caption: isAr ? "نظرة عامة على عتبات الحساسات وحالة العتاد والمتغيرات البيئية" : "Sensor thresholds, hardware status, and environmental parameters overview" 
+    },
+    { 
+      src: "/projects/firebot/deployment.png", 
+      title: isAr ? "بنية التوصيل والتشغيل الفعلي" : "Physical Deployment Architecture", 
+      caption: isAr ? "التوصيل البيني للعتاد: المتحكمات، درايفرات المحركات، ESP32، وجسر السيرفر" : "Hardware interconnection: Microcontrollers, motor drivers, ESP32, and server bridge" 
+    },
+    { 
+      src: "/projects/firebot/activity.png", 
+      title: isAr ? "مخطط اتخاذ القرار بالفيرموير" : "Firmware Decision Workflow", 
+      caption: isAr ? "منطق آلة الحالة لتتبع المسار، ورصد اللهب، وتفادي العوائق، وإجراءات الإخماد" : "State machine logic for line tracking, flame detection, obstacle bypass, and extinguishing" 
+    }
   ];
 
   return (
-    <section id="firebot-case-study" className="py-20 bg-slate-50/60 dark:bg-[#0B0F19]/60 border-y border-slate-200 dark:border-slate-800/80">
+    <section id="firebot-case-study" className="py-20 bg-slate-50/60 dark:bg-[#0B0F19]/60 border-y border-slate-200 dark:border-slate-800/80 text-start">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -50,15 +84,15 @@ export function FireBotCaseStudy() {
               <div>
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800">
                   <Zap className="w-3 h-3 text-amber-500" />
-                  <span>TROY DEVELOPERS · SIGNATURE HARDWARE PROJECT</span>
+                  <span>{isAr ? "فريق TROY DEVELOPERS · مشروع العتاد المميز" : "TROY DEVELOPERS · SIGNATURE HARDWARE PROJECT"}</span>
                 </div>
               </div>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Troy FireBot: Autonomous IoT Firefighting Robot
+              {t.firebot.title}
             </h2>
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mt-2">
-              An end-to-end engineered system bridging real-time microcontroller firmware, multi-sensor telemetry, ESP32-CAM video streaming, and a Node.js WebSocket control station.
+              {t.firebot.subtitle}
             </p>
           </div>
 
@@ -66,9 +100,9 @@ export function FireBotCaseStudy() {
             href="https://github.com/HossamAhmedSoft/firebot-iot-server"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-800 dark:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-sky-500 shadow-sm transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-800 dark:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-sky-500 shadow-sm transition-all shrink-0"
           >
-            <span>View Server & Firmware Repo</span>
+            <span>{isAr ? "عرض مستودع السيرفر والفيرموير" : "View Server & Firmware Repo"}</span>
             <ExternalLink className="w-4 h-4 text-sky-500" />
           </a>
         </div>
@@ -99,8 +133,8 @@ export function FireBotCaseStudy() {
                 className="w-full h-full object-contain bg-slate-950"
               />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent p-4 text-white">
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/80 text-white mr-2">
-                  Live Capture
+                <span className="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/80 text-white mx-2">
+                  {isAr ? "معاينة حية" : "Live Capture"}
                 </span>
                 <span className="text-sm font-medium">
                   {galleryImages.find(img => img.src === selectedImage)?.caption}
@@ -126,7 +160,7 @@ export function FireBotCaseStudy() {
             </div>
 
             {/* Architecture Code Snippet (Firmware State Loop) */}
-            <div className="p-4 rounded-xl bg-slate-900 dark:bg-black border border-slate-800 text-slate-300 font-mono text-xs overflow-x-auto">
+            <div className="p-4 rounded-xl bg-slate-900 dark:bg-black border border-slate-800 text-slate-300 font-mono text-xs overflow-x-auto text-left" dir="ltr">
               <div className="flex items-center justify-between text-slate-400 pb-2 mb-2 border-b border-slate-800">
                 <span className="flex items-center gap-1.5 text-sky-400">
                   <Code className="w-3.5 h-3.5" />
@@ -160,7 +194,7 @@ export function FireBotCaseStudy() {
             <div className="p-6 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 space-y-4">
               <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <Layers className="w-5 h-5 text-sky-500" />
-                <span>How the System Operates</span>
+                <span>{isAr ? "كيف يعمل النظام تقنياً" : "How the System Operates"}</span>
               </h3>
 
               <div className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
@@ -169,7 +203,12 @@ export function FireBotCaseStudy() {
                     1
                   </div>
                   <p>
-                    <strong className="text-slate-900 dark:text-white">Edge Sensor Processing:</strong> Arduino reads infrared flame array angles, ultrasonic distance, and reflectance sensors via interrupt-safe loops.
+                    <strong className="text-slate-900 dark:text-white">
+                      {isAr ? "معالجة الحساسات على العتاد: " : "Edge Sensor Processing: "}
+                    </strong>
+                    {isAr 
+                      ? "يقرأ Arduino مصفوفة حساسات اللهب بالأشعة تحت الحمراء، والمسافة عبر الموجات فوق الصوتية، وحساسات تتبع المسار عبر حلقات برمجية آمنة." 
+                      : "Arduino reads infrared flame array angles, ultrasonic distance, and reflectance sensors via interrupt-safe loops."}
                   </p>
                 </div>
 
@@ -178,7 +217,12 @@ export function FireBotCaseStudy() {
                     2
                   </div>
                   <p>
-                    <strong className="text-slate-900 dark:text-white">Video & Telemetry Transmit:</strong> ESP32-CAM broadcasts optical MJPEG video while relaying serialized sensor status packets over a dedicated WebSocket bridge.
+                    <strong className="text-slate-900 dark:text-white">
+                      {isAr ? "بث الفيديو ونقل القياسات: " : "Video & Telemetry Transmit: "}
+                    </strong>
+                    {isAr 
+                      ? "تبث كاميرا ESP32-CAM فيديو MJPEG بصرياً مع ترحيل حزم بيانات الحساسات المشفرة عبر جسر WebSockets مخصص." 
+                      : "ESP32-CAM broadcasts optical MJPEG video while relaying serialized sensor status packets over a dedicated WebSocket bridge."}
                   </p>
                 </div>
 
@@ -187,7 +231,12 @@ export function FireBotCaseStudy() {
                     3
                   </div>
                   <p>
-                    <strong className="text-slate-900 dark:text-white">Central Web Control Room:</strong> Node.js server serves the operational interface, plotting real-time sensor dials and handling low-latency operator commands.
+                    <strong className="text-slate-900 dark:text-white">
+                      {isAr ? "غرفة التحكم المركزية بالويب: " : "Central Web Control Room: "}
+                    </strong>
+                    {isAr 
+                      ? "يقوم خادم Node.js بتشغيل واجهة العمليات، ورسم مؤشرات الحساسات بالزمن الحقيقي، ومعالجة أوامر التدخل اليدوي بزمن استجابة فائق." 
+                      : "Node.js server serves the operational interface, plotting real-time sensor dials and handling low-latency operator commands."}
                   </p>
                 </div>
 
@@ -196,7 +245,12 @@ export function FireBotCaseStudy() {
                     4
                   </div>
                   <p>
-                    <strong className="text-slate-900 dark:text-white">Targeted Actuation:</strong> L298N H-Bridge controls high-torque DC drive motors; relay module actuates the submersible 12V firefighting pump.
+                    <strong className="text-slate-900 dark:text-white">
+                      {isAr ? "الإخماد والتوجيه الدقيق: " : "Targeted Actuation: "}
+                    </strong>
+                    {isAr 
+                      ? "يتحكم درايفر L298N بمحركات الحركة ذات العزم العالي، بينما يقوم موديول الريلاي بتشغيل مضخة الإطفاء الغاطسة بجهد 12V." 
+                      : "L298N H-Bridge controls high-torque DC drive motors; relay module actuates the submersible 12V firefighting pump."}
                   </p>
                 </div>
               </div>
@@ -206,25 +260,34 @@ export function FireBotCaseStudy() {
             <div className="p-6 rounded-2xl bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/60 space-y-3">
               <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400 font-bold text-sm">
                 <AlertTriangle className="w-4 h-4 shrink-0" />
-                <span>Transparent Engineering Disclosure</span>
+                <span>{isAr ? "إفصاح هندسي شفاف عن حالة المشروع" : "Transparent Engineering Disclosure"}</span>
               </div>
               <ul className="text-xs text-slate-700 dark:text-slate-300 space-y-2 leading-relaxed">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Hardware Verified:</strong> Autonomous line-following navigation and obstacle avoidance were physically built, calibrated, and field-tested in the RoboCup MICA Egypt 2023 competition.
+                    <strong>{isAr ? "موثق على العتاد: " : "Hardware Verified: "}</strong>
+                    {isAr 
+                      ? "تم بناء وتعيير واختبار نظام التتبع الذاتي للمسار وتفادي العوائق فيزيائياً في مسابقة RoboCup MICA Egypt 2023." 
+                      : "Autonomous line-following navigation and obstacle avoidance were physically built, calibrated, and field-tested in the RoboCup MICA Egypt 2023 competition."}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Telemetry Verified:</strong> Node.js WebSocket dashboard and serial-bridge communication function cleanly in local network trials.
+                    <strong>{isAr ? "موثق في الاتصال: " : "Telemetry Verified: "}</strong>
+                    {isAr 
+                      ? "لوحة تحكم Node.js عبر WebSockets وجسر الاتصال بالسيريال يعملان بكفاءة في اختبارات الشبكة المحلية." 
+                      : "Node.js WebSocket dashboard and serial-bridge communication function cleanly in local network trials."}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Experimental Module:</strong> The AI computer vision detection subsystem is an experimental prototype implemented for evaluation, not a deployed industrial fire-suppression system.
+                    <strong>{isAr ? "وحدة تجريبية: " : "Experimental Module: "}</strong>
+                    {isAr 
+                      ? "نظام الرؤية الحاسوبية بالذكاء الاصطناعي لكشف الأجسام هو نموذج أولي تجريبي للتقييم، وليس نظام إطفاء صناعي منشور." 
+                      : "The AI computer vision detection subsystem is an experimental prototype implemented for evaluation, not a deployed industrial fire-suppression system."}
                   </span>
                 </li>
               </ul>

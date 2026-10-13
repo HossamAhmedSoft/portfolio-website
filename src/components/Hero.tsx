@@ -3,6 +3,7 @@
 import React from "react";
 import { 
   ArrowRight, 
+  ArrowLeft,
   Terminal, 
   Database, 
   Cpu, 
@@ -14,18 +15,23 @@ import {
   ShieldCheck
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
+import { useLanguage } from "./LanguageProvider";
 
 interface HeroProps {
   onOpenCV: () => void;
 }
 
 export function Hero({ onOpenCV }: HeroProps) {
+  const { t, isAr, dir } = useLanguage();
+
   const verifiedPillars = [
-    { icon: Terminal, label: "Java 21 & Spring Boot", desc: "Production REST APIs & JWT" },
-    { icon: Database, label: "Oracle SQL & Databases", desc: "Certified schema & normalization" },
-    { icon: Globe, label: "Full-Stack (Next.js / TS)", desc: "Strict type safety & web PWAs" },
-    { icon: Cpu, label: "Embedded Systems & IoT", desc: "Firmware, telemetry & robotics" }
+    { icon: Terminal, label: t.hero.pillars.java.label, desc: t.hero.pillars.java.desc },
+    { icon: Database, label: t.hero.pillars.database.label, desc: t.hero.pillars.database.desc },
+    { icon: Globe, label: t.hero.pillars.fullstack.label, desc: t.hero.pillars.fullstack.desc },
+    { icon: Cpu, label: t.hero.pillars.embedded.label, desc: t.hero.pillars.embedded.desc }
   ];
+
+  const ArrowIcon = isAr ? ArrowLeft : ArrowRight;
 
   return (
     <section id="hero" className="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
@@ -36,21 +42,25 @@ export function Hero({ onOpenCV }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Main Hero Column (7 cols) */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <div className="lg:col-span-7 space-y-6 text-start">
             {/* Status / Availability Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-medium bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800/80 text-sky-700 dark:text-sky-300">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Available for Software Engineering Roles</span>
+              <span>{t.hero.statusBadge}</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
-              I Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-400">Reliable Software</span> and Connected Systems.
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.18]">
+              {t.hero.headlineStart}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-400">
+                {t.hero.headlineHighlight}
+              </span>
+              {t.hero.headlineEnd}
             </h1>
 
             {/* Position Summary */}
             <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-2xl">
-              Software developer focused on backend engineering, full-stack applications, and integrated systems — combining software, databases, and embedded technology to solve practical problems.
+              {t.hero.summary}
             </p>
 
             {/* Primary Action Buttons */}
@@ -59,8 +69,8 @@ export function Hero({ onOpenCV }: HeroProps) {
                 href="#projects"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-sky-500 hover:bg-sky-600 shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/35 transition-all transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-400"
               >
-                <span>View My Projects</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>{t.hero.viewProjects}</span>
+                <ArrowIcon className="w-4 h-4" />
               </a>
 
               <button
@@ -68,14 +78,14 @@ export function Hero({ onOpenCV }: HeroProps) {
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200 dark:hover:bg-slate-700/90 border border-slate-200 dark:border-slate-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
               >
                 <FileText className="w-4 h-4 text-sky-500" />
-                <span>View & Download CV</span>
+                <span>{t.hero.viewCV}</span>
               </button>
 
               <a
                 href="https://github.com/HossamAhmedSoft"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-transparent hover:border-slate-200 dark:hover:border-slate-800 transition-all"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-transparent hover:border-slate-200 dark:border-slate-800 transition-all"
                 aria-label="GitHub Profile"
               >
                 <GithubIcon className="w-5 h-5" />
@@ -89,7 +99,7 @@ export function Hero({ onOpenCV }: HeroProps) {
                 {verifiedPillars.map((p, idx) => (
                   <div 
                     key={idx}
-                    className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 hover:border-sky-500/40 transition-colors"
+                    className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 hover:border-sky-500/40 transition-colors text-start"
                   >
                     <p.icon className="w-5 h-5 text-sky-500 dark:text-sky-400 mb-1.5" />
                     <div className="font-semibold text-xs text-slate-900 dark:text-white leading-tight">
@@ -106,17 +116,17 @@ export function Hero({ onOpenCV }: HeroProps) {
 
           {/* Interactive Architectural Systems Diagram (5 cols) */}
           <div className="lg:col-span-5">
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none relative">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none relative text-start">
               {/* Card Header */}
               <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-rose-500/80" />
                   <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="font-mono text-xs text-slate-500 dark:text-slate-400 ml-2">system_architecture.sys</span>
+                  <span className="font-mono text-xs text-slate-500 dark:text-slate-400 mx-2">{t.hero.diagram.title}</span>
                 </div>
                 <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-300 border border-sky-200 dark:border-sky-900">
-                  VERIFIED PIPELINE
+                  {t.hero.diagram.verifiedPipeline}
                 </span>
               </div>
 
@@ -128,19 +138,19 @@ export function Hero({ onOpenCV }: HeroProps) {
                     <Cpu className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">1. Hardware Edge & Firmware</span>
-                      <span className="text-[10px] font-mono text-emerald-500">Real-Time</span>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">{t.hero.diagram.layer1Title}</span>
+                      <span className="text-[10px] font-mono text-emerald-500 shrink-0">{t.hero.diagram.layer1Badge}</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                      Arduino Mega 2560 & ESP32-CAM: Infrared flame arrays, line sensors, PWM motor actuation, optical video stream.
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                      {t.hero.diagram.layer1Desc}
                     </p>
                   </div>
                 </div>
 
                 {/* Connector Arrow */}
                 <div className="flex justify-center -my-1 text-sky-500 dark:text-sky-400 font-mono text-xs">
-                  ↓ <span className="text-[10px] text-slate-400 dark:text-slate-500 ml-1">Serial / WebSockets Telemetry</span>
+                  ↓ <span className="text-[10px] text-slate-400 dark:text-slate-500 mx-1">{t.hero.diagram.connector1}</span>
                 </div>
 
                 {/* Layer 2: Transactional Core & Persistence */}
@@ -149,19 +159,19 @@ export function Hero({ onOpenCV }: HeroProps) {
                     <Database className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">2. Backend & Data Persistence</span>
-                      <span className="text-[10px] font-mono text-sky-500">ACID Compliance</span>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">{t.hero.diagram.layer2Title}</span>
+                      <span className="text-[10px] font-mono text-sky-500 shrink-0">{t.hero.diagram.layer2Badge}</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                      Spring Boot 3, Java 21 LTS, Oracle Database & PostgreSQL: Stateless JWT authentication, RBAC filters, HikariCP.
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                      {t.hero.diagram.layer2Desc}
                     </p>
                   </div>
                 </div>
 
                 {/* Connector Arrow */}
                 <div className="flex justify-center -my-1 text-sky-500 dark:text-sky-400 font-mono text-xs">
-                  ↓ <span className="text-[10px] text-slate-400 dark:text-slate-500 ml-1">RESTful JSON / WebSocket Feeds</span>
+                  ↓ <span className="text-[10px] text-slate-400 dark:text-slate-500 mx-1">{t.hero.diagram.connector2}</span>
                 </div>
 
                 {/* Layer 3: Presentation & User Control */}
@@ -170,12 +180,12 @@ export function Hero({ onOpenCV }: HeroProps) {
                     <Layers className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">3. Client Applications & Control Room</span>
-                      <span className="text-[10px] font-mono text-purple-500">Accessible UI</span>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">{t.hero.diagram.layer3Title}</span>
+                      <span className="text-[10px] font-mono text-purple-500 shrink-0">{t.hero.diagram.layer3Badge}</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                      Next.js 14, TypeScript (Strict), Java Swing (FlatLaf), and PWA: Live telemetry monitors, responsive dashboards.
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                      {t.hero.diagram.layer3Desc}
                     </p>
                   </div>
                 </div>
@@ -185,13 +195,13 @@ export function Hero({ onOpenCV }: HeroProps) {
               <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                 <span className="flex items-center gap-1.5 font-mono text-[11px]">
                   <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                  <span>26 Repositories Synchronized on GitHub</span>
+                  <span>{t.hero.diagram.reposCount}</span>
                 </span>
                 <a 
                   href="#firebot-case-study" 
                   className="text-sky-500 hover:text-sky-400 font-medium text-xs hover:underline"
                 >
-                  View Signature Project →
+                  {t.hero.diagram.viewSignature}
                 </a>
               </div>
             </div>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useTheme } from "./ThemeProvider";
+import { useLanguage } from "./LanguageProvider";
 import { 
   Sun, 
   Moon, 
@@ -9,7 +10,7 @@ import {
   X, 
   Terminal, 
   FileText, 
-  Cpu
+  Languages
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 
@@ -20,17 +21,18 @@ interface NavbarProps {
 
 export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
+  const { lang, isAr, toggleLanguage, t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Overview", href: "#hero" },
-    { label: "FireBot", href: "#firebot-case-study" },
-    { label: "Projects", href: "#projects" },
-    { label: "Skills", href: "#skills" },
-    { label: "Experience", href: "#experience" },
-    { label: "Credentials", href: "#certifications" },
-    { label: "Education", href: "#education" },
-    { label: "Contact", href: "#contact" },
+    { label: t.nav.overview, href: "#hero" },
+    { label: t.nav.firebot, href: "#firebot-case-study" },
+    { label: t.nav.projects, href: "#projects" },
+    { label: t.nav.skills, href: "#skills" },
+    { label: t.nav.experience, href: "#experience" },
+    { label: t.nav.credentials, href: "#certifications" },
+    { label: t.nav.education, href: "#education" },
+    { label: t.nav.contact, href: "#contact" },
   ];
 
   const handleNavClick = (href: string) => {
@@ -42,7 +44,7 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-[#080B11]/85 border-b border-slate-200 dark:border-slate-800/80 transition-colors duration-200">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/90 dark:bg-[#080B11]/90 border-b border-slate-200 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo Emblem */}
         <a 
@@ -56,23 +58,23 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
               className="w-full h-full object-cover" 
             />
           </div>
-          <div>
+          <div className="text-start">
             <span className="font-bold text-slate-900 dark:text-white tracking-tight text-base sm:text-lg block group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors">
-              Hossam Ahmed
+              {isAr ? "حسام أحمد" : "Hossam Ahmed"}
             </span>
             <span className="text-xs text-slate-500 dark:text-slate-400 block -mt-1 font-mono">
-              Software Developer
+              {isAr ? "مهندس ومطور برمجيات" : "Software Developer"}
             </span>
           </div>
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="px-3 py-1.5 text-xs lg:text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-md transition-colors"
+              className="px-2.5 py-1.5 text-xs xl:text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-md transition-colors"
             >
               {link.label}
             </button>
@@ -80,12 +82,24 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
         </nav>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Theme Toggle Button */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5">
+          {/* Language Switcher Button (AR / EN) */}
+          <button
+            onClick={toggleLanguage}
+            aria-label="Switch Language"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-950/60 hover:text-sky-600 dark:hover:text-sky-400 border border-slate-200 dark:border-slate-700/80 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            title={isAr ? "Switch to English" : "التبديل إلى اللغة العربية"}
+          >
+            <Languages className="w-3.5 h-3.5 text-sky-500" />
+            <span className="font-bold">{isAr ? "EN" : "عربي"}</span>
+          </button>
+
+          {/* Theme Toggle Button (Dark / Light) */}
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
             className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            title={theme === "dark" ? (isAr ? "التبديل للوضع النهاري" : "Switch to Light Mode") : (isAr ? "التبديل للوضع الليلي" : "Switch to Dark Mode")}
           >
             {theme === "dark" ? (
               <Sun className="w-4 h-4 text-amber-400 hover:rotate-45 transition-transform" />
@@ -119,17 +133,17 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
           {/* CV / Resume Button */}
           <button
             onClick={onOpenCV}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white bg-sky-500 hover:bg-sky-600 rounded-lg shadow-sm shadow-sky-500/30 transition-all hover:shadow-md hover:shadow-sky-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-400"
+            className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white bg-sky-500 hover:bg-sky-600 rounded-lg shadow-sm shadow-sky-500/30 transition-all hover:shadow-md hover:shadow-sky-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-400"
           >
             <FileText className="w-4 h-4" />
-            <span>CV</span>
+            <span>{t.nav.cv}</span>
           </button>
 
           {/* Mobile Menu Hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Open navigation menu"
-            className="md:hidden p-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800"
+            className="lg:hidden p-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -138,17 +152,24 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-lg px-4 pt-3 pb-5 space-y-1">
+        <div className="lg:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-lg px-4 pt-3 pb-5 space-y-1">
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="w-full text-left px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 rounded-md transition-colors"
+              className="w-full text-start px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 rounded-md transition-colors"
             >
               {link.label}
             </button>
           ))}
           <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex gap-2">
+            <button
+              onClick={toggleLanguage}
+              className="flex-1 flex items-center justify-center gap-2 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-lg"
+            >
+              <Languages className="w-4 h-4 text-sky-500" />
+              <span>{isAr ? "Switch to English" : "التبديل إلى العربية"}</span>
+            </button>
             <a
               href="https://github.com/HossamAhmedSoft"
               target="_blank"

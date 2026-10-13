@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
     "Personal engineering portfolio of Hossam Ahmed. Backend engineering, Spring Boot, Oracle SQL, Next.js full-stack development, and embedded IoT systems.",
   keywords: [
     "Hossam Ahmed",
+    "حسام أحمد",
     "Software Developer",
     "Backend Engineer",
     "Java",
@@ -74,9 +76,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
-      <body className="min-h-screen bg-[#080B11] text-slate-100 antialiased selection:bg-sky-500 selection:text-white">
-        <ThemeProvider>{children}</ThemeProvider>
+    <html lang="ar" dir="rtl" className="dark scroll-smooth" suppressHydrationWarning>
+      <body className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#080B11] dark:text-slate-100 antialiased selection:bg-sky-500 selection:text-white transition-colors duration-200">
+        <ThemeProvider>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

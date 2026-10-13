@@ -10,8 +10,11 @@ import {
   Award,
   Users
 } from "lucide-react";
+import { useLanguage } from "./LanguageProvider";
 
 export function EducationSection() {
+  const { t, isAr } = useLanguage();
+
   const getTypeBadge = (type: string) => {
     switch (type) {
       case "University":
@@ -24,25 +27,27 @@ export function EducationSection() {
   };
 
   return (
-    <section id="education" className="py-20 bg-slate-50/50 dark:bg-[#0B0F19]/50 border-t border-slate-200 dark:border-slate-800">
+    <section id="education" className="py-20 bg-slate-50/50 dark:bg-[#0B0F19]/50 border-t border-slate-200 dark:border-slate-800 text-start">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 text-left">
+        <div className="max-w-3xl mb-12">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-purple-100 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-800 mb-3">
             <GraduationCap className="w-3.5 h-3.5 text-purple-500" />
-            <span>ACADEMIC FOUNDATION</span>
+            <span>{t.education.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Academic Background & Education
+            {isAr ? "المسار الأكاديمي والتعليمي" : "Academic Background & Education"}
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2">
-            Verified university degree programs and foundational computer science education.
+            {isAr 
+              ? "برامج الدرجات الجامعية والتعليم التأسيسي في علوم وهندسة الحاسب المعتمدة."
+              : "Verified university degree programs and foundational computer science education."}
           </p>
         </div>
 
         {/* Education Timeline Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {educationHistory.map((item, idx) => (
             <div
               key={idx}
@@ -51,25 +56,33 @@ export function EducationSection() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className={`px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold border ${getTypeBadge(item.type)}`}>
-                    {item.type}
+                    {isAr ? (item.type === "University" ? "جامعة" : "أكاديمية") : item.type}
                   </span>
                   <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />
-                    <span>{item.period}</span>
+                    <span>{isAr ? item.period.replace("Present", "حتى الآن").replace("—", "-") : item.period}</span>
                   </span>
                 </div>
 
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  {item.institution}
+                  {isAr 
+                    ? (item.institution.includes("New Cairo") 
+                        ? "جامعة مصر التكنولوجية الدولية بالقاهرة الجديدة (NCTU)" 
+                        : "الأكاديمية الدولية للحاسبات والذكاء الاصطناعي (MICA)")
+                    : item.institution}
                 </h3>
 
                 <p className="text-xs font-semibold text-sky-600 dark:text-sky-400">
-                  {item.degreeOrProgram}
+                  {isAr 
+                    ? (item.type === "University" 
+                        ? "تكنولوجيا المعلومات والاتصالات (ICT)" 
+                        : "منهج تأسيسي مكثف لمدة 3 سنوات في علوم وهندسة البرمجيات")
+                    : item.degreeOrProgram}
                 </p>
 
                 <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 font-mono">
                   <MapPin className="w-3.5 h-3.5" />
-                  <span>{item.location}</span>
+                  <span>{isAr ? (item.location.includes("New Cairo") ? "القاهرة الجديدة، مصر" : "القاهرة، مصر") : item.location}</span>
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-2">

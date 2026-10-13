@@ -14,12 +14,16 @@ import {
 } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 
+import { useLanguage } from "./LanguageProvider";
+
 interface CVModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 export function CVModal({ isOpen, onClose }: CVModalProps) {
+  const { isAr } = useLanguage();
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -43,14 +47,14 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-white dark:bg-[#0F172A] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden text-left"
+        className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-white dark:bg-[#0F172A] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden text-start"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
         <div className="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-[#131C31]">
           <div className="flex items-center gap-2">
             <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300">
-              VERIFIED RESUME
+              {isAr ? "سيرة ذاتية معتمدة" : "VERIFIED RESUME"}
             </span>
             <span className="text-xs text-slate-500 dark:text-slate-400 font-mono hidden sm:inline">
               Hossam_Ahmed_Software_Engineer_CV.pdf
@@ -63,7 +67,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span>Print / Save PDF</span>
+              <span>{isAr ? "طباعة / حفظ PDF" : "Print / Save PDF"}</span>
             </button>
 
             <button
