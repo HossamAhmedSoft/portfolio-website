@@ -9,7 +9,8 @@ import {
   Database, 
   Cpu, 
   Wrench, 
-  ShieldCheck 
+  ShieldCheck,
+  Bot
 } from "lucide-react";
 import { useLanguage } from "./LanguageProvider";
 
@@ -23,6 +24,8 @@ export function SkillsMatrix() {
       case 2: return Database;
       case 3: return Layers;
       case 4: return Cpu;
+      case 5: return Wrench;
+      case 6: return Bot;
       default: return Wrench;
     }
   };

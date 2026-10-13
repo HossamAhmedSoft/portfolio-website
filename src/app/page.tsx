@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { FireBotCaseStudy } from "@/components/FireBotCaseStudy";
 import { ProjectsShowcase } from "@/components/ProjectsShowcase";
+import { AIEngineeringSection } from "@/components/AIEngineeringSection";
 import { SkillsMatrix } from "@/components/SkillsMatrix";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { CertificationsGallery } from "@/components/CertificationsGallery";
@@ -49,6 +50,9 @@ export default function Home() {
 
         {/* Featured Projects Showcase with Live Search */}
         <ProjectsShowcase />
+
+        {/* AI-Assisted Engineering, Prompt Engineering & Workflow Planning */}
+        <AIEngineeringSection />
 
         {/* Evidence-Backed Technical Skills Matrix */}
         <SkillsMatrix />

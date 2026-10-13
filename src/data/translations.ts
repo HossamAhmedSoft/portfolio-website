@@ -13,6 +13,7 @@ export interface Translations {
     contact: string;
     cv: string;
     quickLauncher: string;
+    aiEngineering: string;
   };
   hero: {
     statusBadge: string;
@@ -212,6 +213,60 @@ export interface Translations {
     hintSelect: string;
     emailCopied: string;
   };
+  aiEngineering: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    recruiterNoteTitle: string;
+    recruiterNoteText: string;
+    toolsTitle: string;
+    toolsSubtitle: string;
+    tools: {
+      cursorName: string;
+      cursorDesc: string;
+      cursorUrl: string;
+      antigravityName: string;
+      antigravityDesc: string;
+      antigravityUrl: string;
+      traeName: string;
+      traeDesc: string;
+      traeUrl: string;
+    };
+    promptEngineeringTitle: string;
+    promptEngineeringSubtitle: string;
+    promptPillars: {
+      p1Title: string;
+      p1Desc: string;
+      p2Title: string;
+      p2Desc: string;
+      p3Title: string;
+      p3Desc: string;
+      p4Title: string;
+      p4Desc: string;
+      p5Title: string;
+      p5Desc: string;
+      p6Title: string;
+      p6Desc: string;
+    };
+    workflowTitle: string;
+    workflowSubtitle: string;
+    humanInLoopTitle: string;
+    humanInLoopDesc: string;
+    workflowStages: {
+      title: string;
+      desc: string;
+    }[];
+    caseStudiesTitle: string;
+    caseStudiesSubtitle: string;
+    caseStudies: {
+      title: string;
+      project: string;
+      problem: string;
+      aiApproach: string;
+      humanVerification: string;
+      outcome: string;
+    }[];
+  };
   cvModal: {
     title: string;
     subtitle: string;
@@ -235,13 +290,14 @@ export const translations: Record<Language, Translations> = {
       contact: "Contact",
       cv: "CV",
       quickLauncher: "Quick Launcher",
+      aiEngineering: "AI Engineering",
     },
     hero: {
       statusBadge: "Available for Software Engineering Roles",
       headlineStart: "I Build ",
       headlineHighlight: "Reliable Software",
-      headlineEnd: " and Connected Systems.",
-      summary: "Software developer focused on backend engineering, full-stack applications, and integrated systems — combining software, databases, and embedded technology to solve practical problems.",
+      headlineEnd: ", AI-Assisted Workflows & Systems.",
+      summary: "Software developer focused on Java backend, full-stack applications, and AI-assisted development workflows — combining software engineering, relational databases, and embedded systems to solve practical problems with verified quality.",
       viewProjects: "View My Projects",
       viewCV: "View & Download CV",
       pillars: {
@@ -434,6 +490,94 @@ export const translations: Record<Language, Translations> = {
       hintSelect: "↵ Select",
       emailCopied: "Email copied to clipboard!",
     },
+    aiEngineering: {
+      badge: "AI-Assisted Engineering & Workflow Automation",
+      title: "Modern AI Coding Agents & Workflow Planning",
+      subtitle: "Disciplined integration of modern AI coding agents, context-aware prompt engineering, and a 10-stage implementation lifecycle backed by human-in-the-loop review and zero-error builds.",
+      recruiterNoteTitle: "Recruiter Note: Engineering Velocity vs. Machine Learning",
+      recruiterNoteText: "This section represents practical software engineering velocity and coding agent mastery. I use AI tools to accelerate implementation, explore codebases, and maintain rigorous test suites. It is fundamentally distinct from training deep learning models or building machine learning systems.",
+      toolsTitle: "Verified AI Coding Tools & Environments",
+      toolsSubtitle: "Hands-on tools actively used for semantic codebase navigation, multi-file refactoring, and agentic task execution.",
+      tools: {
+        cursorName: "Cursor",
+        cursorDesc: "AI-first code editor used for semantic codebase indexing, symbol-aware contextual suggestions, and iterative multi-file edits.",
+        cursorUrl: "https://www.cursor.com",
+        antigravityName: "Google Antigravity",
+        antigravityDesc: "Agentic engineering platform utilized for task orchestration, multi-file workspace modifications, terminal automation, and automated validation.",
+        antigravityUrl: "https://antigravity.google",
+        traeName: "Trae",
+        traeDesc: "Adaptive AI development environment applied to project workspace exploration, iterative feature scaffolding, and code inspection.",
+        traeUrl: "https://www.trae.ai",
+      },
+      promptEngineeringTitle: "Professional Prompt Engineering as a Dev Discipline",
+      promptEngineeringSubtitle: "Prompt engineering is not chatting—it is engineering deterministic, repeatable development workflows with rigid boundaries.",
+      promptPillars: {
+        p1Title: "Context & Architectural Grounding",
+        p1Desc: "Specifying language versions (Java 21, Next.js 14, C++17), design patterns, and existing directory structures.",
+        p2Title: "Agent Role & Scope Containment",
+        p2Desc: "Defining precise engineer personas and explicit boundaries to prevent scope creep or unauthorized modifications.",
+        p3Title: "Mandatory Pre-Flight Inspection",
+        p3Desc: "Enforcing active file reading and repository inspection before generating any proposed changes.",
+        p4Title: "Rigid Acceptance Criteria",
+        p4Desc: "Mandating zero TypeScript errors, backward compatibility, clean compilation passes, and strict format compliance.",
+        p5Title: "Security & Secret Sanitization",
+        p5Desc: "Explicit instructions prohibiting credential exposure, sensitive token leakage, or unauthorized repo permissions.",
+        p6Title: "Anti-Hallucination Guardrails",
+        p6Desc: "Strict mandates forbidding imaginary libraries, fabricated metrics, non-existent endpoints, or altered existing logic.",
+      },
+      workflowTitle: "10-Stage Agentic Development Lifecycle",
+      workflowSubtitle: "A disciplined lifecycle organizing complex engineering tasks into predictable, verified execution stages.",
+      humanInLoopTitle: "The Human-in-the-Loop Principle",
+      humanInLoopDesc: "AI agents accelerate implementation and exploration, but architectural soundness, security verification, algorithmic correctness, and final commits remain strictly under human engineering control.",
+      workflowStages: [
+        { title: "1. Scope & Requirements", desc: "Analyze problem boundaries, technical requirements, and acceptance metrics." },
+        { title: "2. Repository Inspection", desc: "Inspect existing files, dependencies, conventions, and architectural patterns." },
+        { title: "3. Task Decomposition", desc: "Decompose complex features into modular, reviewable work chunks." },
+        { title: "4. Implementation Plan", desc: "Author detailed implementation plans with target files and risk analysis." },
+        { title: "5. AI-Assisted Edits", desc: "Execute agentic code changes with targeted diffs and pattern adherence." },
+        { title: "6. Human Code Audit", desc: "Review every line for logic correctness, architectural fit, and edge cases." },
+        { title: "7. Build & Test Checks", desc: "Execute strict compiler checks (tsc, javac), unit tests (pytest, junit), and linters." },
+        { title: "8. Docs & Schema Sync", desc: "Synchronize READMEs, OpenAPI specs, database schemas, and diagrams." },
+        { title: "9. Deployment Prep", desc: "Verify build artifacts, staging environments, and clean git branches." },
+        { title: "10. Final Verification", desc: "Validate live behavior, record demos, and publish version-controlled commits." },
+      ],
+      caseStudiesTitle: "Real-World Evidence Across My Projects",
+      caseStudiesSubtitle: "Documented examples demonstrating how AI-assisted workflows were applied to real software repositories.",
+      caseStudies: [
+        {
+          title: "Telemetry Bridge Decoupling",
+          project: "Troy FireBot Telemetry Bridge",
+          problem: "Needed to decouple high-speed hardware serial sensor data on Arduino Mega from browser WebSocket telemetry without dropping frames.",
+          aiApproach: "Used structured prompts to design protocol parsing state machines and generate decoupled Node.js WebSocket bridge boilerplate.",
+          humanVerification: "Tested physically on hardware with RoboCup obstacle courses and oscilloscope signal checks.",
+          outcome: "Rock-solid bidirectional telemetry with sub-20ms latency and zero camera stream starvation.",
+        },
+        {
+          title: "Multi-Module Architecture & Strict Types",
+          project: "GDG Operations Platform (Next.js 14)",
+          problem: "Governing 17 operational modules with strict points ledger isolation preventing data bleeding across student committees.",
+          aiApproach: "Utilized agentic multi-file refactoring to scaffold Supabase PostgreSQL RLS policies and strict TypeScript types across 38 commits.",
+          humanVerification: "Validated with 100% clean 'tsc --noEmit' passes and end-to-end user testing across committees.",
+          outcome: "Production-ready community platform currently serving university developer operations.",
+        },
+        {
+          title: "Enterprise JWT Auth Pipeline",
+          project: "Enterprise Employee Management API",
+          problem: "Architecting production-grade Spring Security 6 stateless JWT filter chains with Oracle SQL persistence and RBAC.",
+          aiApproach: "Engineered comprehensive unit and integration test fixtures for JWT token extraction, expiration checks, and OpenAPI doc sync.",
+          humanVerification: "Compiled and verified through Apache Maven clean test builds (mvnw test-compile) on Java 21 LTS.",
+          outcome: "Secure, auditable enterprise backend with role-based segregation of duties.",
+        },
+        {
+          title: "Exhaustive Modular Arithmetic Tests",
+          project: "Classical Cryptography Solver Suite",
+          problem: "Implementing bidirectional symmetric cipher algorithms (Caesar, Vigenère, Rail Fence) with support for Arabic and English alphabets.",
+          aiApproach: "Used prompt engineering to generate exhaustive edge-case test vectors for modular arithmetic and Unicode letter normalization.",
+          humanVerification: "Audited cipher invertibility equations and executed Pytest suite with zero regressions.",
+          outcome: "100% pass rate across 69 automated unit tests running in 0.023 seconds.",
+        },
+      ],
+    },
     cvModal: {
       title: "Verified Curriculum Vitae",
       subtitle: "Hossam Ahmed — Software Developer & Systems Engineer",
@@ -455,13 +599,14 @@ export const translations: Record<Language, Translations> = {
       contact: "تواصل معي",
       cv: "السيرة الذاتية",
       quickLauncher: "لوحة الأوامر",
+      aiEngineering: "هندسة الذكاء الاصطناعي",
     },
     hero: {
       statusBadge: "متاح لفرص العمل في هندسة البرمجيات",
       headlineStart: "أبني ",
       headlineHighlight: "برمجيات موثوقة",
-      headlineEnd: " وأنظمة متصلة ومتكاملة.",
-      summary: "مطور برمجيات متخصص في بناء الأنظمة الخلفية عالية الاعتمادية، والتطبيقات المتكاملة (Full-Stack)، والأنظمة المدمجة (Embedded IoT) — أربط بين هندسة الكود، وقواعد البيانات، ومكونات العتاد لحل المشكلات الواقعية.",
+      headlineEnd: " وأنظمة متصلة وسير عمل مدعوم بالذكاء الاصطناعي.",
+      summary: "مطور برمجيات متخصص في هندسة الأنظمة الخلفية بـ Java، والتطبيقات المتكاملة (Full-Stack)، وسير العمل المدعوم بوكلاء الذكاء الاصطناعي — أجمع بين هندسة الكود، وقواعد البيانات العلائقية، وهندسة البرمجيات المنضبطة لحل المشكلات العملية بجودة موثقة.",
       viewProjects: "استعرض المشاريع",
       viewCV: "عرض وتحميل السيرة الذاتية",
       pillars: {
@@ -653,6 +798,94 @@ export const translations: Record<Language, Translations> = {
       hintNavigate: "↑↓ للتنقل",
       hintSelect: "↵ للاختيار",
       emailCopied: "تم نسخ البريد الإلكتروني بنجاح!",
+    },
+    aiEngineering: {
+      badge: "الهندسة البرمجية المدعومة بالذكاء الاصطناعي",
+      title: "وكلاء البرمجة الذكية وتخطيط سير العمل الهندسي",
+      subtitle: "دمج احترافي ومنضبط لوكلاء البرمجة بالذكاء الاصطناعي (AI Coding Agents)، وهندسة الأوامر الموجهة بالسياق (Prompt Engineering)، ومنهجية عمل من 10 مراحل تعتمد على المراجعة البشرية الدقيقة واجتياز فحوصات البناء بنجاح.",
+      recruiterNoteTitle: "ملاحظة توظيف: مضاعفة الإنتاجية الهندسية وليست تدريب نماذج تعلم آلي",
+      recruiterNoteText: "يمثل هذا القسم قدرتي العملية على قيادة أدوات ووكلاء الذكاء الاصطناعي لتسريع بناء البرمجيات، وفحص الشيفرات البرمجية، وصياغة الاختبارات الآلية. وهو يختلف جوهرياً عن تدريب نماذج التعلم العميق (Deep Learning) أو خوارزميات الـ ML.",
+      toolsTitle: "أدوات وبيئات البرمجة الذكية المعتمدة",
+      toolsSubtitle: "أدوات تم استخدامها عملياً للتنقل الدلالي في المشاريع، وإعادة هيكلة الملفات المتعددة، وتنفيذ المهام التلقائية.",
+      tools: {
+        cursorName: "Cursor",
+        cursorDesc: "محرر برمجي مدعوم بالذكاء الاصطناعي لفهرسة وفهم مستودع الأكواد دلالياً، وتقديم اقتراحات تفاعلية والتعديل المتزامن لملفات متعددة.",
+        cursorUrl: "https://www.cursor.com",
+        antigravityName: "Google Antigravity",
+        antigravityDesc: "منصة هندسية لوكلاء البرمجة (Agentic Platform) لتنظيم المهام المعقدة، وأتمتة التيرمينال، وإعادة الهيكلة الشاملة مع التحقق الآلي الصارم.",
+        antigravityUrl: "https://antigravity.google",
+        traeName: "Trae",
+        traeDesc: "بيئة تطوير ذكية متكيفة لاستكشاف مساحات العمل، وتوليد الهياكل الأولية للمشاريع، وفحص الأكواد التكرارية.",
+        traeUrl: "https://www.trae.ai",
+      },
+      promptEngineeringTitle: "هندسة الأوامر (Prompt Engineering) كمهارة هندسية",
+      promptEngineeringSubtitle: "هندسة الأوامر ليست مجرد محادثة نصية عشوائية — بل هي صياغة محددة وصارمة لسير عمل برمجي متسق وقابل للتكرار ضمن قيود دقيقة.",
+      promptPillars: {
+        p1Title: "تأصيل السياق والمعمارية",
+        p1Desc: "تحديد إصدارات اللغات بدقة (Java 21, Next.js 14, C++17) وهيكل المجلدات وأنماط التصميم المعتمدة.",
+        p2Title: "تحديد دور الوكيل ونطاق المهمة",
+        p2Desc: "تعريف دور المهندس وحدود المهمة لمنع التشتت أو التعديل على ملفات غير معنية.",
+        p3Title: "إلزامية الفحص المسبق للمستودع",
+        p3Desc: "إلزام الوكيل الذكي بقراءة الأكواد الحالية وفحص بنيتها قبل اقتراح أي أسطر جديدة.",
+        p4Title: "معايير قبول برمجية صارمة",
+        p4Desc: "اشتراط خلو الكود من أخطاء TypeScript تماماً، وضمان التوافقية العكسية وسلامة الترجمة البرمجية.",
+        p5Title: "حدود الأمان وسرية البيانات",
+        p5Desc: "تعليمات واضحة تمنع كشف مفاتيح الـ API أو أسرار الاعتماد، مع تنقية المدخلات من الثغرات.",
+        p6Title: "ضوابط منع اختلاق البيانات (Anti-Hallucination)",
+        p6Desc: "حظر اختلاق مكتبات وهمية، أو أرقام قياسية غير حقيقية، أو واجهات API غير متوفرة، أو تغيير منطق معتمد.",
+      },
+      workflowTitle: "دورة حياة التطوير بالوكلاء الأذكياء (10 مراحل)",
+      workflowSubtitle: "منهجية هندسية منضبطة لتنظيم المهام البرمجية المعقدة إلى مراحل تنفيذية متسلسلة وموثقة.",
+      humanInLoopTitle: "مبدأ القيادة البشرية (Human-in-the-Loop)",
+      humanInLoopDesc: "وكلاء الذكاء الاصطناعي يسرعون الاستكشاف والتنفيذ، لكن القرارات المعمارية، وفحص الأمان، والتحقق الرياضي والمنطقي، والاعتماد النهائي تظل بالكامل مسؤولية المهندس البشري.",
+      workflowStages: [
+        { title: "1. تحليل النطاق والمتطلبات", desc: "تحديد أبعاد المشكلة، والقيود الفنية، ومعايير القبول والنجاح." },
+        { title: "2. فحص المستودع والمعمارية", desc: "دراسة الملفات الحالية والاعتماديات وأنماط التصميم القائمة." },
+        { title: "3. تفكيك وترتيب الأولويات", desc: "تقسيم المهام الكبيرة إلى وحدات عمل صغيرة وقابلة للمراجعة المنفصلة." },
+        { title: "4. إعداد خطة التنفيذ", desc: "توثيق الملفات المستهدفة وكتل التعديل المتوقعة وخطة التراجع عند الحاجة." },
+        { title: "5. التعديل المدعوم بالذكاء الاصطناعي", desc: "تنفيذ التعديلات البرمجية بدقة استناداً إلى الخطة والأنماط المعتمدة." },
+        { title: "6. المراجعة والتدقيق البشري", desc: "فحص كل سطر كود للتأكد من الصحة المنطقية والتوافقية المعمارية." },
+        { title: "7. فحص البناء والاختبارات الآلية", desc: "تشغيل أدوات البناء والمترجمات (tsc, javac) واختبارات الوحدة (pytest, junit)." },
+        { title: "8. مزامنة التوثيق والمخططات", desc: "تحديث ملفات README ومواصفات OpenAPI ومخططات المعمارية لتطابق الكود." },
+        { title: "9. تجهيز النشر والإصدار", desc: "التحقق من مخرجات البناء (Build Artifacts) وإعداد بيئات النشر وفروع Git." },
+        { title: "10. التحقق النهائي والتقرير", desc: "اختبار السلوك الفعلي على المتصفح/النظام واعتماد الـ Commits الموثقة." },
+      ],
+      caseStudiesTitle: "أدلة وتطبيقات واقعية من مشاريعي",
+      caseStudiesSubtitle: "أمثلة حقيقية موثقة تثبت كيفية تطبيق سير العمل المدعوم بالذكاء الاصطناعي على مشاريعي الفعلية.",
+      caseStudies: [
+        {
+          title: "فصل ومعالجة تدفق القياسات الحية",
+          project: "جسر قياسات روبوت الإطفاء Troy FireBot",
+          problem: "الحاجة إلى فصل تدفق بيانات الحساسات السريع عبر المنفذ التسلسلي (Arduino Mega) عن واجهة الويب WebSocket دون إسقاط إطارات الفيديو.",
+          aiApproach: "استخدام أوامر مهيكلة لتصميم آلة الحالة (State Machine) لبروتوكول البيانات وتوليد الهيكل الأولي لجسر Node.js WebSocket.",
+          humanVerification: "اختبار فيزيائي واقعي على حلبات مسابقة RoboCup وفحص الإشارات على أجهزة القياس.",
+          outcome: "اتصال ثنائي الاتجاه فائق الاستقرار بزمن استجابة أقل من 20 ملي ثانية ودون تأثير على بث الكاميرا.",
+        },
+        {
+          title: "معمارية معقدة بـ 17 موديول مع نمط TypeScript صارم",
+          project: "منصة إدارة عمليات مجتمع GDG (Next.js 14)",
+          problem: "إدارة 17 وحدة تشغيلية مع عزل تام لسجلات نقاط الأعضاء لمنع تداخل البيانات بين اللجان المختلفة.",
+          aiApproach: "إعادة هيكلة لملفات متعددة عبر وكيل ذكي لصياغة سياسات RLS لقاعدة بيانات Supabase وكتابة كود TypeScript صارم عبر 38 Commit.",
+          humanVerification: "فحص اجتياز 'tsc --noEmit' بنجاح بنسبة 100% مع 0 أخطاء واختبار كافة المسارات مع المستخدمين.",
+          outcome: "منصة إنتاجية سحابية متكاملة تعمل حالياً في إدارة عمليات مجتمع المطورين بالجامعة التكنولوجية.",
+        },
+        {
+          title: "تأمين واجهات Enterprise بـ JWT و RBAC",
+          project: "واجهة برمجة تطبيقات إدارة الموظفين (Spring Boot 3)",
+          problem: "بناء مسار أمان احترافي يعتمد على Spring Security 6 وتوكنات JWT عديمة الحالة مع ربط قاعدة بيانات Oracle.",
+          aiApproach: "صياغة بيئات اختبارات متقدمة لفحص استخراج وتدقيق توكنات الـ JWT ومزامنة مواصفات OpenAPI Swagger.",
+          humanVerification: "ترجمة وبناء الكود واجتياز اختبارات Apache Maven بالكامل (mvnw test-compile) على بيئة Java 21 LTS.",
+          outcome: "خادم Enterprise عالي الأمان يوفر فصلاً صارماً للصلاحيات ودعماً كاملاً لبيئات الـ Production.",
+        },
+        {
+          title: "توليد حالات اختبار شاملة للحسابات المعيارية",
+          project: "حزمة أدوات التشفير الكلاسيكي (Python 3)",
+          problem: "تطبيق خوارزميات التشفير التماثلي ثنائية الاتجاه (Caesar, Vigenère, Rail Fence) مع دعم الأبجديتين العربية والإنجليزية.",
+          aiApproach: "استخدام هندسة الأوامر لتوليد متجهات اختبار شاملة للحالات الحدية للحساب المعياري وضبط ترميز الحروف العربية.",
+          humanVerification: "التدقيق الرياضي لمعادلات التشفير والفك وتشغيل حزمة اختبارات Pytest دون أي أخطاء تراجع.",
+          outcome: "نجاح 69 اختباراً مؤتمتاً بنسبة 100% في زمن قياسي قدره 0.023 ثانية.",
+        },
+      ],
     },
     cvModal: {
       title: "السيرة الذاتية المعتمدة (Curriculum Vitae)",

@@ -17,6 +17,7 @@ import {
   GraduationCap, 
   Mail, 
   Zap,
+  Bot,
   Languages
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
@@ -55,6 +56,16 @@ export function CommandPalette({ isOpen, onClose, onOpenCV }: CommandPaletteProp
       run: () => {
         onClose();
         document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    {
+      id: "nav-ai-engineering",
+      title: isAr ? "هندسة الذكاء الاصطناعي وسير العمل المنظم" : "Explore AI-Assisted Engineering & Workflows",
+      category: t.commandPalette.navGroup,
+      icon: Bot,
+      run: () => {
+        onClose();
+        document.querySelector("#ai-engineering")?.scrollIntoView({ behavior: "smooth" });
       }
     },
     {

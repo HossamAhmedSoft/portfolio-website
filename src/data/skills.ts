@@ -73,5 +73,16 @@ export const skillCategories: SkillCategory[] = [
       { name: "TypeScript Strict Mode", level: "Proficient", projectEvidence: "Zero-error type safety across complete full-stack web platforms" },
       { name: "Apache Maven", level: "Proficient", projectEvidence: "Dependency lifecycle, plugin configuration, multi-module packaging" }
     ]
+  },
+  {
+    category: "AI-Assisted Development & Engineering",
+    description: "Modern AI coding agents, structured prompt engineering, and disciplined 10-stage workflows.",
+    skills: [
+      { name: "Cursor (AI Code Editor)", level: "Proficient", projectEvidence: "Semantic codebase indexing, symbol-aware refactoring, multi-file diffs" },
+      { name: "Google Antigravity", level: "Proficient", projectEvidence: "Agentic task orchestration, multi-file execution & CLI workflows" },
+      { name: "Trae (Adaptive AI IDE)", level: "Proficient", projectEvidence: "Context-aware workspace exploration and rapid feature staging" },
+      { name: "Structured Prompt Engineering", level: "Advanced", projectEvidence: "Master Prompt Packages with context grounding, constraints & test guardrails" },
+      { name: "10-Stage Workflow Planning", level: "Advanced", projectEvidence: "Requirement decomposition, human-in-the-loop review, zero-error builds" }
+    ]
   }
 ];

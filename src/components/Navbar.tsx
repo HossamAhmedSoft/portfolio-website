@@ -28,6 +28,7 @@ export function Navbar({ onOpenCV, onOpenPalette }: NavbarProps) {
     { label: t.nav.overview, href: "#hero" },
     { label: t.nav.firebot, href: "#firebot-case-study" },
     { label: t.nav.projects, href: "#projects" },
+    { label: t.nav.aiEngineering, href: "#ai-engineering" },
     { label: t.nav.skills, href: "#skills" },
     { label: t.nav.experience, href: "#experience" },
     { label: t.nav.credentials, href: "#certifications" },
