@@ -91,17 +91,21 @@ export default function Home() {
       <Footer />
 
       {/* Verified CV / Resume Modal */}
-      <CVModal
-        isOpen={isCVModalOpen}
-        onClose={() => setIsCVModalOpen(false)}
-      />
+      {isCVModalOpen && (
+        <CVModal
+          isOpen={isCVModalOpen}
+          onClose={() => setIsCVModalOpen(false)}
+        />
+      )}
 
       {/* Developer Command Palette (Ctrl+K) */}
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setIsCommandPaletteOpen(false)}
-        onOpenCV={() => setIsCVModalOpen(true)}
-      />
+      {isCommandPaletteOpen && (
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          onClose={() => setIsCommandPaletteOpen(false)}
+          onOpenCV={() => setIsCVModalOpen(true)}
+        />
+      )}
     </div>
   );
 }

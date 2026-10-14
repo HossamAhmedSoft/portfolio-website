@@ -118,7 +118,7 @@ export function ServicesSection({ isStandalonePage = false }: ServicesSectionPro
 
                   {/* Typical Deliverables */}
                   <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80">
-                    <span className="text-xs font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500 font-semibold block mb-2">
+                    <span className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 font-semibold block mb-2">
                       {isAr ? "مخرجات العمل الرئيسية" : "Typical Deliverables"}
                     </span>
                     <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
@@ -134,7 +134,7 @@ export function ServicesSection({ isStandalonePage = false }: ServicesSectionPro
                   {/* Example Verified Project Reference */}
                   {service.suitableProjects.length > 0 && (
                     <div className="pt-2">
-                      <span className="text-[11px] font-mono text-slate-400 block mb-1">
+                      <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 block mb-1">
                         {isAr ? "مشروع مرجعي مشابه:" : "Reference Project:"}
                       </span>
                       {service.suitableProjects.map((proj) => (

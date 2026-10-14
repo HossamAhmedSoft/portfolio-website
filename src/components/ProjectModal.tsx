@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Image from "next/image";
 import { Project } from "@/data/projects";
 import { 
   X, 
@@ -104,10 +105,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Project Visual Preview / Banner */}
           {project.thumbnailUrl && (
             <div className="relative w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-sm aspect-16/9 max-h-80">
-              <img 
+              <Image 
                 src={project.thumbnailUrl} 
                 alt={pData.title}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="object-cover"
               />
             </div>
           )}

@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceRequestByReference } from "@/lib/requestStorage";
 
-export const dynamic = "force-dynamic";
-
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);

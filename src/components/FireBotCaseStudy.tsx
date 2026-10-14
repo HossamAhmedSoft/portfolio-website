@@ -76,10 +76,13 @@ export function FireBotCaseStudy() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <img 
+              <Image 
                 src="/assets/branding/troy-developers-logo.png" 
                 alt="Troy Developers Emblem" 
-                className="w-12 h-12 rounded-full border-2 border-sky-400/50 shadow-md shadow-sky-500/20 bg-slate-900 shrink-0" 
+                width={48}
+                height={48}
+                loading="lazy"
+                className="w-12 h-12 rounded-full border-2 border-sky-400/50 shadow-md shadow-sky-500/20 bg-slate-900 shrink-0 object-cover" 
               />
               <div>
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800">

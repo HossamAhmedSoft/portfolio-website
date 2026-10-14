@@ -72,7 +72,7 @@ export function SkillsMatrix() {
                     <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">
                       {isAr ? cat.categoryAr : cat.category}
                     </h3>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-1">
                       {isAr ? cat.descriptionAr : cat.description}
                     </p>
                   </div>
@@ -92,12 +92,12 @@ export function SkillsMatrix() {
                         <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-medium shrink-0 ${
                           skill.level === "Advanced" 
                             ? "bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300"
-                            : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
+                            : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
                         }`}>
                           {getLocalizedLevel(skill.level)}
                         </span>
                       </div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                      <div className="text-[11px] text-slate-600 dark:text-slate-400 font-mono">
                         {isAr ? `• ${skill.projectEvidenceAr}` : `↳ ${skill.projectEvidence}`}
                       </div>
                     </div>

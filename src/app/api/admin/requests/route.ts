@@ -6,8 +6,6 @@ import {
   sanitizeInput,
 } from "@/lib/requestStorage";
 
-export const dynamic = "force-dynamic";
-
 function verifyAdmin(req: NextRequest): boolean {
   const secret = process.env.ADMIN_SECRET_KEY || "hossam_admin_secure_2026";
   const authHeader = req.headers.get("authorization") || "";

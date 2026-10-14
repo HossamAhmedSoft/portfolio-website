@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { communityExperiences, CommunityGraphic } from "@/data/experience";
 import { 
   Users, 
@@ -96,7 +97,7 @@ export function ExperienceSection() {
                 <Award className="w-4 h-4 text-amber-500" />
                 <span>{t.experience.galleryTitle}</span>
               </div>
-              <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
+              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 hidden sm:inline">
                 {isAr ? "انقر على أي صورة لتكبيرها وفحصها بدقة عالية" : "Click any image to inspect full-resolution"}
               </span>
             </div>
@@ -106,13 +107,25 @@ export function ExperienceSection() {
                 <div
                   key={gIdx}
                   onClick={() => setActiveModalGraphic(item)}
-                  className="group relative flex flex-col rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/60 shadow-sm cursor-pointer transition-all transform hover:-translate-y-1"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveModalGraphic(item);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${isAr ? item.titleAr : item.title} - ${isAr ? "عرض الحجم الكامل" : "Inspect Full Size"}`}
+                  className="group relative flex flex-col rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/60 shadow-sm cursor-pointer transition-all transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-sky-500"
                 >
                   <div className="relative aspect-4/3 overflow-hidden bg-slate-950">
-                    <img 
+                    <Image 
                       src={item.src} 
                       alt={isAr ? item.titleAr : item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 380px"
+                      loading="lazy"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-500 text-slate-950 text-xs font-bold shadow-lg">
@@ -288,6 +301,9 @@ export function ExperienceSection() {
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setActiveModalGraphic(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={isAr ? activeModalGraphic.titleAr : activeModalGraphic.title}
         >
           <div 
             className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-slate-900 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden text-start"
@@ -304,17 +320,20 @@ export function ExperienceSection() {
               </div>
               <button 
                 onClick={() => setActiveModalGraphic(null)}
+                aria-label={isAr ? "إغلاق" : "Close modal"}
                 className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-black/60">
-              <img 
+            <div className="relative flex-1 min-h-[50vh] max-h-[70vh] p-4 flex items-center justify-center bg-black/60">
+              <Image 
                 src={activeModalGraphic.src} 
                 alt={isAr ? activeModalGraphic.titleAr : activeModalGraphic.title}
-                className="max-h-[70vh] w-auto object-contain rounded-lg shadow-lg"
+                fill
+                sizes="(max-width: 1024px) 95vw, 900px"
+                className="object-contain rounded-lg p-2"
               />
             </div>
 

@@ -9,8 +9,6 @@ import {
 } from "@/lib/requestStorage";
 import { dispatchNotifications } from "@/lib/notificationDispatcher";
 
-export const dynamic = "force-dynamic";
-
 export async function POST(req: NextRequest) {
   try {
     const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "127.0.0.1";

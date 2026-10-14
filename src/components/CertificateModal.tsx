@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Image from "next/image";
 import { Certificate } from "@/data/certificates";
 import { 
   X, 
@@ -86,18 +87,20 @@ export function CertificateModal({ cert, onClose }: CertificateModalProps) {
         {/* Content Body: Image Lightbox & Details */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
           {/* High-Resolution Certificate Document Preview */}
-          <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-inner max-h-[50vh] flex items-center justify-center p-2">
-            <img
+          <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-inner min-h-[300px] max-h-[50vh] flex items-center justify-center p-2">
+            <Image
               src={cert.imagePath}
               alt={isAr ? cert.titleAr : cert.title}
-              className="max-h-[48vh] w-auto object-contain mx-auto rounded shadow-lg"
+              fill
+              sizes="(max-width: 768px) 95vw, 650px"
+              className="object-contain p-2"
             />
           </div>
 
           {/* Verification & Curriculum Summary */}
           <div className="space-y-4 text-sm text-slate-700 dark:text-slate-300">
             <div>
-              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">
                 {isAr ? "تغطية المنهج والاختبار المعتمد" : "Curriculum & Exam Coverage"}
               </h4>
               <p className="text-xs sm:text-sm leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800">
@@ -106,7 +109,7 @@ export function CertificateModal({ cert, onClose }: CertificateModalProps) {
             </div>
 
             <div>
-              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
                 {isAr ? "المهارات والكفاءات الموثقة" : "Validated Competencies"}
               </h4>
               <div className="flex flex-wrap gap-2">

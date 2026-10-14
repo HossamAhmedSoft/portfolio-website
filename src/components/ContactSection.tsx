@@ -111,7 +111,7 @@ export function ContactSection() {
 
             {/* Primary Email Card */}
             <div className="p-5 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold block">
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 font-bold block">
                 {isAr ? "البريد الإلكتروني المباشر" : "Direct Email"}
               </span>
               <div className="font-mono text-sm font-semibold text-slate-900 dark:text-white break-all">
@@ -144,7 +144,7 @@ export function ContactSection() {
               className="p-5 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 space-y-2 shadow-sm block hover:border-sky-500/60 transition-colors group"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 font-bold">
                   {isAr ? "الملف الشخصي على GitHub" : "GitHub Profile"}
                 </span>
                 <GithubIcon className="w-4 h-4 text-slate-600 dark:text-slate-300 group-hover:text-sky-500 transition-colors" />

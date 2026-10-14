@@ -98,7 +98,7 @@ async function runTestSuite() {
   const updated = await updateServiceRequestStatus(ref1, "Under Review", "Reviewed technical feasibility: verified Spring Boot stack.");
   assert(updated !== null, "Successfully updated record status");
   assert(updated?.status === "Under Review", "Status transitioned to 'Under Review'");
-  assert(updated?.internalNotes?.includes("Spring Boot stack"), "Internal notes recorded correctly");
+  assert(Boolean(updated?.internalNotes?.includes("Spring Boot stack")), "Internal notes recorded correctly");
 
   // 5. Public API: POST /api/services/request
   console.log("\n[5] Testing POST /api/services/request (Intake API)...");

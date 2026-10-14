@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { 
   User, 
   Terminal, 
@@ -72,9 +73,12 @@ export function AboutSection() {
             {/* Authentic Portrait Card */}
             <div className="flex flex-col sm:flex-row items-center gap-5 p-6 rounded-2xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-md">
               <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-sky-400/80 shadow-lg shadow-sky-500/25 shrink-0 bg-slate-900 group">
-                <img 
+                <Image 
                   src="/assets/profile/hossam-ahmed.jpg" 
                   alt="Hossam Ahmed — Software Developer" 
+                  width={144}
+                  height={144}
+                  loading="lazy"
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" 
                 />
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-2xl pointer-events-none" />

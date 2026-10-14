@@ -2,6 +2,7 @@
 
 import React, { use } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -194,11 +195,14 @@ export default function ProjectCaseStudyPage({ params }: PageProps) {
           
           {/* Screenshot / Visual Banner if available */}
           {project.thumbnailUrl && (
-            <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl bg-slate-900">
-              <img
+            <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl bg-slate-900">
+              <Image
                 src={project.thumbnailUrl}
                 alt={`${project.title} Preview Screenshot`}
-                className="w-full max-h-[500px] object-contain bg-slate-950 mx-auto"
+                fill
+                priority
+                sizes="(max-width: 1200px) 100vw, 1024px"
+                className="object-contain bg-slate-950 mx-auto"
               />
             </div>
           )}

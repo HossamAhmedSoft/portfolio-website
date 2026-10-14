@@ -1052,44 +1052,44 @@ export function ServiceRequestWorkflow() {
             <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4 text-xs sm:text-sm">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
                 <div>
-                  <span className="text-slate-400 block font-mono text-xs uppercase">{isAr ? "الخدمة الأساسية" : "Primary Service"}</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-mono text-xs uppercase">{isAr ? "الخدمة الأساسية" : "Primary Service"}</span>
                   <span className="font-bold text-slate-900 dark:text-white">{selectedService.name}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block font-mono text-xs uppercase">{isAr ? "عنوان المشروع" : "Project Title"}</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-mono text-xs uppercase">{isAr ? "عنوان المشروع" : "Project Title"}</span>
                   <span className="font-bold text-slate-900 dark:text-white">{formData.projectTitle || "—"}</span>
                 </div>
               </div>
 
               <div>
-                <span className="text-slate-400 block font-mono text-xs uppercase mb-1">{isAr ? "وصف المشروع" : "Project Summary"}</span>
+                <span className="text-slate-600 dark:text-slate-400 block font-mono text-xs uppercase mb-1">{isAr ? "وصف المشروع" : "Project Summary"}</span>
                 <p className="text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">{formData.description || "—"}</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <div>
-                  <span className="text-slate-400 block font-mono text-xs uppercase">{isAr ? "الميزانية" : "Budget Bracket"}</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-mono text-xs uppercase">{isAr ? "الميزانية" : "Budget Bracket"}</span>
                   <span className="font-medium text-slate-900 dark:text-white">
                     {budgetRanges.find((b) => b.id === formData.budgetRange)?.label || formData.budgetRange}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block font-mono text-xs uppercase">{isAr ? "الأولوية" : "Priority"}</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-mono text-xs uppercase">{isAr ? "الأولوية" : "Priority"}</span>
                   <span className="font-medium capitalize text-slate-900 dark:text-white">{formData.priority}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block font-mono text-xs uppercase">{isAr ? "المنصات" : "Platforms"}</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-mono text-xs uppercase">{isAr ? "المنصات" : "Platforms"}</span>
                   <span className="font-medium text-slate-900 dark:text-white">{formData.platforms.join(", ") || "Web"}</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <div>
-                  <span className="text-slate-400 block font-mono text-xs uppercase">{isAr ? "الاسم" : "Client Name"}</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-mono text-xs uppercase">{isAr ? "الاسم" : "Client Name"}</span>
                   <span className="font-bold text-slate-900 dark:text-white">{formData.clientName}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block font-mono text-xs uppercase">{isAr ? "البريد الإلكتروني" : "Client Email"}</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-mono text-xs uppercase">{isAr ? "البريد الإلكتروني" : "Client Email"}</span>
                   <span className="font-bold text-slate-900 dark:text-white">{formData.clientEmail}</span>
                 </div>
               </div>

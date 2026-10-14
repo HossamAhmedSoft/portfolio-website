@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -64,9 +65,12 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             <div className="md:col-span-4 text-center md:text-start">
               <div className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto md:mx-0 rounded-3xl overflow-hidden border-2 border-sky-400/60 shadow-xl shadow-sky-500/15 bg-slate-900">
-                <img
+                <Image
                   src="/assets/profile/hossam-ahmed.jpg"
                   alt="Hossam Ahmed"
+                  width={208}
+                  height={208}
+                  priority
                   className="w-full h-full object-cover object-top"
                 />
               </div>
